@@ -2,8 +2,13 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const csurf = require('csurf');
+const cors = require('cors');
+const { isProduction } = require('./config/keys');
+
 const usersRouter = require('./routes/api/users');
 const postsRouter = require('./routes/api/posts');
+const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
 
@@ -12,7 +17,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// SECURITY MIDDLEWARE
+if (!isProduction) {
+    app.use(cors());
+}
+
+// CSRF TOKEN
+app.use(
+    csurf({
+        cookie: {
+            secure: isProduction,
+            sameSite: isProduction && "Lax",
+            httpOnly: true
+        }
+    })
+);
+
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
+app.use('/api/csrf', csrfRouter);
 
 module.exports = app;
