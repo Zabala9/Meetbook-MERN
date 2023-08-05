@@ -8,6 +8,7 @@ const cors = require('cors');
 const { isProduction } = require('./config/keys');
 
 require('./models/User');
+require('./models/Post');
 require('./config/passport');
 const passport = require('passport');
 
