@@ -25,6 +25,14 @@ function LoginForm(){
         dispatch(login({ email, password }));
     }
 
+    const changeButton = (e) => {
+        e.preventDefault();
+        const passwordField = document.getElementById('password-field-login');
+        if(passwordField.type === 'password') {
+            passwordField.type = 'text';
+        } else if(passwordField.type === 'text') passwordField.type = 'password';
+    }
+
     return (
         <form className='login-form' onSubmit={handleSubmit}>
             <label id='login-title'>Log In</label>
@@ -36,17 +44,33 @@ function LoginForm(){
                 id='email-field-login'
             />
             <div className='errors'>{errors?.password}</div>
-            <input type='password'
-                value={password}
-                onChange={update('password')}
-                placeholder='Password'
-                id='password-field-login'
-            />
+            <div id='wrapper-pass-button'>
+                <input type='password'
+                    value={password}
+                    onChange={update('password')}
+                    placeholder='Password'
+                    id='password-field-login'
+                />
+                <button id='see-pass-button'
+                    onClick={changeButton}
+                >
+                    <i className="fa-solid fa-eye"></i>
+                </button>
+            </div>
             <input type='submit'
                 value='Log In'
                 disabled={!email || !password}
                 id='login-button'
             />
+            <div>
+                <label id='label-no-account'>
+                    Don't have an account? 
+                </label>
+                <button id='signup-button-login'
+                        // onClick={}
+                >Sign up</button>
+            </div>
+            
         </form>
     )
 };

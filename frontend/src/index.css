@@ -11,3 +11,7 @@ form > .errors {
     align-items: center;
     font-family: 'Noto Sans JP', sans-serif;
 }
+
+button{
+    cursor: pointer;
+}
