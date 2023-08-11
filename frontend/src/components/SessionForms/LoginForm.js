@@ -21,28 +21,31 @@ function LoginForm(){
     }
 
     const handleSubmit = (e) => {
-        e.preventDefaul();
+        e.preventDefault();
         dispatch(login({ email, password }));
     }
 
     return (
         <form className='login-form' onSubmit={handleSubmit}>
-            <label>Log In</label>
+            <label id='login-title'>Log In</label>
             <div className='errors'>{errors?.email}</div>
             <input type='text'
                 value={email}
                 onChange={update('email')}
                 placeholder='Email'
+                id='email-field-login'
             />
             <div className='errors'>{errors?.password}</div>
             <input type='password'
                 value={password}
                 onChange={update('password')}
                 placeholder='Password'
+                id='password-field-login'
             />
             <input type='submit'
                 value='Log In'
                 disabled={!email || !password}
+                id='login-button'
             />
         </form>
     )

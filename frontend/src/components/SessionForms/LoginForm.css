@@ -1,0 +1,28 @@
+.login-form{
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-title{
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+#email-field-login, #password-field-login{
+    font-size: 30px;
+    margin-bottom: 15px;
+    width: 350px;
+}
+
+#login-button{
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+#login-button:hover{
+    cursor: pointer;
+}

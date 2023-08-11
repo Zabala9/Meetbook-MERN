@@ -4,7 +4,7 @@ import './MainPage.css';
 function MainPage(){
     return (
         <div id='container-mainpage'>
-            <div>
+            <div id='container-divs'>
                 <div id='div-left'>
                     <label id='label-title'>Meetbook</label>
                     <label id='label1'>
@@ -22,7 +22,7 @@ function MainPage(){
                     <LoginForm />
                 </div>
             </div>
-            <footer>
+            <footer id='footer-main'>
                 Copyright &copy; 2023 Meetbook
             </footer>
         </div>
