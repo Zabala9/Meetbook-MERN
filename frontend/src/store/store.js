@@ -4,22 +4,23 @@ import session from './session';
 import errors from './errors';
 
 const rootReducer = combineReducers({
-    session,
-    errors
+  session,
+  errors
 });
 
 let enhancer;
 
 if (process.env.NODE_ENV === 'production') {
-    enhancer = applyMiddleware(thunk);
+  enhancer = applyMiddleware(thunk);
 } else {
-    const logger = require('redux-logger').default;
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+  const logger = require('redux-logger').default;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const configureStore = (preloadState) => {
-    return createStore(rootReducer, preloadState, enhancer);
+const configureStore = (preloadedState) => {
+  return createStore(rootReducer, preloadedState, enhancer);
 };
 
 export default configureStore;

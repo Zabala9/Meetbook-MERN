@@ -43,12 +43,6 @@ const startSession = (userInfo, route) => async dispatch => {
     }
 };
 
-export const getCurrentUser = () => async dispatch => {
-    const res = await jwtFetch('api/users/current');
-    const user = await res.json();
-    return dispatch(receiveCurrentUser(user));
-};
-
 export const logout = () => dispatch => {
     localStorage.removeItem('jwtToken');
     dispatch(logoutUser());
@@ -58,16 +52,20 @@ const initialState = { user: undefined };
 
 const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
-        case RECEIVE_CURRENT_USER:
-            return { user: action.currentUser };
-        case RECEIVE_USER_LOGOUT:
-            return initialState;
-        default:
-            return state;
+      case RECEIVE_CURRENT_USER:
+        return { user: action.currentUser };
+      case RECEIVE_USER_LOGOUT:
+        return initialState;
+      default:
+        return state;
     }
 };
 
-export default sessionReducer;
+export const getCurrentUser = () => async dispatch => {
+    const res = await jwtFetch('api/users/current');
+    const user = await res.json();
+    return dispatch(receiveCurrentUser(user));
+};
 
 const nullErrors = null;
 
@@ -79,6 +77,8 @@ export const sessionErrorsReducer = (state = nullErrors, action) => {
         case CLEAR_SESSION_ERRORS:
             return nullErrors;
         default:
-            return state
+            return state;
     }
 };
+
+export default sessionReducer;
