@@ -70,7 +70,7 @@ function SignupForm(){
 
     return (
         <form className='signup-form' onSubmit={handleSubmit}>
-            <label>Sign up</label>
+            <label id='title-signup'>Sign up</label>
             <input type='text'
                 value={name}
                 onChange={update('name')}
