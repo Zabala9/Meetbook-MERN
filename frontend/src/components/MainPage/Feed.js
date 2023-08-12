@@ -3,7 +3,7 @@ import NavBar from '../NavBar/NavBar';
 
 function Feed () {
     return (
-        <h1>Here</h1>
+        <h1>Feed</h1>
     )
 };
 

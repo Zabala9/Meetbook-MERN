@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 
 import MainPage from './components/MainPage/MainPage';
-// import LoginForm from './components/SessionForms/LoginForm';
-// import NavBar from './component/NavBar/NavBar';
+import NavBar from './components/NavBar/NavBar';
 import Feed from './components/MainPage/Feed';
 
 import { getCurrentUser } from './store/session';
@@ -20,7 +19,7 @@ function App() {
 
   return loaded && (
     <>
-      {/* { loggedIn ? <NavBar /> : undefined } */}
+      { loggedIn ? <NavBar /> : undefined }
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
 
