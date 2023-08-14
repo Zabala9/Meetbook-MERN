@@ -10,6 +10,7 @@ function SignupForm(){
     const [phoneNumber, setPhoneNumber] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [password, setPassword] = useState('');
+    const [image, setImage] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState('');
     const city = "";
     const errors = useSelector(state => state.errors.session);
@@ -51,7 +52,9 @@ function SignupForm(){
         }
 
         return e => setState(e.currentTarget.value);
-    }
+    };
+
+    const updateFile = e =>  setImage(e.target.files[0]);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -62,7 +65,8 @@ function SignupForm(){
             phoneNumber,
             birthdate,
             city,
-            password
+            password,
+            image
         };
 
         dispatch(signup(user));
@@ -118,6 +122,10 @@ function SignupForm(){
                 placeholder='Confirm Password'
                 id='confirm-pass-field-sign'
             />
+            {/* <input type='file'
+                accept='.jpg, .jpeg, .png'
+                onChange={updateFile}
+            /> */}
             <input type='submit'
                 value="Sign up"
                 id='button-signup'

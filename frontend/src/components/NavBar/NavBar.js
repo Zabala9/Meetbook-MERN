@@ -7,6 +7,7 @@ import './NavBar.css';
 function NavBar () {
     const history = useHistory();
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
 
     const logoutUser = e => {
         e.preventDefault();
@@ -17,17 +18,24 @@ function NavBar () {
 
     return (
         <div className='container-navbar'>
-            <Link id='link-main' to='/'>
-                <img src={image} alt='' />
-            </Link>
-            <Link id='link-profile' to='/profile'>
-                Profile
-            </Link>
-            {/* <button id='logout-button'
-                onClick={logoutUser}
-            >
-                Log out
-            </button> */}
+            <div id='container-right-side-nav'>
+                <Link id='link-main' to='/'>
+                    <img src={image} alt='' id='img-main'/>
+                </Link>
+                <Link id='link-profile' to='/profile'>
+                    Profile
+                </Link>
+            </div>
+            <div id='container-left-side-nav'>
+                <button id='user-button'>
+                    <img src={user.profileImageUrl} alt='' id='profile-img'/>
+                </button>
+                <button id='logout-button'
+                    onClick={logoutUser}
+                >
+                    Log out
+                </button>
+            </div>
         </div>
     )
 };

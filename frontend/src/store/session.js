@@ -27,10 +27,22 @@ export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 
 const startSession = (userInfo, route) => async dispatch => {
+  const { image, name, lastname, password, email, phoneNumber, city, birthdate } = userInfo;
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("lastname", lastname);
+  formData.append("email", email);
+  formData.append("phoneNumber", phoneNumber);
+  formData.append("city", city);
+  formData.append("password", password);
+  formData.append("birthdate", birthdate);
+
+  if (image) formData.append("image", image);
+
     try {  
       const res = await jwtFetch(route, {
         method: "POST",
-        body: JSON.stringify(userInfo)
+        body: formData
       });
       const { user, token } = await res.json();
       localStorage.setItem('jwtToken', token);
