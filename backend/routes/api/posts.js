@@ -10,7 +10,7 @@ const validatePostInput = require('../../validations/posts');
 router.get('/', async (req, res, next) => {
   try{
     const posts = await Post.find()
-                            .populate("author", "_id name lastname")
+                            .populate("author", "_id name lastname profileImageUrl")
                             .sort({ createAt: -1 });
     return res.json(posts);
   }
@@ -32,7 +32,7 @@ router.get('/user/:userId', async (req, res, next) => {
   try{
     const posts = await Post.find({ author: user._id })
                             .sort({ createdAt: -1})
-                            .populate("author", "_id name lastname")
+                            .populate("author", "_id name lastname profileImageUrl")
     return res.json(posts);
   }
   catch(err) {
@@ -43,7 +43,7 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try{
     const post = await Post.findById(req.params.id)
-                           .populate("author", "_id name lastname")
+                           .populate("author", "_id name lastname profileImageUrl")
     return res.json(post)
   }
   catch(err) {
@@ -62,7 +62,7 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
     });
 
     let post = await newPost.save();
-    post = await post.populate('author', '_id name lastname');
+    post = await post.populate('author', '_id name lastname profileImageUrl');
     return res.json(post);
   }
   catch(err) {

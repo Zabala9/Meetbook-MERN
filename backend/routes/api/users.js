@@ -8,6 +8,9 @@ const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+
+const DEFAULT_PROFILE_IMAGE_URL = "https://meetbook-mern.s3.us-west-1.amazonaws.com/public/blank-profile-picture-973460_1280.png";
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -29,11 +32,12 @@ router.get('/current', restoreUser, (req, res) => {
     email: req.user.email,
     phoneNumber: req.user.phoneNumber,
     birthdate: req.user.birthdate,
-    city: req.user.city
+    city: req.user.city,
+    profileImageUrl: req.user.profileImageUrl
   });
 });
 
-router.post('/register', validateRegisterInput, async (req, res, next) => {
+router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the email
   const user = await User.findOne({
     $or: [{ email: req.body.email }]
@@ -51,13 +55,17 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   }
 
   // Otherwise create a new user
+  const profileImageUrl = req.file ? 
+    await singleFileUpload({ file: req.file, public: true }) : 
+    DEFAULT_PROFILE_IMAGE_URL;
   const newUser = new User({
     name: req.body.name,
     lastname: req.body.lastname,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     birthdate: req.body.birthdate,
-    city: req.body.city
+    city: req.body.city,
+    profileImageUrl
   });
 
   bcrypt.genSalt(10, (err, salt) => {
