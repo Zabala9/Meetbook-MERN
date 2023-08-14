@@ -6,6 +6,8 @@ import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import MainPage from './components/MainPage/MainPage';
 import NavBar from './components/NavBar/NavBar';
 import Feed from './components/MainPage/Feed';
+// import profile 
+// import posts ?
 
 import { getCurrentUser } from './store/session';
 
