@@ -9,7 +9,11 @@ const postSchema = new Schema({
     text: {
         type: String,
         require: true
-    }
+    },
+    imageUrls: {
+        type: [String],
+        required: false
+    },
 }, {
     timestamps: true
 });
