@@ -24,3 +24,5 @@ function AllPosts(){
         </div>
     )
 }
+
+export default AllPosts;

@@ -5,6 +5,7 @@ const User = mongoose.model('User');
 const Post = mongoose.model('Post');
 const { requireUser } = require('../../config/passport');
 const validatePostInput = require('../../validations/posts');
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
