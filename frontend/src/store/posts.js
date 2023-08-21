@@ -58,11 +58,16 @@ export const fetchUserPosts = id => async dispatch => {
     }
 };
 
-export const createPost = data => async dispatch => {
+export const createPost = (postInfo) => async dispatch => {
+    const { text, images } = postInfo;
+    const formData = new FormData();
+    formData.append("text", text);
+    if (images) Array.from(images).forEach(image => formData.append("images", image));
+
     try{
         const res = await jwtFetch('/api/posts/', {
-            method: 'POST',
-            body: JSON.stringify(data)
+            method: "POST",
+            body: formData
         });
         const post = await res.json();
         dispatch(receiveNewPost(post));
