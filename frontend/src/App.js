@@ -6,7 +6,7 @@ import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import MainPage from './components/MainPage/MainPage';
 import NavBar from './components/NavBar/NavBar';
 import Feed from './components/MainPage/Feed';
-// import profile 
+import Profile from './components/Profile/Profile';
 // import posts ?
 
 import { getCurrentUser } from './store/session';
@@ -26,6 +26,7 @@ function App() {
         <AuthRoute exact path="/" component={MainPage} />
 
         <ProtectedRoute exact path="/feed" component={Feed} />
+        <ProtectedRoute exact path="/profile" component={Profile} />
       </Switch>
     </>
   );

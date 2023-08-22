@@ -1,0 +1,52 @@
+.main-feed{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.left-feed{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#button-profile, #button-groups, #button-market{
+    font-size: 25px;
+    padding: 7px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: default;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+#button-profile:hover, #button-groups:hover, 
+#button-market:hover{
+    cursor: pointer;
+    background-color: #619b77;
+    transition: 0.5s;
+}
+
+#label-link-profile:hover, #label-link-groups:hover,
+#label-link-market:hover{
+    cursor: pointer;
+}
+
+#img-button-profile{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+#img-button-groups, #img-button-market{
+    margin-right: 10px;
+}
+
+.right-feed{
+    display: flex;
+    flex-direction: column;
+}
