@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AllPosts from '../Posts/AllPosts';
 import PostCompose from '../Posts/PostCompose';
 import Modal from '../Modal/Modal';
@@ -9,12 +9,19 @@ import './Feed.css';
 
 function Feed () {
     const [showModal, setShowModal] = useState(false);
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch]);
+
+    const goToProfile = e =>{
+        e.preventDefault();
+        let path = '/profile';
+        history.push(path);
+    };
 
     return (
         <>
@@ -45,7 +52,9 @@ function Feed () {
                 {/* MIDDLE FEED */}
                 <div className='middle-feed' style={{overflowY: 'auto'}}>
                     <div className='container-button-new-post'>
-                        <img src={user.profileImageUrl} alt='' id='photo-create-post'/>
+                        <img src={user.profileImageUrl} alt='' id='photo-create-post'
+                            onClick={goToProfile}
+                        />
                         <button onClick={() => setShowModal(prev => !prev)}
                             id='button-new-post-feed'
                         > What are you thinking, {user.name}?
