@@ -105,6 +105,7 @@
 #label-events, #label-contacts{
     font-size: 20px;
     margin-bottom: 10px;
+    color: rgb(63, 63, 63);
 }
 
 #divider-pages-feed-right, #divider-request-feed-right,
