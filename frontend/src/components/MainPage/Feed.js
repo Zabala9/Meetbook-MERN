@@ -45,6 +45,7 @@ function Feed () {
                 {/* MIDDLE FEED */}
                 <div className='middle-feed' style={{overflowY: 'auto'}}>
                     <div className='container-button-new-post'>
+                        <img src={user.profileImageUrl} alt='' id='photo-create-post'/>
                         <button onClick={() => setShowModal(prev => !prev)}
                             id='button-new-post-feed'
                         > What are you thinking, {user.name}?
@@ -55,16 +56,20 @@ function Feed () {
 
                 <div className='right-feed' style={{overflowY: 'auto'}}>
                     <div className='container-pages'>
-                        <label>Your pages</label>
+                        <label id='label-your-pages'>Your pages</label>
+                        <button id='divider-pages-feed-right'></button>
                     </div>
                     <div className='container-friends-request'>
-                        <label>Friend request</label>
+                        <label id='label-friend-request'>Friend request</label>
+                        <button id='divider-request-feed-right'></button>
                     </div>
                     <div className='container-events'>
-                        <label>Events</label>
+                        <label id='label-events'>Events</label>
+                        <button id='divider-events-feed-right'></button>
                     </div>
                     <div className='container-contacts'>
-                        <label>Contacts</label>
+                        <label id='label-contacts'>Contacts</label>
+                        {/* <button id='divider-contacts-feed-right'></button> */}
                     </div>
                 </div>
             </div>

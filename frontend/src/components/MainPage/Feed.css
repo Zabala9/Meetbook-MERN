@@ -8,6 +8,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: fit-content;
+    background-color: white;
+    border: none;
+    border-radius: 8px;
 }
 
 #button-profile, #button-groups, #button-market, 
@@ -57,6 +61,15 @@
     padding: 10px;
     border: none;
     border-radius: 8px;
+    display: flex;
+}
+
+#photo-create-post{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 20px;
 }
 
 #button-new-post-feed{
@@ -71,6 +84,33 @@
 }
 
 .right-feed{
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    height: fit-content;
+    border: none;
+    border-radius: 8px;
+}
+
+.container-pages, .container-friends-request,
+.container-events, .container-contacts{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: none;
+}
+
+#label-your-pages, #label-friend-request,
+#label-events, #label-contacts{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#divider-pages-feed-right, #divider-request-feed-right,
+#divider-events-feed-right, #divider-contacts-feed-right {
+    background: none;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid rgb(171, 171, 171);
 }
