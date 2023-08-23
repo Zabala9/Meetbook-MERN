@@ -17,7 +17,7 @@ function AllPosts(){
 
     return (
         <div className='container-all-posts'>
-            <label id='label-all-posts'>All Posts</label>
+            {/* <label id='label-all-posts'>All Posts</label> */}
             {posts.map(post => (
                 <PostBox key={post._id} post={post} />
             ))}

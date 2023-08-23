@@ -41,14 +41,18 @@ function Feed () {
                         <label id='label-link-market'>Market</label>
                     </Link>
                 </div>
+
+                {/* MIDDLE FEED */}
                 <div className='middle-feed' style={{overflowY: 'auto'}}>
                     <div className='container-button-new-post'>
                         <button onClick={() => setShowModal(prev => !prev)}
-                        > What are you thinking?
+                            id='button-new-post-feed'
+                        > What are you thinking, {user.name}?
                         </button>
                     </div>
                     <AllPosts />
                 </div>
+
                 <div className='right-feed' style={{overflowY: 'auto'}}>
                     <div className='container-pages'>
                         <label>Your pages</label>
