@@ -42,6 +42,22 @@ function NavBar () {
                     <img src={image} alt='' id='img-main'/>
                 </Link>
             </div>
+
+            <div className='middle-side-nav'>
+                <Link id='link-home-nav' to='/'>
+                    <i className="fa-solid fa-house" id='img-home-button-nav'></i>
+                </Link>
+                <Link id='link-groups-nav' to='/groups'>
+                    <i className="fa-solid fa-people-group" id='img-groups-button-nav'></i>
+                </Link>
+                <Link id='link-market-nav' to='/market'>
+                    <i className="fa-solid fa-money-bill-trend-up" id='img-market-button-nav'></i>
+                </Link>
+                <Link id='link-games-nav' to='/games'>
+                    <i class="fa-solid fa-gamepad" id='img-games-button-nav'></i>
+                </Link>
+            </div>
+
             <div id='right-side-nav'>
                 <div id='dropdown-navbar' style={{ textAlign: 'right' }}>
                     <button id='button-dropdown' onClick={openMenu}>
