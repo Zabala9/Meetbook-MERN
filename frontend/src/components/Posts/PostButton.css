@@ -1,0 +1,67 @@
+#button-post{
+    border: none;
+    border-radius: 30px;
+    background: none;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 20px;
+    transition: 0.5s;
+}
+
+#button-post:hover{
+    background-color: rgb(221, 221, 221);
+    transition: 0.5s;
+}
+
+#img-button-post{
+    font-size: 20px;
+}
+
+.dropdown-content-post{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px;
+    margin-left: -75px;
+    background-color: white;
+}
+
+#save-button-post{
+    margin-top: 5px;
+}
+
+#delete-button-post{
+    margin-bottom: 5px;
+}
+
+#save-button-post, #edit-button-post, #edit-privacy-button-post,
+#delete-button-post {
+    font-size: 17px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: none;
+    transition: 0.5s;
+}
+
+#save-button-post:hover, #edit-button-post:hover, 
+#edit-privacy-button-post:hover, #delete-button-post:hover{
+    cursor: pointer;
+    background-color: #80b694;
+    transition: 0.5s;
+}
+
+#save-button-post, #edit-button-post, #edit-privacy-button-post{
+    margin-bottom: 8px;
+}
+
+#divider-post{
+    background: none;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid rgb(171, 171, 171);
+    margin-bottom: 15px;
+}

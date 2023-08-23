@@ -28,6 +28,10 @@ function Feed () {
                         <label id='label-link-profile'>{user.name + ' ' + user.lastname}</label>
                     </Link>
                     {/* <button>Friends</button> */}
+                    <Link id="button-saved" to='/saved'>
+                        <i className="fa-solid fa-bookmark" id='img-button-saved'></i>
+                        <label id='label-link-saved'>Saved</label>
+                    </Link>
                     <Link id="button-groups" to="/groups">
                         <i className="fa-solid fa-people-group" id='img-button-groups'></i>
                         <label id='label-link-groups'>Groups</label>

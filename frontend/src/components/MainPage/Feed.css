@@ -10,7 +10,8 @@
     align-items: center;
 }
 
-#button-profile, #button-groups, #button-market{
+#button-profile, #button-groups, #button-market, 
+#button-saved{
     font-size: 25px;
     padding: 7px;
     border-radius: 10px;
@@ -19,6 +20,7 @@
     margin-bottom: 10px;
     cursor: default;
     text-decoration: none;
+    color: black;
     transition: 0.5s;
 }
 
@@ -45,6 +47,8 @@
 #img-button-groups, #img-button-market{
     margin-right: 10px;
 }
+
+
 
 .right-feed{
     display: flex;

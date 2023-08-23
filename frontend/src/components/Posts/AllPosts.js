@@ -16,8 +16,8 @@ function AllPosts(){
     if (posts.length === 0) return <div>There are no Posts</div>;
 
     return (
-        <div>
-            <label>All Posts</label>
+        <div className='container-all-posts'>
+            <label id='label-all-posts'>All Posts</label>
             {posts.map(post => (
                 <PostBox key={post._id} post={post} />
             ))}
