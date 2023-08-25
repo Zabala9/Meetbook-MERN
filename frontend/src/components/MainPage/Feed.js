@@ -25,16 +25,20 @@ function Feed () {
     };
 
     if (currentUrl === '/feed'){
-        document.getElementById('img-home-button-nav').style.color = "#469663";
-        document.getElementById('img-groups-button-nav').style.color = "#000000";
-        document.getElementById('img-market-button-nav').style.color = "#000000";
-        document.getElementById('img-games-button-nav').style.color = "#000000";
+        const buttonHome = document.getElementById('img-home-button-nav');
+        if (buttonHome) buttonHome.style.color = "#469663";
+        const buttonGroup = document.getElementById('img-groups-button-nav');
+        if (buttonGroup) buttonGroup.style.color = "#000000";
+        const buttonMarket = document.getElementById('img-market-button-nav');
+        if (buttonMarket) buttonMarket.style.color = "#000000";
+        const buttonGames = document.getElementById('img-games-button-nav');
+        if (buttonGames) buttonGames.style.color = "#000000";
     }
 
     return (
         <>
             {showModal && (
-                <Modal closeModal={() => setShowModal(false)} component={<PostCompose closeModal={setShowModal} />} />
+                <Modal component={<PostCompose closeModal={setShowModal} />} />
             )}
             <div className='main-feed' style={{overflowY: 'auto'}}>
                 <div className='left-feed'>

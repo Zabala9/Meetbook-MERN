@@ -1,0 +1,84 @@
+.compose-post{
+    background-color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    margin-top: -100px;
+    width: 400px;
+}
+
+.container-title-close-create-post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#label-create-post{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    display: flex;
+    margin-left: 130px;
+    margin-right: 100px;
+}
+
+#button-close-create-post{
+    background: none;
+    margin-top: -10px;
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 90px;
+    transition: 0.5s;
+}
+
+#button-close-create-post:hover{
+    cursor: pointer;
+    background-color: rgb(218, 218, 218);
+}
+
+#img-close-create-post{
+    display: flex;
+    justify-content: center;
+}
+
+#button-divider-create-post{
+    background: none;
+    border: none;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(171, 171, 171);
+}
+
+.info-user-create-post{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+#img-profile-create-post{
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+}
+
+#label-name-create-post{
+    margin-left: 15px;
+}
+
+#post-text{
+    border: none;
+    border-radius: 8px;
+    font-size: 25px;
+    outline: none;
+    height: 200px;
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: auto;
+    resize: none;
+}
+
+#select-files{
+    margin-top: 20px;
+    margin-bottom: 15px;
+}

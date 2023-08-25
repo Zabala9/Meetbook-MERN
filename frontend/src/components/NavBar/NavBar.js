@@ -54,7 +54,7 @@ function NavBar () {
                     <i className="fa-solid fa-money-bill-trend-up" id='img-market-button-nav'></i>
                 </Link>
                 <Link id='link-games-nav' to='/games'>
-                    <i class="fa-solid fa-gamepad" id='img-games-button-nav'></i>
+                    <i className="fa-solid fa-gamepad" id='img-games-button-nav'></i>
                 </Link>
             </div>
 
