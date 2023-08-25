@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
   try{
     const posts = await Post.find()
                             .populate("author", "_id name lastname profileImageUrl")
-                            .sort({ createAt: -1 });
+                            .sort({ createdAt: -1 });
     return res.json(posts);
   }
   catch(err) {

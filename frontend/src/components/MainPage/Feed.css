@@ -1,6 +1,7 @@
 .main-feed{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    /* justify-content: space-evenly; */
 }
 
 .left-feed{
@@ -13,6 +14,8 @@
     border: none;
     padding: 10px;
     border-radius: 8px;
+    margin-right: 100px;
+    margin-left: -50px;
 }
 
 #button-profile, #button-groups, #button-market, 
@@ -55,6 +58,7 @@
 
 .middle-feed{
     margin-top: 20px;
+    margin-right: 100px;
 }
 
 .container-button-new-post{
