@@ -81,4 +81,23 @@
 #select-files{
     margin-top: 20px;
     margin-bottom: 15px;
+    font-size: 18px;
+}
+
+#select-files:hover{
+    cursor: pointer;
+}
+
+#button-create-post{
+    font-size: 28px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: 0.5s;
+}
+
+#button-create-post:hover{
+    background-color: #80b694;
+    cursor: pointer;
+    transition: 0.5s;
 }
