@@ -49,7 +49,7 @@ function PostCompose({ closeModal }) {
         setPrivacy('friends');
         fileRef.current.value = null;
         closeModal(false);
-        window.location.reload(false);
+        // window.location.reload(false);
     };
 
     const update = e => setText(e.currentTarget.value);

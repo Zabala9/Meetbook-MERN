@@ -63,7 +63,9 @@ export const createPost = (postInfo) => async dispatch => {
     const formData = new FormData();
     formData.append("text", text);
     formData.append("privacy", privacy);
-    if (images) Array.from(images).forEach(image => formData.append("images", image));
+    if (images) {
+        Array.from(images).forEach(image => formData.append("images", image));
+    }
 
     try{
         const res = await jwtFetch('/api/posts/', {
