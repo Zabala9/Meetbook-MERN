@@ -1,0 +1,26 @@
+.container-profile{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.container-top-profile{
+    display: flex;
+}
+
+#img-profile{
+    width: 100px;
+    height: 100px;
+}
+
+.container-bottom-profile{
+    display: flex;
+}
+
+.left-side-profile{
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    margin-right: 20px;
+}

@@ -5,7 +5,6 @@ import './PostBox.css';
 function PostBox ({ post: {text, author, imageUrls, privacy }}) {
     const { name, lastname, profileImageUrl, _id } = author;
     const location = window.location.pathname;
-    console.log(location);
 
     const images = imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
