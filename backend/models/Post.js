@@ -10,6 +10,10 @@ const postSchema = new Schema({
         type: String,
         require: true
     },
+    privacy: {
+        type: String,
+        require: true
+    },
     imageUrls: {
         type: [String],
         required: false

@@ -11,7 +11,7 @@ const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 router.get('/', async (req, res, next) => {
   try{
     const posts = await Post.find()
-                            .populate("author", "_id name lastname profileImageUrl")
+                            .populate("author", "_id name lastname profileImageUrl privacy")
                             .sort({ createdAt: -1 });
     return res.json(posts);
   }
@@ -33,7 +33,7 @@ router.get('/user/:userId', async (req, res, next) => {
   try{
     const posts = await Post.find({ author: user._id })
                             .sort({ createdAt: -1})
-                            .populate("author", "_id name lastname profileImageUrl")
+                            .populate("author", "_id name lastname profileImageUrl privacy")
     return res.json(posts);
   }
   catch(err) {
@@ -44,7 +44,7 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try{
     const post = await Post.findById(req.params.id)
-                           .populate("author", "_id name lastname profileImageUrl")
+                           .populate("author", "_id name lastname profileImageUrl privacy")
     return res.json(post)
   }
   catch(err) {
@@ -61,11 +61,12 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
     const newPost = new Post({
       text: req.body.text,
       imageUrls,
+      privacy: req.body.privacy,
       author: req.user._id
     });
 
     let post = await newPost.save();
-    post = await post.populate('author', '_id name lastname profileImageUrl');
+    post = await post.populate('author', '_id name lastname profileImageUrl privacy');
     return res.json(post);
   }
   catch(err) {
