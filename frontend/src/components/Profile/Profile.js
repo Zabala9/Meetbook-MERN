@@ -15,7 +15,30 @@ function Profile() {
     }, [currentUser, dispatch]);
 
     if (userPosts.length === 0) {
-        return <div>{currentUser.name + ' ' + currentUser.lastname} has no Posts.</div>;
+        return (
+            <div className='container-profile'>
+                <div className='container-top-profile'>
+                    <img src={currentUser.profileImageUrl} id='img-profile' />
+                    <label>{currentUser.name + ' ' + currentUser.lastname}</label>
+                </div>
+                <div className='container-bottom-profile'>
+                    <div className='left-side-profile'>
+                        <div id='container-bio-profile'>
+                            <label>Bio</label>
+                        </div>
+                        {/* <div id='container-photos-profile'>
+
+                        </div> */}
+                        <div id='container-friends-profile'>
+                            <label>Friends</label>
+                        </div>
+                    </div>
+                    <div className='right-side-profile'>
+                        <div>{currentUser.name + ' ' + currentUser.lastname} has no Posts.</div>
+                    </div>
+                </div>
+            </div>
+        )
     } else {
         return (
             <div className='container-profile'>
