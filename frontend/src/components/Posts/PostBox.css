@@ -26,6 +26,26 @@
     margin-right: 10px;
 }
 
+.container-name-privacy-postbox{
+    display: flex;
+    flex-direction: column;
+}
+
+#name-user-postbox:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#privacy-postbox{
+    width: 17px;
+}
+
+
+#img-public-privacy-postbox, #img-friends-privacy-postbox,
+#img-onlyme-privacy-postbox{
+   font-size: 15px;
+}
+
 #post-image{
     width: 100%;
     height: 100%;

@@ -65,6 +65,54 @@
 
 #label-name-create-post{
     margin-left: 15px;
+    font-weight: bold;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.dropdown-privacy{
+    align-items: center;
+    width: 32px;
+    padding: 3px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    background: rgb(227, 227, 227);
+    margin-left: 18px;
+}
+
+#button-dropdown-privacy{
+    display: flex;
+}
+
+#button-dropdown-privacy:hover, #button-public-privacy:hover,
+#button-friends-privacy:hover, #button-onlyme-privacy:hover {
+    cursor: pointer;
+}
+
+#button-public-privacy, #button-friends-privacy{
+    margin-bottom: 5px;
+} 
+
+#img-friends-privacy, #img-public-privacy,
+#img-onlyme-privacy {
+    font-size: 14px;
+}
+
+#img-arrow-privacy{
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.dropdown-content-privacy{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 2px;
+    margin-left: 20px;
 }
 
 #post-text{
