@@ -30,19 +30,42 @@ function Profile() {
         return (
             <div className='container-profile'>
                 <div className='container-top-profile'>
-                    <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
-                    <label>{currentUser.name + ' ' + currentUser.lastname}</label>
+                    <div className='container-left-top-profile'>
+                        <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
+                        <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
+                    </div>
+                    <div className='container-right-top-profile'>
+                        <button id='button-edit-profile'>
+                            <i className="fa-solid fa-user-pen" id='img-edit-profile'></i>
+                            Edit profile
+                        </button>
+                    </div>
                 </div>
                 <div className='container-bottom-profile'>
                     <div className='left-side-profile'>
                         <div id='container-bio-profile'>
-                            <label>Bio</label>
+                            <label id='title-intro-profile'>Intro</label>
+                            { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
+                                undefined
+                            }
+                            <button id='button-edit-bio'
+                                >Edit bio
+                            </button>
+                            { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
+                                undefined
+                            }
+                            { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
+                                undefined
+                            }
+                            <button id='button-edit-details'>
+                                Edit details
+                            </button>
                         </div>
                         {/* <div id='container-photos-profile'>
 
                         </div> */}
                         <div id='container-friends-profile'>
-                            <label>Friends</label>
+                            <label id='title-friends-profile'>Friends</label>
                         </div>
                     </div>
                     <div className='right-side-profile'>
@@ -55,19 +78,42 @@ function Profile() {
         return (
             <div className='container-profile'>
                 <div className='container-top-profile'>
-                    <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
-                    <label>{currentUser.name + ' ' + currentUser.lastname}</label>
+                    <div className='container-left-top-profile'>
+                        <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
+                        <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
+                    </div>
+                    <div className='container-right-top-profile'>
+                        <button id='button-edit-profile'>
+                            <i className="fa-solid fa-user-pen" id='img-edit-profile'></i>
+                            Edit profile
+                        </button>
+                    </div>
                 </div>
                 <div className='container-bottom-profile'>
                     <div className='left-side-profile'>
                         <div id='container-bio-profile'>
-                            <label>Bio</label>
+                            <label id='title-intro-profile'>Intro</label>
+                            { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
+                                undefined
+                            }
+                            <button id='button-edit-bio'
+                                >Edit bio
+                            </button>
+                            { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
+                                undefined
+                            }
+                            { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
+                                undefined
+                            }
+                            <button id='button-edit-details'>
+                                Edit details
+                            </button>
                         </div>
                         {/* <div id='container-photos-profile'>
 
                         </div> */}
                         <div id='container-friends-profile'>
-                            <label>Friends</label>
+                            <label id='title-friends-profile'>Friends</label>
                         </div>
                     </div>
                     <div className='right-side-profile'>
