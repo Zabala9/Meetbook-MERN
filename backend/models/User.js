@@ -25,6 +25,12 @@ const userSchema = new Schema({
     city: {
         type: String
     },
+    bio: {
+        type: String
+    },
+    status: {
+        type: String
+    },
     hashedPassword: {
         type: String,
         required: true

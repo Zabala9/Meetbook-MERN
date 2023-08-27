@@ -65,6 +65,8 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
     phoneNumber: req.body.phoneNumber,
     birthdate: req.body.birthdate,
     city: req.body.city,
+    bio: req.body.city,
+    status: req.body.status,
     profileImageUrl
   });
 

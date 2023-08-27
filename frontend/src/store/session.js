@@ -27,7 +27,7 @@ export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 
 const startSession = (userInfo, route) => async dispatch => {
-  const { image, name, lastname, password, email, phoneNumber, city, birthdate } = userInfo;
+  const { image, name, lastname, password, email, phoneNumber, city, birthdate, bio, status } = userInfo;
   const formData = new FormData();
   formData.append("name", name);
   formData.append("lastname", lastname);
@@ -36,6 +36,8 @@ const startSession = (userInfo, route) => async dispatch => {
   formData.append("city", city);
   formData.append("password", password);
   formData.append("birthdate", birthdate);
+  formData.append("bio", bio);
+  formData.append("status", status);
 
   if (image) formData.append("image", image);
 

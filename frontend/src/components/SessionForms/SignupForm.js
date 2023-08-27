@@ -13,6 +13,8 @@ function SignupForm(){
     const [image, setImage] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState('');
     const city = "";
+    const bio = "";
+    const status = "";
     const errors = useSelector(state => state.errors.session);
     const dispatch = useDispatch();
 
@@ -65,6 +67,8 @@ function SignupForm(){
             phoneNumber,
             birthdate,
             city,
+            bio,
+            status,
             password,
             image
         };
