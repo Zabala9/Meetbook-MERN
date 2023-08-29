@@ -95,6 +95,22 @@ export const createPost = (postInfo) => async dispatch => {
     }
 };
 
+export const updatePost = data => async dispatch => {
+    try{
+        const res = await jwtFetch(`api/posts/${data.postId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+        const post = await res.json();
+        dispatch(receivePost(post));
+    } catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) {
+            return dispatch(receiveErrors(resBody.errors));
+        }
+    }
+};
+
 export const deletePost = (postId) => async dispatch => {
     try{
         await jwtFetch(`/api/posts/${postId}`, {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deletePost } from '../../store/posts';
+import { deletePost, updatePost } from '../../store/posts';
 import './PostButton.css';
 
 function PostButton({ userId, postId }){
@@ -31,6 +31,11 @@ function PostButton({ userId, postId }){
         if (currentLocation !== '/profile') window.location.reload(false);
     };
 
+    const update = () => {
+        // CALL MODAL TO UPDATE POST? AND LATER REDIRECTING TO
+        // SHOW PAGE?
+    };
+
     if (user._id === userId) return (
         <div>
             <div className='dropdown-post' style={{ textAlign: 'right' }}>
@@ -42,7 +47,7 @@ function PostButton({ userId, postId }){
                 <div className='dropdown-content-post'>
                     <button id='save-button-post'>Save</button>
                     <button id='divider-post'></button>
-                    <button id='edit-button-post'>Edit post</button>
+                    <button id='edit-button-post' onClick={update}>Edit post</button>
                     <button id='edit-privacy-button-post'>Edit privacy</button>
                     <button id='delete-button-post' onClick={remove}>Delete post</button>
                 </div>

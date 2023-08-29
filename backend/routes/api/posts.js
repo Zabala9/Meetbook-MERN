@@ -74,6 +74,28 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
   }
 });
 
+router.patch('/:id', multipleMulterUpload("images"), requireUser, validatePostInput, async (req, res, next) => {
+  try{
+    const postId = req.params.id;
+    const { text, privacy, imageUrls } = req.body;
+    let post = await Post.findById(postId);
+
+    if (!post) return res.status(404).json({ message: 'Post not found '});
+    if (!post.author.equals(req.user._id)) {
+      return res.status(403).json({ message: 'You are not authorized to edit this post.' });
+    }
+    
+    post.text = text;
+    post.privacy = privacy;
+    post.imageUrls = imageUrls;
+    post = await post.save();
+    
+    return res.json(post);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete('/:id', requireUser, async(req, res, next) => {
   try{
     const post = await Post.deleteOne({ _id: req.params.id });
