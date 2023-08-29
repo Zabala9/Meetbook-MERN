@@ -2,6 +2,7 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
+const RECEIVE_POST = "posts/RECEIVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
@@ -11,6 +12,11 @@ const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 const receivePosts = posts => ({
     type: RECEIVE_POSTS,
     posts
+});
+
+const receivePost = post => ({
+    type: RECEIVE_POST,
+    post
 });
 
 const receiveUserPosts = posts => ({
@@ -115,17 +121,22 @@ export const postErrorsReducer = (state = nullErrors, action) => {
     }
 };
 
-const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
     let filteredUserPost;
     switch(action.type) {
         case RECEIVE_POSTS:
             return { ...state, all: action.posts, new: undefined };
+        case RECEIVE_POST:
+            return { ...state, all: {...state.all, [action.post._id]: action.post }};
         case RECEIVE_USER_POSTS:
             return { ...state, user: action.posts, new: undefined };
         case RECEIVE_NEW_POST:
-            return { ...state, new: action.posts };
+            const mappedUserPosts = state.user.map(userPost => {
+                return userPost;
+            })
+            return { ...state, new: action.posts, user: mappedUserPosts };
         case RECEIVE_USER_LOGOUT:
-            return { ...state, user: {}, new: undefined };
+            return { ...state, user: [], new: undefined };
         case REMOVE_POST:
             filteredUserPost = state.user.filter(userPost => {
                 return userPost._id.toString() !== action.postId.toString();

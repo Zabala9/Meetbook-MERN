@@ -7,6 +7,7 @@ function PostButton({ userId, postId }){
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const currentLocation = window.location.pathname;
 
     const openMenu = () => {
         if (showMenu) return;
@@ -27,6 +28,7 @@ function PostButton({ userId, postId }){
 
     const remove = () => {
         dispatch(deletePost(postId));
+        if (currentLocation !== '/profile') window.location.reload(false);
     };
 
     if (user._id === userId) return (

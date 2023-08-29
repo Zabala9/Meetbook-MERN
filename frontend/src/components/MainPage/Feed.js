@@ -1,22 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import AllPosts from '../Posts/AllPosts';
 import PostCompose from '../Posts/PostCompose';
 import Modal from '../Modal/Modal';
-import { fetchPosts } from '../../store/posts';
 import './Feed.css';
 
 function Feed () {
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
     const currentUrl = window.location.pathname;
-
-    useEffect(() => {
-        dispatch(fetchPosts());
-    }, [dispatch]);
 
     const goToProfile = e =>{
         e.preventDefault();
