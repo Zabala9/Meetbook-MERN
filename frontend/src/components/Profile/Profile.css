@@ -43,11 +43,13 @@
     border-radius: 5px;
     font-size: 15px;
     margin-top: 50px;
+    transition: 0.5s;
 }
 
 #button-edit-profile:hover{
     cursor: pointer;
     background-color: #8ec2a1;
+    transition: 0.5s;
 }
 
 #img-edit-profile{
@@ -80,6 +82,11 @@
     font-size: 18px;
     margin-top: 15px;
     width: 200px;
+    transition: 0.5s;
+}
+
+#button-edit-bio:hover, #button-edit-details:hover{
+    background-color: #8ec2a1;
 }
 
 #container-friends-profile{

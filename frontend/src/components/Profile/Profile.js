@@ -26,6 +26,28 @@ function Profile() {
         if (buttonGames) buttonGames.style.color = "#000000";
     }
 
+    const editBio = e => {
+        // e.preventDefault();
+        const user = {
+            name: currentUser.name,
+            lastname: currentUser.lastname,
+            email: currentUser.email,
+            city: currentUser.city,
+            phoneNumber: currentUser.phoneNumber,
+            birthdate: currentUser.birthdate,
+            status: currentUser.status,
+            profileImageUrl: currentUser.profileImageUrl
+        }
+        
+        dispatch(/* some function receiving the user infod */);
+    };
+
+    const editDetails = e => {
+        // e.preventDefault();
+
+        dispatch(/* some function */);
+    };
+
     if (userPosts.length === 0) {
         return (
             <div className='container-profile'>
@@ -48,7 +70,7 @@ function Profile() {
                             { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
                                 undefined
                             }
-                            <button id='button-edit-bio'
+                            <button id='button-edit-bio' onClick={editBio}
                                 >Edit bio
                             </button>
                             { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
@@ -57,7 +79,7 @@ function Profile() {
                             { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                 undefined
                             }
-                            <button id='button-edit-details'>
+                            <button id='button-edit-details' onClick={editDetails}>
                                 Edit details
                             </button>
                         </div>
@@ -96,7 +118,7 @@ function Profile() {
                             { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
                                 undefined
                             }
-                            <button id='button-edit-bio'
+                            <button id='button-edit-bio' onClick={editBio}
                                 >Edit bio
                             </button>
                             { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
@@ -105,7 +127,7 @@ function Profile() {
                             { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                 undefined
                             }
-                            <button id='button-edit-details'>
+                            <button id='button-edit-details' onClick={editDetails}>
                                 Edit details
                             </button>
                         </div>
