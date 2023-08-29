@@ -5,6 +5,7 @@ const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
+const REMOVE_POST = "posts/REMOVE_POST";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
 const receivePosts = posts => ({
@@ -15,6 +16,11 @@ const receivePosts = posts => ({
 const receiveUserPosts = posts => ({
     type: RECEIVE_USER_POSTS,
     posts
+});
+
+const removePost = postId => ({
+    type: REMOVE_POST,
+    postId
 });
 
 const receiveNewPost = post => ({
@@ -83,6 +89,18 @@ export const createPost = (postInfo) => async dispatch => {
     }
 };
 
+export const deletePost = (postId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/posts/${postId}`, {
+            method: 'DELETE'
+        });
+        dispatch(removePost(postId));
+    } catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 const nullErrors = null;
 
 export const postErrorsReducer = (state = nullErrors, action) => {
@@ -98,6 +116,7 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+    let filteredUserPost;
     switch(action.type) {
         case RECEIVE_POSTS:
             return { ...state, all: action.posts, new: undefined };
@@ -107,6 +126,13 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
             return { ...state, new: action.posts };
         case RECEIVE_USER_LOGOUT:
             return { ...state, user: {}, new: undefined };
+        case REMOVE_POST:
+            filteredUserPost = state.user.filter(userPost => {
+                return userPost._id.toString() !== action.postId.toString();
+            });
+            const newState = {...state};
+            delete newState.all[action.postId];
+            return {...newState, user: filteredUserPost, new: undefined};
         default:
             return state;
     }

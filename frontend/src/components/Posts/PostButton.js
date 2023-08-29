@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletePost } from '../../store/posts';
 import './PostButton.css';
 
-function PostButton({ id }){
+function PostButton({ userId, postId }){
     const [showMenu, setShowMenu] = useState(false);
+    const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
 
     const openMenu = () => {
@@ -23,7 +25,11 @@ function PostButton({ id }){
         return () => document.removeEventListener('click', closeMenu);
     }, [showMenu]);
 
-    if (user._id === id) return (
+    const remove = () => {
+        dispatch(deletePost(postId));
+    };
+
+    if (user._id === userId) return (
         <div>
             <div className='dropdown-post' style={{ textAlign: 'right' }}>
                 <button id='button-post' onClick={openMenu}>
@@ -36,7 +42,7 @@ function PostButton({ id }){
                     <button id='divider-post'></button>
                     <button id='edit-button-post'>Edit post</button>
                     <button id='edit-privacy-button-post'>Edit privacy</button>
-                    <button id='delete-button-post'>Delete post</button>
+                    <button id='delete-button-post' onClick={remove}>Delete post</button>
                 </div>
             )}
         </div>
