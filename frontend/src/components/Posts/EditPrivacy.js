@@ -4,6 +4,7 @@ import './EditPrivacy.css';
 
 function EditPrivacy({ closeModal, post }){
     const dispatch = useDispatch();
+    const currentPath = window.location.pathname;
 
     const previousPath = () => {
         closeModal(false);
@@ -12,26 +13,35 @@ function EditPrivacy({ closeModal, post }){
     const changeToPublic = e => {
         e.preventDefault();
         post.privacy = 'public';
+        dispatch(updatePost(post));
+        closeModal(false);
+        if (currentPath !== '/profile') window.location.reload(false);
     };
 
     const changeToFriends = e => {
         e.preventDefault();
         post.privacy = 'friends';
+        dispatch(updatePost(post));
+        closeModal(false);
+        if (currentPath !== '/profile') window.location.reload(false);
     };
 
     const changeToOnlyme = e => {
         e.preventDefault();
         post.privacy = 'only me';
+        dispatch(updatePost(post));
+        closeModal(false);
+        if (currentPath !== '/profile') window.location.reload(false);
     };
 
     const handleSubmit = e => {
         dispatch(updatePost(post));
         closeModal(false);
-        // window.location.reload(false);
+        if (currentPath !== '/profile') window.location.reload(false);
     };
 
     return (
-        <form className='edit-privacy-form'>
+        <div className='edit-privacy-form'>
             <div className='top-privacy'>
                 <label id='label-edit-privacy'>Edit privacy</label>
                 <button id='button-close-edit-privacy'
@@ -43,20 +53,32 @@ function EditPrivacy({ closeModal, post }){
             <button id='divider-edit-privacy'></button>
 
             <div className='bottom-privacy'>
-                <button className='option-public' onClick={changeToPublic}>
+                <button id='option-public' onClick={changeToPublic}>
                     <i className="fa-solid fa-earth-americas" id='img-public-edit-privacy'></i>
-                    <label>Public</label>
+                    <label id='label-public-edit-privacy'>Public</label>
                 </button>
-                <button className='option-friends' onClick={changeToFriends}>
+                <button id='option-friends' onClick={changeToFriends}>
                     <i className="fa-solid fa-user-group" id='img-friends-edit-privacy'></i>
-                    <label>Friends</label>
+                    <label id='label-friends-edit-privacy'>Friends</label>
                 </button>
-                <button className='option-onlyme' onClick={changeToOnlyme}>
+                <button id='option-onlyme' onClick={changeToOnlyme}>
                     <i className="fa-solid fa-lock" id='img-onlyme-edit-privacy'></i>
-                    <label>Only me</label>
+                    <label id='label-onlyme-edit-privacy'>Only me</label>
                 </button>
             </div>
-        </form>
+            {/* <div>
+                <button id='button-cancel-edit-privacy'
+                    onClick={previousPath}
+                >
+                    Cancel
+                </button>
+                <button id='button-confirm-edit-privacy'
+                    onClick={handleSubmit}
+                >
+                    Confirm
+                </button>
+            </div> */}
+        </div>
     )
 };
 
