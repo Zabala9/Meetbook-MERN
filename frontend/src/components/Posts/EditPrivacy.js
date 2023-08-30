@@ -34,12 +34,6 @@ function EditPrivacy({ closeModal, post }){
         if (currentPath !== '/profile') window.location.reload(false);
     };
 
-    const handleSubmit = e => {
-        dispatch(updatePost(post));
-        closeModal(false);
-        if (currentPath !== '/profile') window.location.reload(false);
-    };
-
     return (
         <div className='edit-privacy-form'>
             <div className='top-privacy'>
@@ -66,18 +60,6 @@ function EditPrivacy({ closeModal, post }){
                     <label id='label-onlyme-edit-privacy'>Only me</label>
                 </button>
             </div>
-            {/* <div>
-                <button id='button-cancel-edit-privacy'
-                    onClick={previousPath}
-                >
-                    Cancel
-                </button>
-                <button id='button-confirm-edit-privacy'
-                    onClick={handleSubmit}
-                >
-                    Confirm
-                </button>
-            </div> */}
         </div>
     )
 };
