@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletePost, updatePost } from '../../store/posts';
+import Modal from '../Modal/Modal';
+import EditPrivacy from './EditPrivacy';
 import './PostButton.css';
 
-function PostButton({ userId, postId }){
+function PostButton({ userId, post }){
     const [showMenu, setShowMenu] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [showModalPrivacy, setShowModalPrivacy] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const currentLocation = window.location.pathname;
@@ -27,7 +31,7 @@ function PostButton({ userId, postId }){
     }, [showMenu]);
 
     const remove = () => {
-        dispatch(deletePost(postId));
+        dispatch(deletePost(post.id));
         if (currentLocation !== '/profile') window.location.reload(false);
     };
 
@@ -36,23 +40,32 @@ function PostButton({ userId, postId }){
         // SHOW PAGE?
     };
 
+    const updatePrivacy = () => {
+        setShowModalPrivacy(true);
+    };
+
     if (user._id === userId) return (
-        <div>
-            <div className='dropdown-post' style={{ textAlign: 'right' }}>
-                <button id='button-post' onClick={openMenu}>
-                    <i className="fa-solid fa-ellipsis" id='img-button-post'></i>
-                </button>
-            </div>
-            { showMenu && (
-                <div className='dropdown-content-post'>
-                    <button id='save-button-post'>Save</button>
-                    <button id='divider-post'></button>
-                    <button id='edit-button-post' onClick={update}>Edit post</button>
-                    <button id='edit-privacy-button-post'>Edit privacy</button>
-                    <button id='delete-button-post' onClick={remove}>Delete post</button>
-                </div>
+        <>
+            {showModalPrivacy && (
+                <Modal component={<EditPrivacy closeModal={setShowModalPrivacy} post={post} />}  />
             )}
-        </div>
+            <div>
+                <div className='dropdown-post' style={{ textAlign: 'right' }}>
+                    <button id='button-post' onClick={openMenu}>
+                        <i className="fa-solid fa-ellipsis" id='img-button-post'></i>
+                    </button>
+                </div>
+                { showMenu && (
+                    <div className='dropdown-content-post'>
+                        <button id='save-button-post'>Save</button>
+                        <button id='divider-post'></button>
+                        <button id='edit-button-post' onClick={update}>Edit post</button>
+                        <button id='edit-privacy-button-post' onClick={updatePrivacy}>Edit privacy</button>
+                        <button id='delete-button-post' onClick={remove}>Delete post</button>
+                    </div>
+                )}
+            </div>
+        </>
     )
 };
 

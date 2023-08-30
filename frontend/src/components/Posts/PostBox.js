@@ -30,7 +30,7 @@ function PostBox ({ post }) {
                                 </label>
                             </div>
                         </label>
-                        <PostButton userId={_id} postId={post._id} />
+                        <PostButton userId={_id} post={post} />
                     </div>
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
@@ -54,7 +54,7 @@ function PostBox ({ post }) {
                                     </label>
                                 </div>
                             </label>
-                            <PostButton userId={_id} postId={post._id} />
+                            <PostButton userId={_id} post={post} />
                         </div>
                         <div id='container-text-post-postbox'>
                             <p id='label-text-post' >{post.text}</p>
