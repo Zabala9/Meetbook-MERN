@@ -30,10 +30,10 @@ function App() {
 
         <ProtectedRoute exact path="/feed" component={Feed} />
         <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path='/groups' component={Groups} />
-        <ProtectedRoute exact path='/market' component={Market} />
-        <ProtectedRoute exact  path='/games' component={Games} />
-        <ProtectedRoute exact path='/post/:postId' component={PostShow} />
+        <ProtectedRoute exact path="/groups" component={Groups} />
+        <ProtectedRoute exact path="/market" component={Market} />
+        <ProtectedRoute exact  path="/games" component={Games} />
+        <ProtectedRoute exact path="/post/:postId" component={PostShow} />
       </Switch>
     </>
   );

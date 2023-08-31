@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { deletePost, updatePost } from '../../store/posts';
 import Modal from '../Modal/Modal';
 import EditPrivacy from './EditPrivacy';
@@ -12,6 +13,7 @@ function PostButton({ userId, post }){
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const currentLocation = window.location.pathname;
+    const history = useHistory();
 
     const openMenu = () => {
         if (showMenu) return;
@@ -32,6 +34,11 @@ function PostButton({ userId, post }){
 
     const remove = () => {
         dispatch(deletePost(post._id));
+        if (currentLocation === `/post/${post._id}`) {
+            let path = '/feed'
+            history.push(path);
+            window.location.reload(false);
+        }
         if (currentLocation !== '/profile') window.location.reload(false);
     };
 

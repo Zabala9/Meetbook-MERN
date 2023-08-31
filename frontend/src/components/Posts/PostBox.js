@@ -13,7 +13,6 @@ function PostBox ({ post }) {
 
     const goToPostShow = () => {
         let path = `/post/${post._id}`;
-        // let path = '/postView';
         history.push(path);
     };
 

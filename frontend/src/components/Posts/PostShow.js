@@ -1,25 +1,51 @@
-// import { useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchPost } from '../../store/posts';
+import { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PostButton from './PostButton';
 import './PostShow.css';
 
 function PostShow(){
-    // const { postId } = useParams();
+    const { postId } = useParams();
+    const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     // const dispatch = useDispatch();
-    // const currentUser = useSelector(state => state.session.user);
-    // const currentPost = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
+    const currentUser = useSelector(state => state.session.user);
 
-    // useEffect(() => {
-    //     // dispatch(fetchPost(postId));
-    // }, [dispatch]);
+    const images = post.imageUrls?.map((url, index) => {
+        return <img id='post-image-postshow' key={url} src={url} alt='' />
+    });
 
-    // if (!currentPost) return null;
-    // if (!currentUser) return null;
+    if(!post) return null;
 
     return (
-        <div className='form-postShow'>
-            <label>Test</label>
+        <div className='form-postshow'>
+            <div className='container-postshow'>
+                <div className='container-postshow-info'>
+                    <label id='label-name-postshow'>
+                        <Link to='/'>
+                            <img id='profile-image-postshow' src={currentUser.profileImageUrl} alt='' />
+                        </Link>
+                        <div className='container-name-privacy-postshow'>
+                            <Link id='name-user-postshow' to='/'>{currentUser.name + ' ' + currentUser.lastname}</Link>
+                            <label id='privacy-postshow'>
+                                {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postshow'></i> :
+                                    post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postshow'></i> : 
+                                    post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postshow'></i> : undefined
+                                }
+                            </label>
+                        </div>
+                    </label>
+                    <PostButton userId={currentUser._id} post={post} />
+                </div>
+                <div className='container-text-post-postshow'>
+                    <p id='label-text-postshow' >{post.text}</p>
+                </div>
+                <div className='container-images-postshow'>
+                    {images}
+                </div>
+                <div className='container-likes-comments-postshow'>
+                    <label id='label-comments-postshow'>comments</label>
+                </div>
+            </div>
         </div>
     )
 };
