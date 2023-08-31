@@ -1,14 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PostButton from './PostButton';
 import './PostBox.css';
 
 function PostBox ({ post }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
+    const history = useHistory();
 
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
     });
+
+    const goToPostShow = () => {
+        let path = `/post/${post._id}`;
+        // let path = '/postView';
+        history.push(path);
+    };
 
     return (
         <>
@@ -35,7 +42,10 @@ function PostBox ({ post }) {
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
                     </div>
-                    {images}
+                    <div id='container-images-postbox'>
+                        {images}
+                    </div>
+                    <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
                 </div> : 
                 location === '/profile' ? 
                     <div className='container-post'>
@@ -59,7 +69,10 @@ function PostBox ({ post }) {
                         <div id='container-text-post-postbox'>
                             <p id='label-text-post' >{post.text}</p>
                         </div>
-                        {images}
+                        <div id='container-images-postbox'>
+                            {images}
+                        </div>
+                        <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
                     </div> : undefined
             }
         </>

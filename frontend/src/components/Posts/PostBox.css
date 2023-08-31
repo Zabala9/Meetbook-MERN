@@ -59,3 +59,15 @@
     width: 500px;
     word-wrap: break-word;
 }
+
+#label-comments-postbox{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#label-comments-postbox:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

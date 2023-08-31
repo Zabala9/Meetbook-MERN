@@ -31,7 +31,7 @@ function PostButton({ userId, post }){
     }, [showMenu]);
 
     const remove = () => {
-        dispatch(deletePost(post.id));
+        dispatch(deletePost(post._id));
         if (currentLocation !== '/profile') window.location.reload(false);
     };
 

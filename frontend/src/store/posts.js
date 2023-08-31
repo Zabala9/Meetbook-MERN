@@ -57,6 +57,17 @@ export const fetchPosts = () => async dispatch => {
     }
 };
 
+export const fetchPost = (postId) => async dispatch => {
+    try{
+        const res = await jwtFetch(`/api/posts/${postId}`);
+        const post = await res.json();
+        dispatch(receivePost(post));
+    } catch (err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 export const fetchUserPosts = id => async dispatch => {
     try{
         const res = await jwtFetch(`/api/posts/user/${id}`);
@@ -72,7 +83,6 @@ export const fetchUserPosts = id => async dispatch => {
 
 export const createPost = (postInfo) => async dispatch => {
     const { text, images, privacy } = postInfo;
-    // console.log(images, "images");
     const formData = new FormData();
     formData.append("text", text);
     formData.append("privacy", privacy);
@@ -87,6 +97,7 @@ export const createPost = (postInfo) => async dispatch => {
         });
         const post = await res.json();
         dispatch(receiveNewPost(post));
+        return post;
     } catch (err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -144,6 +155,13 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
             return { ...state, all: action.posts, new: undefined };
         case RECEIVE_POST:
             return { ...state, all: {...state.all, [action.post._id]: action.post }};
+        case REMOVE_POST:
+            filteredUserPost = state.user.filter(userPost => {
+                return userPost._id.toString() !== action.postId.toString();
+            });
+            const newState = {...state};
+            delete newState.all[action.postId];
+            return {...newState, user: filteredUserPost, new: undefined};
         case RECEIVE_USER_POSTS:
             return { ...state, user: action.posts, new: undefined };
         case RECEIVE_NEW_POST:
@@ -153,13 +171,6 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
             return { ...state, new: action.posts, user: mappedUserPosts };
         case RECEIVE_USER_LOGOUT:
             return { ...state, user: [], new: undefined };
-        case REMOVE_POST:
-            filteredUserPost = state.user.filter(userPost => {
-                return userPost._id.toString() !== action.postId.toString();
-            });
-            const newState = {...state};
-            delete newState.all[action.postId];
-            return {...newState, user: filteredUserPost, new: undefined};
         default:
             return state;
     }
