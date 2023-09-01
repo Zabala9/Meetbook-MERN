@@ -1,20 +1,26 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPosts } from '../../store/posts';
 import PostButton from './PostButton';
 import './PostShow.css';
 
 function PostShow(){
     const { postId } = useParams();
+    const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    // const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    // console.log(post, 'post');
+
+    useEffect(() => {
+        dispatch(fetchPosts());
+    }, [dispatch]);
+
+    if(!post) return undefined;
 
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image-postshow' key={url} src={url} alt='' />
     });
-
-    if(!post) return null;
 
     return (
         <div className='form-postshow'>

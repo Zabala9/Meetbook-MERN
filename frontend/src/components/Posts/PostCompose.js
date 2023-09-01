@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPostErrors, createPost, fetchPosts } from '../../store/posts';
+import { clearPostErrors, createPost } from '../../store/posts';
 import './PostCompose.css';
 
 function PostCompose({ closeModal }) {
