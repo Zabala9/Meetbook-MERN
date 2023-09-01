@@ -10,7 +10,6 @@ function PostShow(){
     const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     const currentUser = useSelector(state => state.session.user);
-    // console.log(post, 'post');
 
     useEffect(() => {
         dispatch(fetchPosts());

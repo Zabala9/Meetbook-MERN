@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { updatePost } from '../../store/posts';
 import './EditPrivacy.css';
 
 function EditPrivacy({ closeModal, post }){
     const dispatch = useDispatch();
+    const history = useHistory();
     const currentPath = window.location.pathname;
 
     const previousPath = () => {
@@ -15,7 +17,11 @@ function EditPrivacy({ closeModal, post }){
         post.privacy = 'public';
         dispatch(updatePost(post));
         closeModal(false);
-        if (currentPath !== '/profile') window.location.reload(false);
+        if (currentPath !== '/profile'){
+            let path =`/post/${post._id}`;
+            history.push(path);
+            window.location.reload(false);
+        }
     };
 
     const changeToFriends = e => {
@@ -23,7 +29,11 @@ function EditPrivacy({ closeModal, post }){
         post.privacy = 'friends';
         dispatch(updatePost(post));
         closeModal(false);
-        if (currentPath !== '/profile') window.location.reload(false);
+        if (currentPath !== '/profile'){
+            let path =`/post/${post._id}`;
+            history.push(path);
+            window.location.reload(false);
+        }
     };
 
     const changeToOnlyme = e => {
@@ -31,7 +41,11 @@ function EditPrivacy({ closeModal, post }){
         post.privacy = 'only me';
         dispatch(updatePost(post));
         closeModal(false);
-        if (currentPath !== '/profile') window.location.reload(false);
+        if (currentPath !== '/profile'){
+            let path =`/post/${post._id}`;
+            history.push(path);
+            window.location.reload(false);
+        }
     };
 
     return (
