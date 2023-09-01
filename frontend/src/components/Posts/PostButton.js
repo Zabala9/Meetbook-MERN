@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deletePost, updatePost } from '../../store/posts';
 import Modal from '../Modal/Modal';
+import EditPost from './EditPost';
 import EditPrivacy from './EditPrivacy';
 import './PostButton.css';
 
@@ -43,8 +44,7 @@ function PostButton({ userId, post }){
     };
 
     const update = () => {
-        // CALL MODAL TO UPDATE POST? AND LATER REDIRECTING TO
-        // SHOW PAGE?
+        setShowModalUpdate(true);
     };
 
     const updatePrivacy = () => {
@@ -53,6 +53,9 @@ function PostButton({ userId, post }){
 
     if (user._id === userId) return (
         <>
+            {showModalUpdate && (
+                <Modal component={<EditPost closeModal={setShowModalUpdate} post={post} />} />
+            )}
             {showModalPrivacy && (
                 <Modal component={<EditPrivacy closeModal={setShowModalPrivacy} post={post} />}  />
             )}

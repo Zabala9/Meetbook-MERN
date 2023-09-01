@@ -56,7 +56,6 @@ function PostCompose({ closeModal }) {
 
     const updateFiles = async e => {
         const files = e.target.files;
-        console.log(files, 'files');
         setImages(files);
         if (files.length !== 0) {
             let filesLoaded = 0;
@@ -72,8 +71,6 @@ function PostCompose({ closeModal }) {
             });
         }
         else setImageUrls([]);
-
-        console.log(images, 'images');
     };
 
     const previousPath = e => {
