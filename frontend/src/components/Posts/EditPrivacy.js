@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { updatePost } from '../../store/posts';
 import './EditPrivacy.css';
 
-function EditPrivacy({ closeModal, post }){
+function EditPrivacy({closeModal, post }){
     const dispatch = useDispatch();
     const history = useHistory();
     const currentPath = window.location.pathname;

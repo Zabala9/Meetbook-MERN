@@ -15,6 +15,7 @@ function PostButton({ userId, post }){
     const user = useSelector(state => state.session.user);
     const currentLocation = window.location.pathname;
     const history = useHistory();
+    const body = document.body;
 
     const openMenu = () => {
         if (showMenu) return;
@@ -50,6 +51,12 @@ function PostButton({ userId, post }){
     const updatePrivacy = () => {
         setShowModalPrivacy(true);
     };
+
+    if(showModalUpdate || showModalPrivacy){
+        body.style.overflow = 'hidden';
+    } else if(!showModalUpdate || !showModalUpdate){
+        body.style.overflow = 'scroll';
+    }
 
     if (user._id === userId) return (
         <>
