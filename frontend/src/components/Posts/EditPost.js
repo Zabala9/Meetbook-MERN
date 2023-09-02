@@ -52,7 +52,7 @@ function EditPost({ closeModal, post }){
     return (
         <div className='container-edit-post'>
             <div className='container-editpost-info'>
-                <div className='top=editpost'>
+                <div className='top-editpost'>
                     <label id='label-editpost'>Edit post</label>
                     <button id='button-close-editpost' onClick={previousPath}>
                         <i className="fa-solid fa-xmark" id='img-close-editpost'></i>
@@ -63,7 +63,7 @@ function EditPost({ closeModal, post }){
                     <img src={post.author.profileImageUrl} alt='' id='profile-img-editpost' />
                     <div className='container-name-privacy'>
                         <label id='name-user-editpost'>{post.author.name + ' ' + post.author.lastname}</label>
-                        <label id='provacy-editpost'>
+                        <label id='privacy-editpost'>
                             {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-editpost'></i> : 
                                 post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-editpost'></i> :
                                 post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-editpost'></i> : undefined
