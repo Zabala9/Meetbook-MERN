@@ -1,5 +1,91 @@
 .container-edit-bio{
     background-color: white;
-    width: 300px;
-    height: 300px;
+    width: 360px;
+    padding: 10px;
+    margin-top: -70px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-edit-bio{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#label-edit-bio{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+#close-edit-bio{
+    background: none;
+    border: none;
+    border-radius: 50px;
+    transition: 0.5s;
+}
+
+#close-edit-bio:hover{
+    background-color: rgb(202, 202, 202);
+    transition: 0.5s;
+}
+
+#divider-edit-bio{
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    width: 99%;
+    margin-bottom: 10px;
+}
+
+#divider-edit-bio:hover{
+    cursor: auto;
+}
+
+.bottom-edit-bio{
+    display: flex;
+    flex-direction: column;
+}
+
+#label-error-edit-bio{
+    color: rgb(201, 0, 0);
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+#text-edit-bio{
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    height: 65px;
+    outline: none;
+    resize: none;
+    font-size: 20px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.container-buttons-edit-bio{
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+}
+
+#button-cancel-edit-bio{
+    margin-right: 15px;
+}
+
+#button-cancel-edit-bio, #button-save-edit-bio{
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#button-cancel-edit-bio:hover, #button-save-edit-bio:hover{
+    background-color: #80b694;
+    transition: 0.5s;
 }

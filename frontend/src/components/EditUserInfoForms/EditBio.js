@@ -34,10 +34,15 @@ function EditBio({ closeModal, userInfo }){
             <div className='top-edit-bio'>
                 <label id='label-edit-bio'>Edit Bio</label>
                 <button id='close-edit-bio' onClick={close}>
-                    Close
+                    <i className="fa-solid fa-xmark" id='img-close-edit-bio'></i>
                 </button>
             </div>
+            <button id='divider-edit-bio'></button>
             <div className='bottom-edit-bio'>
+                {bio.length > 100 ? <label id='label-error-edit-bio'>
+                        The bio cannot have more than 100 characters
+                    </label> : undefined
+                }
                 <textarea
                     value={bio}
                     onChange={updateBio}
@@ -45,11 +50,12 @@ function EditBio({ closeModal, userInfo }){
                     placeholder='Describe how you are'
                     required
                 />
-                <div className='container-buttons'>
+                <div className='container-buttons-edit-bio'>
                     <button id='button-cancel-edit-bio' onClick={close}
                     >Cancel
                     </button>
                     <button id='button-save-edit-bio' onClick={handleSubmit}
+                        disabled={bio.length > 100}
                     >Save
                     </button>
                 </div>
