@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const passport = require('passport');
-const { loginUser, restoreUser } = require('../../config/passport');
+const { loginUser, restoreUser, requireUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
@@ -97,6 +97,33 @@ router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, re
     }
     return res.json(await loginUser(user));
   })(req, res, next);
+});
+
+router.patch('/:id', singleMulterUpload("image"), requireUser, async (req, res, next) => {
+  try{
+    const { bio, birthdate, city, email, lastname, 
+      name, phoneNumber, profileImageUrl, status, _id 
+    } = req.body;
+    let user = await User.findById(_id);
+
+    if(!user) return res.status(404).json({ message: 'User not found.' });
+
+    user.bio = bio;
+    user.birthdate = birthdate;
+    user.city = city;
+    user.email = email;
+    user.lastname = lastname;
+    user.name = name;
+    user.phoneNumber = phoneNumber;
+    user.profileImageUrl = profileImageUrl;
+    user.status = status;
+
+    user = await user.save();
+
+    return res.json(user);
+  } catch (err){
+    next(err);
+  }
 });
 
 module.exports = router;

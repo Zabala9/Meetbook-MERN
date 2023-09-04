@@ -77,7 +77,6 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
 router.patch('/:id', multipleMulterUpload("images"), requireUser, validatePostInput, async (req, res, next) => {
   try{
     const { text, privacy, imageUrls, _id } = req.body;
-    console.log(_id, 'from back');
     let post = await Post.findById(_id);
 
     if (!post) return res.status(404).json({ message: 'Post not found '});
