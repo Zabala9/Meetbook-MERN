@@ -70,7 +70,7 @@ function Profile() {
                             { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
                                 undefined
                             }
-                            <button id='button-edit-bio' onClick={editBio}
+                            <button id='button-edit-bio' 
                                 >Edit bio
                             </button>
                             { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
@@ -79,7 +79,7 @@ function Profile() {
                             { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                 undefined
                             }
-                            <button id='button-edit-details' onClick={editDetails}>
+                            <button id='button-edit-details' >
                                 Edit details
                             </button>
                         </div>
@@ -118,7 +118,7 @@ function Profile() {
                             { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
                                 undefined
                             }
-                            <button id='button-edit-bio' onClick={editBio}
+                            <button id='button-edit-bio'
                                 >Edit bio
                             </button>
                             { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
@@ -127,7 +127,7 @@ function Profile() {
                             { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                 undefined
                             }
-                            <button id='button-edit-details' onClick={editDetails}>
+                            <button id='button-edit-details'>
                                 Edit details
                             </button>
                         </div>
@@ -139,7 +139,7 @@ function Profile() {
                         </div>
                     </div>
                     <div className='right-side-profile'>
-                        <label>All posts</label>
+                        <label id='label-all-post-profile'>All posts</label>
                         {userPosts.map(post => (
                             <PostBox key={post._id}
                                 post={post}
