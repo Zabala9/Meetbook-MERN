@@ -39,7 +39,7 @@ function PostShow(){
                             </label>
                         </div>
                     </label>
-                    <PostButton userId={post.author._id} post={post} />
+                    {/* <PostButton userId={post.author._id} post={post} /> */}
                 </div>
                 <div className='container-text-post-postshow'>
                     <p id='label-text-postshow' >{post.text}</p>

@@ -13,6 +13,7 @@ function EditPost({ closeModal, post }){
     const [imagesUrls, setImagesUrls] = useState(post.imageUrls);
     const history = useHistory();
     const dispatch = useDispatch();
+    const currentPath = window.location.pathname;
 
     const previousPath = e => {
         e.preventDefault();
@@ -46,7 +47,11 @@ function EditPost({ closeModal, post }){
         closeModal(false);
         let path =`/post/${post._id}`;
         history.push(path);
-        window.location.reload(false);
+        // if(currentPath !== `/post/${post._id}`){
+        //     let path =`/post/${post._id}`;
+        //     history.push(path);
+        //     window.location.reload(false);
+        // }
     };
 
     return (

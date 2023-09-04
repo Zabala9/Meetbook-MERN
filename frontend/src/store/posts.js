@@ -107,8 +107,9 @@ export const createPost = (postInfo) => async dispatch => {
 };
 
 export const updatePost = data => async dispatch => {
+    console.log(data, 'data');
     try{
-        const res = await jwtFetch(`api/posts/${data.postId}`, {
+        const res = await jwtFetch(`api/posts/${data._id}`, {
             method: 'PATCH',
             body: JSON.stringify(data)
         });
