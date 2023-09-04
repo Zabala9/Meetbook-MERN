@@ -33,6 +33,8 @@ router.get('/current', restoreUser, (req, res) => {
     phoneNumber: req.user.phoneNumber,
     birthdate: req.user.birthdate,
     city: req.user.city,
+    bio: req.user.bio,
+    status: req.user.status,
     profileImageUrl: req.user.profileImageUrl
   });
 });
