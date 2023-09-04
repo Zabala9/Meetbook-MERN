@@ -35,20 +35,14 @@ function Profile() {
     };
 
     // const editDetails = () => {
-
+        
     // };
 
-    if(showModalEditBio){
-        body.style.overflow = 'hidden';
-    } else if(!showModalEditBio){
-        body.style.overflow = 'scroll';
-    }
-
-    if (userPosts.length === 0) {
+    if (userPosts.length === 0)
         return (
             <>
                 {showModalEditBio && (
-                    <Modal component={<EditBio closeModal={setShowModalEditBio} user={currentUser} />} />
+                    <Modal component={<EditBio closeModal={setShowModalEditBio} userInfo={currentUser} />} />
                 )}
                 <div className='container-profile'>
                     <div className='container-top-profile'>
@@ -96,66 +90,65 @@ function Profile() {
                     </div>
                 </div>
             </>
-        )
-    } else {
-        return (
-            <>
-                {showModalEditBio && (
-                    <Modal closeModal={setShowModalEditBio} component={<EditBio userInfo={currentUser} />} />
-                )}
-                <div className='container-profile'>
-                    <div className='container-top-profile'>
-                        <div className='container-left-top-profile'>
-                            <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
-                            <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
-                        </div>
-                        <div className='container-right-top-profile'>
-                            <button id='button-edit-profile'>
-                                <i className="fa-solid fa-user-pen" id='img-edit-profile'></i>
-                                Edit profile
-                            </button>
-                        </div>
+        );
+    
+    return (
+        <>
+            {showModalEditBio && (
+                <Modal component={<EditBio closeModal={setShowModalEditBio} userInfo={currentUser} />} />
+            )}
+            <div className='container-profile'>
+                <div className='container-top-profile'>
+                    <div className='container-left-top-profile'>
+                        <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
+                        <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
                     </div>
-                    <div className='container-bottom-profile'>
-                        <div className='left-side-profile'>
-                            <div id='container-bio-profile'>
-                                <label id='title-intro-profile'>Intro</label>
-                                { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
-                                    undefined
-                                }
-                                <button id='button-edit-bio' onClick={editBio}
-                                    >Edit bio
-                                </button>
-                                { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
-                                    undefined
-                                }
-                                { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
-                                    undefined
-                                }
-                                <button id='button-edit-details'>
-                                    Edit details
-                                </button>
-                            </div>
-                            {/* <div id='container-photos-profile'>
-
-                            </div> */}
-                            <div id='container-friends-profile'>
-                                <label id='title-friends-profile'>Friends</label>
-                            </div>
-                        </div>
-                        <div className='right-side-profile'>
-                            <label id='label-all-post-profile'>All posts</label>
-                            {userPosts.map(post => (
-                                <PostBox key={post._id}
-                                    post={post}
-                                />
-                            ))}
-                        </div>
+                    <div className='container-right-top-profile'>
+                        <button id='button-edit-profile'>
+                            <i className="fa-solid fa-user-pen" id='img-edit-profile'></i>
+                            Edit profile
+                        </button>
                     </div>
                 </div>
-            </>
-        );
-    }
+                <div className='container-bottom-profile'>
+                    <div className='left-side-profile'>
+                        <div id='container-bio-profile'>
+                            <label id='title-intro-profile'>Intro</label>
+                            { currentUser.bio !== '' ?  <p id='bio-user-profile'>{currentUser.bio}</p> :
+                                undefined
+                            }
+                            <button id='button-edit-bio' onClick={editBio}
+                                >Edit bio
+                            </button>
+                            { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
+                                undefined
+                            }
+                            { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
+                                undefined
+                            }
+                            <button id='button-edit-details'>
+                                Edit details
+                            </button>
+                        </div>
+                        {/* <div id='container-photos-profile'>
+
+                        </div> */}
+                        <div id='container-friends-profile'>
+                            <label id='title-friends-profile'>Friends</label>
+                        </div>
+                    </div>
+                    <div className='right-side-profile'>
+                        <label id='label-all-post-profile'>All posts</label>
+                        {userPosts.map(post => (
+                            <PostBox key={post._id}
+                                post={post}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default Profile;
