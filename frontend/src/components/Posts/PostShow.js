@@ -9,7 +9,7 @@ function PostShow(){
     const { postId } = useParams();
     const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    const currentUser = useSelector(state => state.session.user);
+    // const currentUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(fetchPosts());
@@ -27,10 +27,10 @@ function PostShow(){
                 <div className='container-postshow-info'>
                     <label id='label-name-postshow'>
                         <Link to='/'>
-                            <img id='profile-image-postshow' src={currentUser.profileImageUrl} alt='' />
+                            <img id='profile-image-postshow' src={post.author.profileImageUrl} alt='' />
                         </Link>
                         <div className='container-name-privacy-postshow'>
-                            <Link id='name-user-postshow' to='/'>{currentUser.name + ' ' + currentUser.lastname}</Link>
+                            <Link id='name-user-postshow' to='/'>{post.author.name + ' ' + post.author.lastname}</Link>
                             <label id='privacy-postshow'>
                                 {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postshow'></i> :
                                     post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postshow'></i> : 
@@ -39,7 +39,7 @@ function PostShow(){
                             </label>
                         </div>
                     </label>
-                    <PostButton userId={currentUser._id} post={post} />
+                    <PostButton userId={post.author._id} post={post} />
                 </div>
                 <div className='container-text-post-postshow'>
                     <p id='label-text-postshow' >{post.text}</p>
