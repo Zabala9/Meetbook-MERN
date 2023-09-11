@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import PostBox from '../Posts/PostBox';
 import EditBio from '../EditUserInfoForms/EditBio';
+import EditDetails from '../EditUserInfoForms/EditDetails';
 import Modal from '../Modal/Modal';
 import './Profile.css';
 
 function Profile() {
     const dispatch = useDispatch();
     const [showModalEditBio, setShowModalEditBio] = useState(false);
+    const [showModalEditDetails, setShowModalEditDetails] = useState(false);
     const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const currentUrl = window.location.pathname;
@@ -34,15 +36,18 @@ function Profile() {
         setShowModalEditBio(true);
     };
 
-    // const editDetails = () => {
-        
-    // };
+    const editDetails = () => {
+        setShowModalEditDetails(true);
+    };
 
     if (userPosts.length === 0)
         return (
             <>
                 {showModalEditBio && (
                     <Modal component={<EditBio closeModal={setShowModalEditBio} userInfo={currentUser} />} />
+                )}
+                {showModalEditDetails && (
+                    <Modal component={<EditDetails closeModal={setShowModalEditDetails} userInfo={currentUser} />} />
                 )}
                 <div className='container-profile'>
                     <div className='container-top-profile'>
@@ -73,7 +78,7 @@ function Profile() {
                                 { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                     undefined
                                 }
-                                <button id='button-edit-details' >
+                                <button id='button-edit-details' onClick={editDetails} >
                                     Edit details
                                 </button>
                             </div>
@@ -96,6 +101,9 @@ function Profile() {
         <>
             {showModalEditBio && (
                 <Modal component={<EditBio closeModal={setShowModalEditBio} userInfo={currentUser} />} />
+            )}
+            {showModalEditDetails && (
+                <Modal component={<EditDetails closeModal={setShowModalEditDetails} userInfo={currentUser} />} />
             )}
             <div className='container-profile'>
                 <div className='container-top-profile'>
@@ -126,7 +134,7 @@ function Profile() {
                             { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
                                 undefined
                             }
-                            <button id='button-edit-details'>
+                            <button id='button-edit-details' onClick={editDetails} >
                                 Edit details
                             </button>
                         </div>

@@ -4,7 +4,6 @@ import { updateUser } from '../../store/session';
 import './EditBio.css';
 
 function EditBio({ closeModal, userInfo }){
-    // console.log(userInfo);
     const previousBio = userInfo.bio;
     const [bio, setBio] = useState(userInfo.bio);
     const body = document.body;
