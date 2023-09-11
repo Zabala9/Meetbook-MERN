@@ -31,7 +31,16 @@ function EditDetails({ closeModal, userInfo }){
 
     return (
         <div className='container-edit-details'>
-            <label onClick={close}>Test</label>
+            <div className='top-edit-details'>
+                <label id='label-edit-bio'>Edit Details</label>
+                <button id='close-edit-details' onClick={close}>
+                    <i className="fa-solid fa-xmark" id='img-close-edit-details'></i>
+                </button>
+            </div>
+            <button id='divider-edit-details'></button>
+            <div className='bottom-edit-details'>
+                
+            </div>
         </div>
     )
 };

@@ -23,7 +23,6 @@ function EditBio({ closeModal, userInfo }){
     const handleSubmit = e => {
         e.preventDefault();
         userInfo.bio = bio;
-        console.log(userInfo);
         dispatch(updateUser(userInfo));
         closeModal(false);
     };
