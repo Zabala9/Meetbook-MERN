@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../../store/session';
+import { useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import './EditDetails.css';
 
 function EditDetails({ closeModal, userInfo }){
@@ -9,6 +10,11 @@ function EditDetails({ closeModal, userInfo }){
     const [city, setCity] = useState(userInfo.city);
     const [status, setStatus] = useState(userInfo.status);
     const body = document.body;
+
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        libraries: ['places'],
+    });
 
     useEffect(() => {
         body.style.overflow = 'hidden';
@@ -29,6 +35,8 @@ function EditDetails({ closeModal, userInfo }){
         closeModal(false);
     };
 
+    if(!isLoaded) return undefined; // loading?
+
     return (
         <div className='container-edit-details'>
             <div className='top-edit-details'>
@@ -39,7 +47,11 @@ function EditDetails({ closeModal, userInfo }){
             </div>
             <button id='divider-edit-details'></button>
             <div className='bottom-edit-details'>
-                
+                <Autocomplete>
+                    <input type='text'
+                        id='city-edit-details'
+                    />
+                </Autocomplete>
             </div>
         </div>
     )
