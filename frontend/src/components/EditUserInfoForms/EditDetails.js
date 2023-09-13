@@ -89,6 +89,7 @@ function EditDetails({ closeModal, userInfo }){
                         <button id='button-single'>Single</button>
                         <button id='button-relationship'>In a relationship</button>
                         {/* more options */}
+                        
                     </div>
                 )}
                 {/* <input type='text'
