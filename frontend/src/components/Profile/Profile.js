@@ -72,7 +72,7 @@ function Profile() {
                                 <button id='button-edit-bio' onClick={editBio}
                                     >Edit bio
                                 </button>
-                                { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
+                                { currentUser.city !== '' ? <label id='label-city-profile'>Lives in {currentUser.city}</label> :
                                     undefined
                                 }
                                 { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
@@ -128,10 +128,18 @@ function Profile() {
                             <button id='button-edit-bio' onClick={editBio}
                                 >Edit bio
                             </button>
-                            { currentUser.city !== '' ? <label id='label-city-profile'>{currentUser.city}</label> :
+                            { currentUser.city !== '' ?
+                                <label id='label-city-profile'>
+                                    <i class="fa-solid fa-house-chimney-window" id='img-live-profile'></i>
+                                    Lives in <label id='label-city-inside-profile'>{currentUser.city}</label>
+                                </label> :
                                 undefined
                             }
-                            { currentUser.status !== '' ? <label id='label-status-profile'>{currentUser.status}</label> :
+                            { currentUser.status !== '' ?
+                                <label id='label-status-profile'>
+                                    <i class="fa-solid fa-heart" id='img-status-profile'></i>
+                                    <label id='label-status-inside-profile'>{currentUser.status}</label>
+                                </label> :
                                 undefined
                             }
                             <button id='button-edit-details' onClick={editDetails} >

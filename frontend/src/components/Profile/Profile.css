@@ -76,12 +76,40 @@
     margin-bottom: 50px;
 }
 
-#button-edit-bio, #button-edit-details{
+#bio-user-profile{
+    display: flex;
+    justify-content: center;
+}
+
+#button-edit-bio{
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 3px;
+    width: 99%;
+    transition: 0.5s;
+}
+
+#label-status-profile{
+    margin-top: 7px;
+}
+
+#img-live-profile, #img-status-profile{
+    margin-right: 5px;
+    color: rgb(134, 134, 134);
+}
+
+#label-city-inside-profile{
+    font-weight: bold;
+}
+
+#button-edit-details{
     border: 1px solid black;
     border-radius: 5px;
     font-size: 18px;
     margin-top: 15px;
-    width: 200px;
+    width: 99%;
     transition: 0.5s;
 }
 
