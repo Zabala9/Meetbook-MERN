@@ -13,27 +13,20 @@ function PostCompose({ closeModal }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const errors = useSelector(state => state.errors.posts);
+    const body = document.body;
 
     const openMenu = () => {
-        if(showMenu) return;
-        setShowMenu(true);
+        if(showMenu) {
+            setShowMenu(false);
+        } else {
+            setShowMenu(true);
+        }
     };
 
     useEffect(() => {
-        if(!showMenu) return;
-
-        const closeMenu = () => {
-            setShowMenu(false);
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener('click', closeMenu);
-    }, [showMenu]);
-
-    useEffect(() => {
-        return () => dispatch(clearPostErrors(errors));
-    }, [dispatch]);
+        body.style.overflow = 'hidden';
+        // return () => dispatch(clearPostErrors(errors));
+    });
 
     const handleSubmit = e => {
         // e.preventDefault();
