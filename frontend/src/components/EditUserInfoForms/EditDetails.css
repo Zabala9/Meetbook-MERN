@@ -61,9 +61,72 @@
 #button-dropdown-details{
     margin-bottom: 20px;
     font-size: 17px;
-    width: 99%;
+    width: 100%;
+}
+
+#label-options-details:hover{
+    cursor: pointer;
 }
 
 #arrow-drop-details{
     margin-left: 150px;
+}
+
+.dropdown-content-details{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: white;
+    padding: 7px;
+    margin-top: -20px;
+    width: 90%;
+}
+
+#button-single, #button-relationship, #button-married,
+#button-divorced, #button-separated{
+    width: 100%;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#button-single:hover, #button-relationship:hover,
+#button-married:hover, #button-divorced:hover,
+#button-separated:hover{
+    border: 1px solid black;
+    background-color: #80b694;
+    transition: 0.5s;
+}
+
+#button-relationship, #button-married,
+#button-divorced, #button-separated{
+    margin-top: 3px;
+}
+
+.container-buttons-edit-details{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 7px;
+}
+
+#button-cancel-edit-details{
+    margin-right: 12px;
+}
+
+#button-cancel-edit-details, #button-save-edit-details{
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#button-cancel-edit-details:hover,
+#button-save-edit-details:hover{
+    border: 1px solid black;
+    background-color: #80b694;
+    transition: 0.5s;
 }

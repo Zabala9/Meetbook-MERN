@@ -7,9 +7,10 @@ import './EditDetails.css';
 function EditDetails({ closeModal, userInfo }){
     const previousCity = userInfo.city;
     const previousStatus = userInfo.status;
-    const [city, setCity] = useState(userInfo.city);
+    // const [city, setCity] = useState(userInfo.city);
     const [status, setStatus] = useState(userInfo.status);
     const [showOptions, setShowOptions] = useState(false);
+    const dispatch = useDispatch();
     const body = document.body;
 
     /** @type React.MutableRefObject<HTMLInputElement> */
@@ -38,14 +39,38 @@ function EditDetails({ closeModal, userInfo }){
         closeModal(false);
     };
 
-    // const updateStatus = e => setStatus(e.currentTarget.value);
-
     const handleSubmit = e => {
         e.preventDefault();
         userInfo.city = originCity.current.value;
         userInfo.status = status;
-        // dispatch
+        // console.log(userInfo, 'userInfo');
+        dispatch(updateUser(userInfo));
         closeModal(false);
+    };
+
+    const changeStatusToSingle = () => {
+        setStatus('Single');
+        setShowOptions(false);
+    };
+
+    const changeStatusToRelationship = () => {
+        setStatus('Relationship');
+        setShowOptions(false);
+    };
+
+    const changeStatusToDivorced = () => {
+        setStatus('Divorced');
+        setShowOptions(false);
+    };
+
+    const changeStatusToMarried = () => {
+        setStatus('Married');
+        setShowOptions(false);
+    };
+
+    const changeStatusToSeparated = () => {
+        setStatus('Separated');
+        setShowOptions(false);
     };
 
     if(!isLoaded) return undefined;
@@ -67,7 +92,7 @@ function EditDetails({ closeModal, userInfo }){
                         required
                     />
                 </Autocomplete>
-                <div className='dropdown-options-details' style={{ textAlign: 'left'}}>
+                <div className='dropdown-options-details' >
                     <button id='button-dropdown-details'
                         onClick={openOptions}
                     >
@@ -75,16 +100,16 @@ function EditDetails({ closeModal, userInfo }){
                             <i className="fa-solid fa-caret-down" id='arrow-drop-details'></i>
                         </label> : status}
                     </button>
+                    {showOptions && (
+                        <div className='dropdown-content-details'>
+                            <button id='button-single' onClick={changeStatusToSingle}>Single</button>
+                            <button id='button-relationship' onClick={changeStatusToRelationship}>In a relationship</button>
+                            <button id='button-married' onClick={changeStatusToMarried}>Married</button>
+                            <button id='button-divorced' onClick={changeStatusToDivorced}>Divorced</button>
+                            <button id='button-separated' onClick={changeStatusToSeparated}>Separated</button>
+                        </div>
+                    )}
                 </div>
-                {showOptions && (
-                    <div className='dropdown-content-details'>
-                        <button id='button-single'>Single</button>
-                        <button id='button-relationship'>In a relationship</button>
-                        <button id='button-married'>Married</button>
-                        <button id='button-divorced'>Divorced</button>
-                        <button id='button-separated'>Separated</button>
-                    </div>
-                )}
                 {/* <input type='text'
                     value={status}
                     onChange={updateStatus}
@@ -100,6 +125,7 @@ function EditDetails({ closeModal, userInfo }){
                     </button>
                     <button id='button-save-edit-details'
                         onClick={handleSubmit}
+                        // disabled={!status || userInfo.city !== previousCity}
                     >
                         Save
                     </button>
