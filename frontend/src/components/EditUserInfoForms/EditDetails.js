@@ -21,21 +21,12 @@ function EditDetails({ closeModal, userInfo }){
     });
 
     const openOptions = () => {
-        if(showOptions) return;
-        setShowOptions(true);
-    };
-
-    useEffect(() => {
-        if(!showOptions) return;
-
-        const closeMenu = () => {
+        if(showOptions){
             setShowOptions(false);
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener('click', closeMenu);
-    }, [showOptions])
+        } else {
+            setShowOptions(true);
+        }
+    };
 
     useEffect(() => {
         body.style.overflow = 'hidden';
@@ -47,7 +38,7 @@ function EditDetails({ closeModal, userInfo }){
         closeModal(false);
     };
 
-    const updateStatus = e => setStatus(e.currentTarget.value);
+    // const updateStatus = e => setStatus(e.currentTarget.value);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -57,12 +48,12 @@ function EditDetails({ closeModal, userInfo }){
         closeModal(false);
     };
 
-    if(!isLoaded) return undefined; // loading?
+    if(!isLoaded) return undefined;
 
     return (
         <div className='container-edit-details'>
             <div className='top-edit-details'>
-                <label id='label-edit-bio'>Edit Details</label>
+                <label id='label-edit-details'>Edit Details</label>
                 <button id='close-edit-details' onClick={close}>
                     <i className="fa-solid fa-xmark" id='img-close-edit-details'></i>
                 </button>
@@ -76,20 +67,22 @@ function EditDetails({ closeModal, userInfo }){
                         required
                     />
                 </Autocomplete>
-                <div className='dropdown-options-details' style={{ textAlign: 'center'}}>
+                <div className='dropdown-options-details' style={{ textAlign: 'left'}}>
                     <button id='button-dropdown-details'
                         onClick={openOptions}
-                        value={status}
-                        placeholder={status === '' ? 'Select option' : undefined}
                     >
+                        {status === "" ? <label id='label-options-details'> Select an option
+                            <i className="fa-solid fa-caret-down" id='arrow-drop-details'></i>
+                        </label> : status}
                     </button>
                 </div>
                 {showOptions && (
                     <div className='dropdown-content-details'>
                         <button id='button-single'>Single</button>
                         <button id='button-relationship'>In a relationship</button>
-                        {/* more options */}
-                        
+                        <button id='button-married'>Married</button>
+                        <button id='button-divorced'>Divorced</button>
+                        <button id='button-separated'>Separated</button>
                     </div>
                 )}
                 {/* <input type='text'

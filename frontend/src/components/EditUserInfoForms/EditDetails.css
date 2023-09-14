@@ -1,5 +1,69 @@
 .container-edit-details{
-    width: 300px;
-    height: 300px;
+    /* width: 500px;
+    height: 500px; */
+    margin-top: -100px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.top-edit-details{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#label-edit-details{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#close-edit-details{
+    background: none;
+    border: none;
+    height: 21px;
+    border-radius: 50px;
+    transition: 0.5s;
+}
+
+#close-edit-details:hover{
+    background-color: rgb(202, 202, 202);
+    transition: 0.5s;
+}
+
+#divider-edit-details{
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(152, 152, 152);
+    width: 97%;
+}
+
+.bottom-edit-details{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#field-city-edit-details{
+    font-size: 20px;
+    width: 98%;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    text-indent: 2px;
+}
+
+#button-dropdown-details{
+    margin-bottom: 20px;
+    font-size: 17px;
+    width: 99%;
+}
+
+#arrow-drop-details{
+    margin-left: 150px;
 }
