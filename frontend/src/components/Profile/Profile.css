@@ -25,6 +25,24 @@
     height: 120px;
 }
 
+#button-change-photo-profile{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 95px;
+    border: 1px solid rgb(131, 131, 131);
+    background-color: rgb(230, 230, 230);
+    height: 31px;
+    border-radius: 50px;
+}
+
+#button-change-photo-profile:hover{
+    background-color: rgb(219, 219, 219);
+}
+
+#edit-profile-photo{
+    font-size: 20px;
+}
+
 #label-name-profile{
     margin-left: 20px;
     font-size: 25px;

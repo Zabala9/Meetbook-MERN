@@ -109,6 +109,9 @@ function Profile() {
                 <div className='container-top-profile'>
                     <div className='container-left-top-profile'>
                         <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
+                        <button id='button-change-photo-profile'>
+                            <i className="fa-solid fa-camera" id='edit-profile-photo'></i>
+                        </button>
                         <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
                     </div>
                     <div className='container-right-top-profile'>
