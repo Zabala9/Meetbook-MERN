@@ -82,6 +82,7 @@ export const fetchUserPosts = id => async dispatch => {
 };
 
 export const createPost = (postInfo) => async dispatch => {
+    // console.log(postInfo);
     const { text, images, privacy } = postInfo;
     const formData = new FormData();
     formData.append("text", text);

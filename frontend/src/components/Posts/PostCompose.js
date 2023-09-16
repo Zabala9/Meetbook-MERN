@@ -136,15 +136,28 @@ function PostCompose({ closeModal }) {
                     required
                 />
                 {/* <div className='errors'>{errors?.post}</div> */}
-                <input type='file'
-                    ref={fileRef}
-                    accept='.jpg, .jpeg, .png'
-                    multiple
-                    onChange={updateFiles}
-                    id='select-files'
-                />
+                <div className='container-files-name'>
+                    <div className='container-files-create-post'>
+                        <label htmlFor='select-files' type="files" id='label-select-files'>
+                            <i className="fa-solid fa-camera-retro" id='img-file-post'></i>
+                            <i className="fa-solid fa-plus" id='img-plus-file'></i>
+                        </label>
+                        <input type='file'
+                            ref={fileRef}
+                            accept='.jpg, .jpeg, .png'
+                            multiple
+                            onChange={updateFiles}
+                            id='select-files'
+                            style={{display: 'none'}}
+                        />
+                    </div>
+                    {images.length > 0 ?
+                        <label id='label-name-file'>{images[0].name}</label>
+                        : undefined
+                    }
+                </div>
                 <input type='submit' value="Post" id='button-create-post'
-                    disabled={!text}
+                    // disabled={!text}
                 />
             </form>
             {/* <div className='post-preview'>
