@@ -102,12 +102,16 @@ router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, re
 });
 
 router.patch('/:id', singleMulterUpload("image"), requireUser, async (req, res, next) => {
+  // console.log(req.body);
+  // console.log(req.file);
   try{
     const { bio, birthdate, city, email, lastname, 
-      name, phoneNumber, status, id } = req.body;
-    let user = await User.findById(id);
+      name, phoneNumber, status, _id, profileImageUrl } = req.body;
+    let user = await User.findById(_id);
 
-    const newProfileImageUrl = await singleFileUpload({ file: req.file, public: true });
+    let newProfileImageUrl; 
+    
+    if(req.file) newProfileImageUrl = await singleFileUpload({ file: req.file, public: true });
 
     if(!user) return res.status(404).json({ message: 'User not found.' });
 
@@ -118,7 +122,9 @@ router.patch('/:id', singleMulterUpload("image"), requireUser, async (req, res, 
     user.lastname = lastname;
     user.name = name;
     user.phoneNumber = phoneNumber;
-    user.profileImageUrl = newProfileImageUrl;
+    if(req.file) {
+      user.profileImageUrl = newProfileImageUrl
+    } else { user.profileImageUrl = profileImageUrl }
     user.status = status;
 
     user = await user.save();

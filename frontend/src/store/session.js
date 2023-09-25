@@ -80,7 +80,7 @@ export const updateUser = (data) => async dispatch => {
 export const updateProfilePhoto = (data, image) => async dispatch => {
   const { _id, bio, birthdate, city, email, lastname, name, phoneNumber, status } = data;
   const formData = new FormData();
-  formData.append("id", _id);
+  formData.append("_id", _id);
   formData.append("bio", bio);
   formData.append("birthdate", birthdate);
   formData.append("city", city);

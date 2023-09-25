@@ -41,7 +41,12 @@ function EditDetails({ closeModal, userInfo }){
 
     const handleSubmit = e => {
         e.preventDefault();
-        userInfo.city = originCity.current.value;
+        if (originCity.current.value === '') {
+            userInfo.city = previousCity;
+        } else {
+            userInfo.city = originCity.current.value;
+        }
+        
         userInfo.status = status;
         // console.log(userInfo, 'userInfo');
         dispatch(updateUser(userInfo));
