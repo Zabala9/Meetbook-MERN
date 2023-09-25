@@ -11,7 +11,7 @@ function EditBio({ closeModal, userInfo }){
     
     useEffect(() => {
         body.style.overflow = 'hidden';
-    });
+    }, []);
 
     const close = () => {
         userInfo.bio = previousBio;

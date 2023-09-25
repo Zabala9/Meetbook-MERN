@@ -31,7 +31,7 @@ function EditDetails({ closeModal, userInfo }){
 
     useEffect(() => {
         body.style.overflow = 'hidden';
-    });
+    }, []);
 
     const close = () => {
         userInfo.city = previousCity;

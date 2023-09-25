@@ -1,5 +1,5 @@
-import { useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { updateProfilePhoto } from '../../store/session';
 import './EditProfilePhoto.css';
 
@@ -7,6 +7,7 @@ function EditProfilePhoto({ closeModal, user }) {
     const previousPhoto = user.profileImageUrl;
     const dispatch = useDispatch();
     const [image, setImage] = useState(user.profileImageUrl);
+    const body = document.body;
 
     const close = () => {
         closeModal(false);
@@ -21,11 +22,15 @@ function EditProfilePhoto({ closeModal, user }) {
         window.location.reload(false);
     };
 
+    useEffect(() => {
+        body.style.overflow = 'hidden';
+    }, []);
+
     return(
         <div className='container-edit-photo'>
             <div className='container-top-edit-photo'>
                 <label id='label-edit-photo'>Edit Profile Picture</label>
-                <button onClick={close}>
+                <button onClick={close} id='close-edit-photo'>
                     <i className="fa-solid fa-xmark" id='img-close-edit-photo'></i>
                 </button>
             </div>
@@ -34,6 +39,7 @@ function EditProfilePhoto({ closeModal, user }) {
                 <div className='container-photo-new'>
                     <label htmlFor='input-photo-new' id='label-input-photo'>
                         <i className="fa-solid fa-camera-retro" id='img-photo-edit'></i>
+                        <i className="fa-solid fa-plus" id='img-plus-photo-edit'></i>
                     </label>
                     <input type='file'
                         id='input-photo-new'
@@ -44,7 +50,7 @@ function EditProfilePhoto({ closeModal, user }) {
                     />
                 </div>
                 {image ?
-                    <label id='name-file-photo-new'>{image.name}</label>
+                    <textarea id='name-file-photo-new' value={image.name} />
                     : undefined
                 }
             </div>

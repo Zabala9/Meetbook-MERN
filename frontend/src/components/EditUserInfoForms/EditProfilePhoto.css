@@ -1,6 +1,108 @@
 .container-edit-photo{
     background-color: white;
     padding: 10px;
-    /* width: 100px;
-    height: 100px; */
+    border-radius: 10px;
+    margin-top: -10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-top-edit-photo{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#label-edit-photo{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#img-close-edit-photo{
+    font-size: 20px;
+}
+
+#close-edit-photo{
+    background: none;
+    border: none;
+    height: 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+
+#close-edit-photo:hover{
+    background-color: rgb(202, 202, 202);
+    transition: 0.5s;
+}
+
+#divider-edit-photo{
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(152, 152, 152);
+}
+
+.container-bottom-edit-photo{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.container-photo-new{
+    background-color: #dadada;
+    width: 40px;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.container-photo-new:hover, #label-input-photo:hover{
+    cursor: pointer;
+}
+
+#img-photo-edit{
+    font-size: 25px;
+    margin-right: 3px;
+}
+
+#img-plus-photo-edit{
+    font-size: 13px;
+    position: absolute;
+}
+
+#name-file-photo-new{
+    border: none;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 240px;
+    margin-left: 20px;
+}
+
+.container-buttons{
+    margin-top: 13px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5px;
+}
+
+#button-cancel{
+    margin-right: 12px;
+}
+
+#button-cancel, #button-confirm{
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#button-cancel:hover, #button-confirm:hover{
+    background-color: #80b694;
+    transition: 0.5s;
 }
