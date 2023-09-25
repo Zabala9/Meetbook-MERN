@@ -4,6 +4,7 @@ import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import PostBox from '../Posts/PostBox';
 import EditBio from '../EditUserInfoForms/EditBio';
 import EditDetails from '../EditUserInfoForms/EditDetails';
+import EditProfilePhoto from '../EditUserInfoForms/EditProfilePhoto';
 import Modal from '../Modal/Modal';
 import './Profile.css';
 
@@ -11,10 +12,10 @@ function Profile() {
     const dispatch = useDispatch();
     const [showModalEditBio, setShowModalEditBio] = useState(false);
     const [showModalEditDetails, setShowModalEditDetails] = useState(false);
+    const [showModalEditPhoto, setShowModalEditPhoto] = useState(false);
     const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const currentUrl = window.location.pathname;
-    const body = document.body;
 
     useEffect(() => {
         dispatch(fetchUserPosts(currentUser._id));
@@ -38,6 +39,10 @@ function Profile() {
 
     const editDetails = () => {
         setShowModalEditDetails(true);
+    };
+
+    const editProfilePhoto = () => {
+        setShowModalEditPhoto(true);
     };
 
     // if (userPosts.length === 0)
@@ -105,11 +110,14 @@ function Profile() {
             {showModalEditDetails && (
                 <Modal component={<EditDetails closeModal={setShowModalEditDetails} userInfo={currentUser} />} />
             )}
+            {showModalEditPhoto && (
+                <Modal component={<EditProfilePhoto closeModal={setShowModalEditPhoto} user={currentUser} />} />
+            )}
             <div className='container-profile'>
                 <div className='container-top-profile'>
                     <div className='container-left-top-profile'>
                         <img src={currentUser.profileImageUrl} id='img-profile' alt='' />
-                        <button id='button-change-photo-profile'>
+                        <button id='button-change-photo-profile' onClick={editProfilePhoto}>
                             <i className="fa-solid fa-camera" id='edit-profile-photo'></i>
                         </button>
                         <label id='label-name-profile'>{currentUser.name + ' ' + currentUser.lastname}</label>
@@ -133,14 +141,14 @@ function Profile() {
                             </button>
                             { currentUser.city !== '' ?
                                 <label id='label-city-profile'>
-                                    <i class="fa-solid fa-house-chimney-window" id='img-live-profile'></i>
+                                    <i className="fa-solid fa-house-chimney-window" id='img-live-profile'></i>
                                     Lives in <label id='label-city-inside-profile'>{currentUser.city}</label>
                                 </label> :
                                 undefined
                             }
                             { currentUser.status !== '' ?
                                 <label id='label-status-profile'>
-                                    <i class="fa-solid fa-heart" id='img-status-profile'></i>
+                                    <i className="fa-solid fa-heart" id='img-status-profile'></i>
                                     <label id='label-status-inside-profile'>{currentUser.status}</label>
                                 </label> :
                                 undefined

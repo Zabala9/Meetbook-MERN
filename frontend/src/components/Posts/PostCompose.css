@@ -128,7 +128,7 @@
 
 .container-files-name{
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .container-files-create-post{

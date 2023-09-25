@@ -63,15 +63,43 @@ const startSession = (userInfo, route) => async dispatch => {
     }
 };
 
-export const updateUser = data => async dispatch => {
+export const updateUser = (data) => async dispatch => {
   try{
-    const res = await jwtFetch(`/api/users/${data.userId}`, {
+    const res = await jwtFetch(`/api/users/${data._id}`, {
       method: 'PATCH',
       body: JSON.stringify(data)
     });
     const user = await res.json();
     dispatch(receiveUser(user));
   } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+  }
+};
+
+export const updateProfilePhoto = (data, image) => async dispatch => {
+  const { _id, bio, birthdate, city, email, lastname, name, phoneNumber, status } = data;
+  const formData = new FormData();
+  formData.append("id", _id);
+  formData.append("bio", bio);
+  formData.append("birthdate", birthdate);
+  formData.append("city", city);
+  formData.append("email", email);
+  formData.append("lastname", lastname);
+  formData.append("name", name);
+  formData.append("phoneNumber", phoneNumber);
+  formData.append("status", status);
+  formData.append("image", image);
+
+  try{
+    const res = await jwtFetch(`/api/users/${data._id}`, {
+      method: "PATCH",
+      body: formData,
+    });
+
+    const user = await res.json();
+    dispatch(receiveUser(user));
+  } catch(err){
     const resBody = await err.json();
     if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
   }

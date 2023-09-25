@@ -69,6 +69,9 @@ function PostCompose({ closeModal }) {
     const previousPath = e => {
         e.preventDefault();
         closeModal(false);
+        setText('');
+        setImages([]);
+        setImageUrls([]);
     };
 
     const updatePrivacyToPublic = () => {
