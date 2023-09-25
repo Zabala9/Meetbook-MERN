@@ -58,8 +58,9 @@ function PostCompose({ closeModal }) {
                 fileReader.readAsDataURL(file);
                 fileReader.onload = () => {
                     urls[index] = fileReader.result;
-                    if (++filesLoaded === files.length)
+                    if (++filesLoaded === files.length) {
                         setImageUrls(urls);
+                    }
                 }
             });
         }
@@ -155,7 +156,7 @@ function PostCompose({ closeModal }) {
                         />
                     </div>
                     {images.length > 0 ?
-                        <label id='label-name-file'>{images[0].name}</label>
+                        <textarea id='label-name-file'value={images[0].name} />
                         : undefined
                     }
                 </div>

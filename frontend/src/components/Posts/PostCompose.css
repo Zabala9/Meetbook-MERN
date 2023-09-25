@@ -165,6 +165,13 @@
 
 #label-name-file{
     margin-left: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 300px;
+    overflow: hidden;
+    border: none;
+    resize: none;
+    outline: none;
+    font-size: 15px;
 }
 
 #button-create-post{
