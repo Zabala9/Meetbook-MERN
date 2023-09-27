@@ -37,6 +37,20 @@
     text-decoration: underline;
 }
 
+.container-time-privacy{
+    display: flex;
+    align-items: center;
+}
+
+#time-post-box{
+    font-weight: normal;
+    margin-right: 8px;
+    margin-left: 3px;
+    font-size: 15px;
+    margin-top: 3px;
+    color: rgb(109, 109, 109);
+}
+
 #privacy-postbox{
     margin-top: -3px;
     width: 17px;

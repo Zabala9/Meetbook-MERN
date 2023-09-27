@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PostButton from './PostButton';
 import './PostBox.css';
@@ -6,6 +7,11 @@ function PostBox ({ post }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
     const history = useHistory();
+    const postTime = post.createdAt;
+    const slideTime = postTime.split("T");
+    const secondSlide = slideTime[1].split(".");
+    const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
+    const [time, setTime] = useState('');
 
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
@@ -15,6 +21,29 @@ function PostBox ({ post }) {
         let path = `/post/${post._id}`;
         history.push(path);
     };
+
+    useEffect(() => {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const hours = 60 * 60 * 1000;
+        const minutes = 60 * 1000;
+        const dateG = new Date(slideTime[0]);
+        const date = new Date(finalTimeSlide);
+        const todayDate = new Date();
+
+        // console.log(dateG);
+
+        if (Math.round(Math.abs((date - todayDate) / oneDay)) === 0){
+            setTime(Math.round(Math.abs(date - todayDate) / hours) + 'h');
+        } else if(Math.round(Math.abs(date - todayDate) / hours) === 0){
+            setTime(Math.round(Math.abs((date - todayDate) / minutes)) + 'm');
+        } else if(Math.round(Math.abs((date - todayDate) / minutes)) === 0){
+            setTime(Math.round(Math.abs((date - todayDate) / 1000)) + 's');
+        } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 0 && Math.round(Math.abs((date - todayDate) / oneDay)) < 30) {
+            setTime(Math.round(Math.abs((date - todayDate) / oneDay)) + 'd');
+        } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
+            setTime(dateG);
+        }
+    });
 
     return (
         <>
@@ -28,12 +57,15 @@ function PostBox ({ post }) {
                             </Link>
                             <div className='container-name-privacy-postbox'>
                                 <Link id='name-user-postbox' to='/'>{name + ' ' + lastname}</Link>
-                                <label id='privacy-postbox'>
-                                    {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postbox'></i> :
-                                        post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postbox'></i> : 
-                                        post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postbox'></i> : undefined
-                                    }
-                                </label>
+                                <div className='container-time-privacy'>
+                                    <label id='time-post-box'>{time}</label>
+                                    <label id='privacy-postbox'>
+                                        {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postbox'></i> :
+                                            post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postbox'></i> : 
+                                            post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postbox'></i> : undefined
+                                        }
+                                    </label>
+                                </div>
                             </div>
                         </label>
                         <PostButton userId={_id} post={post} />
@@ -55,12 +87,15 @@ function PostBox ({ post }) {
                                 </Link>
                                 <div className='container-name-privacy-postbox'>
                                     <Link id='name-user-postbox' to='/'>{name + ' ' + lastname}</Link>
-                                    <label id='privacy-postbox'>
-                                        {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postbox'></i> :
-                                            post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postbox'></i> : 
-                                            post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postbox'></i> : undefined
-                                        }
-                                    </label>
+                                    <div className='container-time-privacy'>
+                                        <label id='time-post-box'>{time}</label>
+                                        <label id='privacy-postbox'>
+                                            {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postbox'></i> :
+                                                post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postbox'></i> : 
+                                                post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postbox'></i> : undefined
+                                            }
+                                        </label>
+                                    </div>
                                 </div>
                             </label>
                             <PostButton userId={_id} post={post} />
