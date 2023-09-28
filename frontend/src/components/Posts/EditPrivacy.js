@@ -7,7 +7,6 @@ function EditPrivacy({closeModal, post }){
     const dispatch = useDispatch();
     const history = useHistory();
     const currentPath = window.location.pathname;
-    console.log(post);
 
     const previousPath = () => {
         closeModal(false);
