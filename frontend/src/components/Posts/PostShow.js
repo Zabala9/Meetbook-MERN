@@ -10,11 +10,18 @@ function PostShow(){
     const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     // const currentUser = useSelector(state => state.session.user);
-    const postTime = post.createdAt;
-    const slideTime = postTime.split("T");
-    const secondSlide = slideTime[1].split(".");
-    const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
-    const [time, setTime] = useState('');
+    let postTime;
+    let slideTime;
+    let secondSlide;
+    let finalTimeSlide;
+    let [time, setTime] = useState('');
+
+    if(post){
+        postTime = post.createdAt;
+        slideTime = postTime.split("T");
+        secondSlide = slideTime[1].split(".");
+        finalTimeSlide  = slideTime[0] + ' ' + secondSlide[0];
+    }
 
     useEffect(() => {
         dispatch(fetchPosts());
@@ -24,22 +31,25 @@ function PostShow(){
         const oneDay = 24 * 60 * 60 * 1000;
         const hours = 60 * 60 * 1000;
         const minutes = 60 * 1000;
-        const dateG = new Date(slideTime[0]);
-        const date = new Date(finalTimeSlide);
-        const todayDate = new Date();
+        
+        if(post){
+            const dateG = new Date(slideTime[0]);
+            const date = new Date(finalTimeSlide);
+            const todayDate = new Date();
 
-        // console.log(dateG);
+            // console.log(dateG);
 
-        if (Math.round(Math.abs((date - todayDate) / oneDay)) === 0){
-            setTime(Math.round(Math.abs(date - todayDate) / hours) + 'h');
-        } else if(Math.round(Math.abs(date - todayDate) / hours) === 0){
-            setTime(Math.round(Math.abs((date - todayDate) / minutes)) + 'm');
-        } else if(Math.round(Math.abs((date - todayDate) / minutes)) === 0){
-            setTime(Math.round(Math.abs((date - todayDate) / 1000)) + 's');
-        } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 0 && Math.round(Math.abs((date - todayDate) / oneDay)) < 30) {
-            setTime(Math.round(Math.abs((date - todayDate) / oneDay)) + 'd');
-        } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
-            setTime(dateG);
+            if (Math.round(Math.abs((date - todayDate) / oneDay)) === 0){
+                setTime(Math.round(Math.abs(date - todayDate) / hours) + 'h');
+            } else if(Math.round(Math.abs(date - todayDate) / hours) === 0){
+                setTime(Math.round(Math.abs((date - todayDate) / minutes)) + 'm');
+            } else if(Math.round(Math.abs((date - todayDate) / minutes)) === 0){
+                setTime(Math.round(Math.abs((date - todayDate) / 1000)) + 's');
+            } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 0 && Math.round(Math.abs((date - todayDate) / oneDay)) < 30) {
+                setTime(Math.round(Math.abs((date - todayDate) / oneDay)) + 'd');
+            } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
+                setTime(dateG);
+            }
         }
     });
 
