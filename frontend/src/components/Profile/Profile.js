@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
+import { fetchAllComments } from '../../store/comments';
 import PostBox from '../Posts/PostBox';
 import EditBio from '../EditUserInfoForms/EditBio';
 import EditDetails from '../EditUserInfoForms/EditDetails';
@@ -15,12 +16,17 @@ function Profile() {
     const [showModalEditPhoto, setShowModalEditPhoto] = useState(false);
     const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => Object.values(state.posts.user));
+    const comments = useSelector(state => Object.values(state.comments.all));
     const currentUrl = window.location.pathname;
 
     useEffect(() => {
         dispatch(fetchUserPosts(currentUser._id));
         return () => dispatch(clearPostErrors());
     }, [currentUser, dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchAllComments());
+    }, [dispatch]);
 
     if (currentUrl === '/profile'){
         const buttonHome = document.getElementById('img-home-button-nav');
@@ -172,6 +178,7 @@ function Profile() {
                             userPosts.map(post => (
                                 <PostBox key={post._id}
                                     post={post}
+                                    comments={comments}
                                 />
                             ))
                         }
