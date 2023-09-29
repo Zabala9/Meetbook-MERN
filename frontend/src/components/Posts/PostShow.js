@@ -93,6 +93,8 @@ function PostShow(){
                 <div className='container-likes-comments-postshow'>
                     <label id='label-comments-postshow'>comments</label>
                 </div>
+                <button id='divider-post-show'></button>
+                <button id='divider-two-post-show'></button>
                 <div className='container-comments-post-show'>
                     <AllComments post={post} />
                 </div>

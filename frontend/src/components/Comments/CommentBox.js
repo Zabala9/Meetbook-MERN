@@ -9,15 +9,11 @@ function CommentBox({ comment }){
     return (
         <div className='container-comment'>
             <div className='container-comment-info'>
-                <label id='label-name-commentbox'>
-                    <Link id='img-user-commentbox'>
-                        <img src={profileImageUrl} alt='' id='profile-img-commentbox' />
-                    </Link>
-                </label>
+                <Link id='img-user-commentbox'>
+                    <img src={profileImageUrl} alt='' id='profile-img-commentbox' />
+                </Link>
                 <div className='container-user-text-commentbox'>
-                    <Link id='name-user-commentbox'>
-                        {name + ' ' + lastname}
-                    </Link>
+                    <Link id='name-user-commentbox'>{name + ' ' + lastname}</Link>
                     <p id='label-text-comment'>{comment.text}</p>
                 </div>
                 {/* commentButton */}
