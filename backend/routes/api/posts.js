@@ -7,7 +7,7 @@ const { requireUser } = require('../../config/passport');
 const validatePostInput = require('../../validations/posts');
 const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
-/* GET users listing. */
+/* GET posts listing. */
 router.get('/', async (req, res, next) => {
   try{
     const posts = await Post.find()

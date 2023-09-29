@@ -78,11 +78,20 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    margin-bottom: 10px;
+    /* width: 80px; */
     /* background-color: green; */
 }
 
 #label-comments-postbox:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+#divider-post-box{
+    margin-left: 2px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(171, 171, 171);
+    width: 98%;
+    margin-bottom: 10px;
 }

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts } from '../../store/posts';
+import { fetchComments } from '../../store/comments';
 import PostButton from './PostButton';
+import AllComments from '../Comments/AllComments';
 import './PostShow.css';
 
 function PostShow(){
@@ -90,6 +92,9 @@ function PostShow(){
                 </div>
                 <div className='container-likes-comments-postshow'>
                     <label id='label-comments-postshow'>comments</label>
+                </div>
+                <div className='container-comments-post-show'>
+                    <AllComments post={post} />
                 </div>
             </div>
         </div>
