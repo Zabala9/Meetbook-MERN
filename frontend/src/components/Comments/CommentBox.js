@@ -4,7 +4,6 @@ import './CommentBox.css';
 
 function CommentBox({ comment }){
     const { name, lastname, profileImageUrl } = comment.author;
-    console.log(comment, 'commentBox');
 
     return (
         <div className='container-comment'>

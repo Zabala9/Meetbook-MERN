@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { fetchComments } from '../../store/comments';
 import PostButton from './PostButton';
 import CommentCompose from '../Comments/CommentCompose';
 import './PostBox.css';
 
-function PostBox ({ post }) {
+function PostBox ({ post, comments }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
     const history = useHistory();
@@ -14,6 +13,11 @@ function PostBox ({ post }) {
     const secondSlide = slideTime[1].split(".");
     const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
     const [time, setTime] = useState('');
+
+    const commentsPost = comments.map((comment) => {
+        if (comment.parentPost === post._id) return comment;
+        return null;
+    }).filter((comment) => comment !== null);
     
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
@@ -78,7 +82,12 @@ function PostBox ({ post }) {
                     <div id='container-images-postbox'>
                         {images}
                     </div>
-                    <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                    <div className='container-labels-postshow'>
+                        {commentsPost.length > 0 ?
+                            <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
+                            : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                        }
+                    </div>
                     <button id='divider-post-box'></button>
                     <CommentCompose parentPost={post._id} />
                 </div> : 
@@ -110,7 +119,12 @@ function PostBox ({ post }) {
                         <div id='container-images-postbox'>
                             {images}
                         </div>
-                        <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                        <div className='container-labels-postshow'>
+                            {commentsPost.length > 0 ?
+                                <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
+                                : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                            }
+                        </div>
                         <button id='divider-post-box'></button>
                         <CommentCompose parentPost={post._id} />
                     </div> : undefined

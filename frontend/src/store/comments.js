@@ -1,11 +1,17 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
+const RECEIVE_ALL_COMMENTS = "comments/RECEIVE_ALL_COMMENTS";
 const RECEIVE_COMMENTS = "comments/RECEIVE_COMMENTS";
 const RECEIVE_NEW_COMMENT = "comments/RECEIVE_NEW_COMMENT";
 const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";
 const CLEAR_COMMENT_ERRORS = "comments/CLEAR_COMMENT_ERRORS";
 const REMOVE_COMMENT = "comments/REMOVE_COMMENT";
+
+const receiveAllComments = comments => ({
+    type: RECEIVE_ALL_COMMENTS,
+    comments
+});
 
 const receiveComments = comments => ({
     type: RECEIVE_COMMENTS,
@@ -31,6 +37,17 @@ export const clearCommentErrors = errors => ({
     type: CLEAR_COMMENT_ERRORS,
     errors
 });
+
+export const fetchAllComments = () => async dispatch => {
+    try{
+        const res = await jwtFetch('/api/comments/');
+        const comments = await res.json();
+        dispatch(receiveAllComments(comments));
+    } catch(err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) dispatch(receiveErrors(resBody.errors));
+    }
+};
 
 export const fetchComments = (postId) => async dispatch => {
     try{
@@ -87,6 +104,8 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 const commentReducer = (state ={ all: {}, user: [], new: undefined }, action) => {
     let filteredUserComments;
     switch(action.type){
+        case RECEIVE_ALL_COMMENTS:
+            return {...state, all: action.comments, new: undefined };
         case RECEIVE_COMMENTS:
             return { ...state, all: action.comments, new: undefined };
         case REMOVE_COMMENT:

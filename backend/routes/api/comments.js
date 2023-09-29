@@ -8,6 +8,17 @@ const { requireUser } = require("../../config/passport");
 const validateCommentInput = require('../../validations/comments');
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 
+router.get('/', async (req, res, next) => {
+    try{
+        const comments = await Comment.find()
+                                      .populate("author", "_id name lastname profileImageUrl")
+                                      .sort({ createdAt: -1 });
+        return res.json(comments);
+    } catch(err){
+        return res.json([]);
+    }
+});
+
 router.get('/:postId', async (req, res, next) => {
     const id = req.params.postId;
     try{
