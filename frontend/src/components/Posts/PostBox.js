@@ -83,10 +83,12 @@ function PostBox ({ post, comments }) {
                         {images}
                     </div>
                     <div className='container-labels-postshow'>
+                        <label id='label-likes-postbox'>likes</label>
                         {commentsPost.length > 0 ?
                             <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
                             : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
                         }
+                        <label id='label-shares-postbox'>shares</label> 
                     </div>
                     <button id='divider-post-box'></button>
                     <CommentCompose parentPost={post._id} />
@@ -120,10 +122,12 @@ function PostBox ({ post, comments }) {
                             {images}
                         </div>
                         <div className='container-labels-postshow'>
+                            <label id='label-likes-postbox'>Likes</label>
                             {commentsPost.length > 0 ?
                                 <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
                                 : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
                             }
+                            <label id='label-shares-postbox'>shares</label>
                         </div>
                         <button id='divider-post-box'></button>
                         <CommentCompose parentPost={post._id} />
