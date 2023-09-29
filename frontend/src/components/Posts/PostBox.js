@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { fetchComments } from '../../store/comments';
 import PostButton from './PostButton';
+import CommentCompose from '../Comments/CommentCompose';
 import './PostBox.css';
 
 function PostBox ({ post }) {
@@ -12,7 +14,7 @@ function PostBox ({ post }) {
     const secondSlide = slideTime[1].split(".");
     const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
     const [time, setTime] = useState('');
-
+    
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
     });
@@ -77,6 +79,8 @@ function PostBox ({ post }) {
                         {images}
                     </div>
                     <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                    <button id='divider-post-box'></button>
+                    <CommentCompose parentPost={post._id} />
                 </div> : 
                 location === '/profile' ? 
                     <div className='container-post'>
@@ -107,6 +111,8 @@ function PostBox ({ post }) {
                             {images}
                         </div>
                         <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                        <button id='divider-post-box'></button>
+                        <CommentCompose parentPost={post._id} />
                     </div> : undefined
             }
         </>

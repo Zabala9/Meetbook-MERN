@@ -1,0 +1,79 @@
+.container-comment-compose{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+    width: 100%;
+}
+
+#img-profile-comment-compose{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 3px;
+}
+
+.container-comment-compose-info{
+    display: flex;
+    flex-direction: column;
+    width: 89%;
+}
+
+.container-info-comment-compose{
+    display: flex;
+    align-items: center;
+    background-color: rgb(219, 219, 219);
+    padding: 3px;
+    border-radius: 12px;
+    margin-left: 5px;
+    transition: 0.5s;
+}
+
+.container-info-comment-compose:hover{
+    background-color: rgb(196, 196, 196);
+    transition: 0.5s;
+}
+
+#comment-text{
+    border: none;
+    border-radius: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    outline: none;
+    overflow: auto;
+    resize: none;
+    text-indent: 3px;
+    font-size: 17px;
+    height: 23px;
+    width: 93%;
+    margin-left: 2px;
+    /* margin-right: 6px; */
+    background-color: rgb(219, 219, 219);
+}
+
+#button-submit-comment{
+    background: none;
+    border: none;
+    margin-top: 1px;
+}
+
+#img-arrow-comment-compose{
+    font-size: 18px;
+    color: rgb(9, 103, 9);
+}
+
+#label-select-file-comment{
+    margin-right: 5px;
+}
+
+#img-file-comment{
+    font-size: 18px;
+    color: rgb(110, 110, 110);
+}
+
+#label-select-file-comment:hover, #img-file-comment:hover{
+    cursor: pointer;
+}
+
+#label-photo-comment{
+    margin-left: 10px;
+    margin-top: 10px;
+}
