@@ -76,6 +76,7 @@
     border-top: 1px solid rgb(171, 171, 171);
     width: 100%;
     margin-bottom: 5px;
+    cursor: default;
 }
 
 #divider-two-post-show{
@@ -83,4 +84,9 @@
     background: none;
     border-top: 1px solid rgb(171, 171, 171);
     width: 100%;
+    cursor: default;
+}
+
+#divider-post-show:hover, #divider-two-post-show:hover{
+    cursor: default;
 }

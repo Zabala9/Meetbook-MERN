@@ -49,6 +49,7 @@
     border: none;
     margin-bottom: 10px;
     border-bottom: 1px solid rgb(171, 171, 171);
+    cursor: default;
 }
 
 .info-user-create-post{

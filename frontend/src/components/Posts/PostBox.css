@@ -74,12 +74,8 @@
     word-wrap: break-word;
 }
 
-#label-comments-postbox{
-    display: flex;
-    justify-content: center;
-}
-
-#label-comments-postbox:hover{
+#label-comments-postbox:hover, #label-likes-postbox:hover,
+#label-shares-postbox:hover{
     cursor: pointer;
     text-decoration: underline;
 }
@@ -97,4 +93,9 @@
     border-bottom: 1px solid rgb(171, 171, 171);
     width: 98%;
     margin-bottom: 10px;
+    cursor: default;
+}
+
+#divider-post-box:hover{
+    cursor: default;
 }

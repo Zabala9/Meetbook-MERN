@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts } from '../../store/posts';
-import { fetchComments } from '../../store/comments';
 import PostButton from './PostButton';
 import AllComments from '../Comments/AllComments';
 import './PostShow.css';
@@ -11,7 +10,6 @@ function PostShow(){
     const { postId } = useParams();
     const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    // const currentUser = useSelector(state => state.session.user);
     let postTime;
     let slideTime;
     let secondSlide;

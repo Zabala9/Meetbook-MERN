@@ -49,7 +49,7 @@ function PostBox ({ post, comments }) {
         } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
             setTime(dateG);
         }
-    });
+    }, [postTime]);
 
     return (
         <>
