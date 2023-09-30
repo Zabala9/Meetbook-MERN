@@ -1,9 +1,9 @@
-// comment button
 import { Link } from 'react-router-dom';
+import CommentButton from './CommentButton';
 import './CommentBox.css';
 
 function CommentBox({ comment }){
-    const { name, lastname, profileImageUrl } = comment.author;
+    const { name, lastname, profileImageUrl, _id } = comment.author;
 
     return (
         <div className='container-comment'>
@@ -15,7 +15,7 @@ function CommentBox({ comment }){
                     <Link id='name-user-commentbox'>{name + ' ' + lastname}</Link>
                     <p id='label-text-comment'>{comment.text}</p>
                 </div>
-                {/* commentButton */}
+                <CommentButton comment={comment} userId={_id} />
             </div>
         </div>
     )
