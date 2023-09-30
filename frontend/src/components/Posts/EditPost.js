@@ -86,13 +86,13 @@ function EditPost({ closeModal, post }){
                     </div>
                     <div className='container-files-editpost'>
                         {images}
-                        <input type='file'
+                        {/* <input type='file'
                             ref={fileRef}
                             accept='.jpg, .jpeg, .png'
                             multiple
                             onChange={updateFiles}
                             id='select-files-editpost'
-                        />
+                        /> */}
                     </div>
                     <button id='button-save-editpost'
                         onClick={handleSubmit}
