@@ -47,7 +47,9 @@ function PostBox ({ post, comments }) {
         } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 0 && Math.round(Math.abs((date - todayDate) / oneDay)) < 30) {
             setTime(Math.round(Math.abs((date - todayDate) / oneDay)) + 'd');
         } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
-            setTime(dateG);
+            const fDate = dateG.toLocaleDateString('default', { month: 'long' }) + " " + dateG.toLocaleTimeString('default', { day: 'numeric' } );
+            const splited = fDate.split(',');
+            setTime(splited[0]);
         }
     }, [postTime]);
 
