@@ -18,10 +18,11 @@ function CommentCompose({ parentPost }){
             parentPost,
             authorId: user._id
         }
+        // console.log(comment, 'comment to send');
         dispatch(createComment(comment));
         setText('');
-        setImage('');
-        setImageUrl('');
+        setImage([]);
+        setImageUrl([]);
         fileRef.current.value = null;
     };
 

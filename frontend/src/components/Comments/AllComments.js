@@ -7,12 +7,13 @@ import './AllComments.css';
 function AllComments({ post }) {
     const dispatch = useDispatch();
     const comments = useSelector(state => Object.values(state.comments.all));
+    // const reversedComments = comments.toReversed();
 
     useEffect(() => {
         dispatch(fetchComments(post._id));
         return() => dispatch(clearCommentErrors());
     }, [dispatch]);
-
+    
     return (
         <div className='container-all-comments'>
             {comments.map(comment => (

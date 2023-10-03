@@ -34,15 +34,15 @@ router.get('/:postId', async (req, res, next) => {
 
 router.post('/', singleMulterUpload("image"), requireUser, validateCommentInput, async (req, res, next) => {
     // console.log(req.body, 'back');
-    const { parentPost, text } = req.body;
-    let imageUrl = [];
+    const { parentPost, text, image } = req.body;
+    let imageUrl;
     
-    if(req.file) imageUrl = await singleFileUpload({ file: req.file, public: true });
+    if(req.file) imageUrl = await singleFileUpload({ file: image, public: true });
 
     try {
         const newComment = new Comment({
             text: text,
-            imageUrl,
+            imageUrl: imageUrl,
             parentPost: parentPost,
             author: req.user._id,
         });

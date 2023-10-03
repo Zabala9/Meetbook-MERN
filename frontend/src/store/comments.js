@@ -61,7 +61,7 @@ export const fetchComments = (postId) => async dispatch => {
 };
 
 export const createComment = (commentInfo) => async dispatch => {
-    // console.log(commentInfo, 'comment Info front');
+    console.log(commentInfo, 'comment Info front');
     const { text, image, parentPost, authorId } = commentInfo;
     const formData = new FormData();
     formData.append("text", text);
