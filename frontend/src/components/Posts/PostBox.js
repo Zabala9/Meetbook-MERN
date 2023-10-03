@@ -93,6 +93,9 @@ function PostBox ({ post, comments }) {
                         <label id='label-shares-postbox'>shares</label> 
                     </div>
                     <button id='divider-post-box'></button>
+                    {/* <div className='container-button-showpost'>
+
+                    </div> */}
                     <CommentCompose parentPost={post._id} />
                 </div> : 
                 location === '/profile' ? 
@@ -132,6 +135,9 @@ function PostBox ({ post, comments }) {
                             <label id='label-shares-postbox'>shares</label>
                         </div>
                         <button id='divider-post-box'></button>
+                        {/* <div className='container-button-showpost'>
+                            
+                        </div> */}
                         <CommentCompose parentPost={post._id} />
                     </div> : undefined
             }

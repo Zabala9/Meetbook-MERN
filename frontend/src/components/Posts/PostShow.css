@@ -59,6 +59,8 @@
 
 .container-text-post-postshow{
     margin-left: 10px;
+    width: 520px;
+    word-wrap: break-word;
 }
 
 #post-image-postshow{
