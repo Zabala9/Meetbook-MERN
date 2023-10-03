@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts } from '../../store/posts';
 import PostButton from './PostButton';
 import AllComments from '../Comments/AllComments';
+import CommentCompose from '../Comments/CommentCompose';
 import './PostShow.css';
 
 function PostShow(){
@@ -90,6 +91,9 @@ function PostShow(){
                 </div>
                 <button id='divider-post-show'></button>
                 <button id='divider-two-post-show'></button>
+                <div className='container-comment-compose'>
+                    <CommentCompose parentPost={postId} />
+                </div>
                 <div className='container-likes-comments-postshow'>
                     <label id='label-comments-postshow'>All comments</label>
                 </div>

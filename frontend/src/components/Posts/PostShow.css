@@ -90,3 +90,9 @@
 #divider-post-show:hover, #divider-two-post-show:hover{
     cursor: default;
 }
+
+.container-comment-compose{
+    margin-top: 5px;
+    margin-bottom: 8px;
+    margin-left: -5px;
+}
