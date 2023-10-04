@@ -149,19 +149,15 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
-    let filteredUserPost;
     switch(action.type) {
         case RECEIVE_POSTS:
             return { ...state, all: action.posts, new: undefined };
         case RECEIVE_POST:
             return { ...state, all: {...state.all, [action.post._id]: action.post }};
         case REMOVE_POST:
-            filteredUserPost = state.user.filter(userPost => {
-                return userPost._id.toString() !== action.postId.toString();
-            });
             const newState = {...state};
             delete newState.all[action.postId];
-            return {...newState, user: filteredUserPost, new: undefined};
+            return {...newState, user: [], new: undefined};
         case RECEIVE_USER_POSTS:
             return { ...state, user: action.posts, new: undefined };
         case RECEIVE_NEW_POST:

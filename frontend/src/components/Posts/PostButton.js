@@ -34,14 +34,15 @@ function PostButton({ userId, post }){
         return () => document.removeEventListener('click', closeMenu);
     }, [showMenu]);
 
-    const remove = () => {
+    const remove = e => {
+        e.preventDefault();
         dispatch(deletePost(post._id));
         if (currentLocation === `/post/${post._id}`) {
             let path = '/feed'
             history.push(path);
-            window.location.reload(false);
+            // window.location.reload(false);
         }
-        if (currentLocation !== '/profile') window.location.reload(false);
+        // if (currentLocation !== '/profile') window.location.reload(false);
     };
 
     const update = () => {

@@ -13,7 +13,11 @@ router.get('/', async (req, res, next) => {
     const posts = await Post.find()
                             .populate("author", "_id name lastname profileImageUrl")
                             .sort({ createdAt: -1 });
-    return res.json(posts);
+    const postsObj = {};
+    posts.forEach((post) => {
+      postsObj[post._id] = post;
+    });
+    return res.json(postsObj);
   }
   catch(err) {
     return res.json([]);
@@ -30,11 +34,16 @@ router.get('/user/:userId', async (req, res, next) => {
     error.errors = { message: "No user found with that id" };
     return next(error);
   }
+
   try{
     const posts = await Post.find({ author: user._id })
                             .sort({ createdAt: -1})
                             .populate("author", "_id name lastname profileImageUrl")
-    return res.json(posts);
+    const postsObj = {};
+    posts.forEach((post) => {
+      postsObj[post._id] = post;
+    });
+    return res.json(postsObj);
   }
   catch(err) {
     return res.json([]);
