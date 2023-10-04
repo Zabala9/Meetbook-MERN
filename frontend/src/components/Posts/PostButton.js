@@ -37,11 +37,11 @@ function PostButton({ userId, post }){
     const remove = e => {
         e.preventDefault();
         dispatch(deletePost(post._id));
-        if (currentLocation === `/post/${post._id}`) {
-            let path = '/feed'
-            history.push(path);
-            // window.location.reload(false);
-        }
+        // if (currentLocation === `/post/${post._id}`) {
+        //     let path = '/feed'
+        //     history.push(path);
+        //     // window.location.reload(false);
+        // }
         // if (currentLocation !== '/profile') window.location.reload(false);
     };
 
