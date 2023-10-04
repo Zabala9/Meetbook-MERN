@@ -13,7 +13,11 @@ router.get('/', async (req, res, next) => {
         const comments = await Comment.find()
                                       .populate("author", "_id name lastname profileImageUrl")
                                       .sort({ createdAt: -1 });
-        return res.json(comments);
+        const commentsObj = {};
+        comments.forEach((comment) => {
+            commentsObj[comment._id] = comment;
+        });
+        return res.json(commentsObj);
     } catch(err){
         return res.json([]);
     }
@@ -26,7 +30,11 @@ router.get('/:postId', async (req, res, next) => {
                                       .populate("parentPost", "id post")
                                       .populate("author", "_id name lastname profileImageUrl")
                                       .sort({ createdAt: -1 });
-        return res.json(comments);
+        const commentsObj = {};
+        comments.forEach((comment) => {
+            commentsObj[comment._id] = comment;
+        });
+        return res.json(commentsObj);
     } catch(err){
         return res.json([]);
     }
@@ -53,6 +61,17 @@ router.post('/', singleMulterUpload("image"), requireUser, validateCommentInput,
     } catch(err){
         next(err);
     }
+});
+
+router.delete('/:id', requireUser, async(req, res, next) => {
+    try{
+        const comment = await Comment.deleteOne({ _id: req.params.id });
+        if (!comment) return res.status(404).json({ message: 'Comment not found.' });
+
+        return res.status(204).json('Comment successfully deleted.');
+    } catch (err){
+        next(err);
+    };
 });
 
 module.exports = router;

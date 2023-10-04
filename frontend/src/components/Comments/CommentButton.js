@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { } delete and update functions
+import { deleteComment } from '../../store/comments';
 import Modal from '../Modal/Modal';
-// import edit post
 import './CommentButton.css';
 
 function CommentButton({ userId, comment }) {
     const [showMenu, setShowMenu] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
     const body = document.body;
 
     const openMenu = () => {
@@ -21,8 +21,10 @@ function CommentButton({ userId, comment }) {
         setShowModalUpdate(true);
     };
 
-    const remove = () => {
-        // do something
+    const remove = e => {
+        // e.preventDefault();
+        dispatch(deleteComment(comment._id));
+        setShowMenu(false);
     };
 
     if(showModalUpdate) body.style.overflow = 'hidden';
@@ -42,7 +44,7 @@ function CommentButton({ userId, comment }) {
                 { showMenu && (
                     <div className='dropdown-content-comment'>
                         <button id='edit-button-comment'>Edit</button> 
-                        <button id='delete-button-comment'>Delete</button>
+                        <button id='delete-button-comment' onClick={remove}>Delete</button>
                     </div>
                 )}
             </div>

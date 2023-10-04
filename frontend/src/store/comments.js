@@ -61,7 +61,7 @@ export const fetchComments = (postId) => async dispatch => {
 };
 
 export const createComment = (commentInfo) => async dispatch => {
-    console.log(commentInfo, 'comment Info front');
+    // console.log(commentInfo, 'comment Info front');
     const { text, image, parentPost, authorId } = commentInfo;
     const formData = new FormData();
     formData.append("text", text);
@@ -85,7 +85,17 @@ export const createComment = (commentInfo) => async dispatch => {
 
 // update
 
-// delete
+export const deleteComment = (commentId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/comments/${commentId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removeComment(commentId));
+    } catch (err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) dispatch(receiveErrors(resBody.errors));
+    }
+};
 
 const nullErrors = null;
 
@@ -102,24 +112,16 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const commentReducer = (state ={ all: {}, user: [], new: undefined }, action) => {
-    let filteredUserComments;
     switch(action.type){
         case RECEIVE_ALL_COMMENTS:
             return {...state, all: action.comments, new: undefined };
         case RECEIVE_COMMENTS:
             return { ...state, all: action.comments, new: undefined };
         case REMOVE_COMMENT:
-            filteredUserComments = state.user.filter(userComment => {
-                return userComment._id.toString() !== action.commentId.toString();
-            });
-            const newState = {...state};
+            const newState = {...state };
             delete newState.all[action.commentId];
-            return {...newState, user: filteredUserComments, new: undefined };
+            return {...newState, user: [], new: undefined };
         case RECEIVE_NEW_COMMENT:
-            // const mapppedUserComments = state.user.map(userComment => {
-            //     return userComment;
-            // })
-            // return { ...state, new: action.comments, user: mapppedUserComments };
             return {...state, all: {...state.all, [action.comment._id]: action.comment }};
         case RECEIVE_USER_LOGOUT:
             return { ...state, user: [], new: undefined };
