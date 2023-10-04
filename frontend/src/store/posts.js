@@ -162,10 +162,10 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
         case RECEIVE_USER_POSTS:
             return { ...state, user: action.posts, new: undefined };
         case RECEIVE_NEW_POST:
-            const mappedUserPosts = state.user.map(userPost => {
-                return userPost;
-            })
-            return { ...state, new: action.posts, user: mappedUserPosts };
+            // const mappedUserPosts = state.user.map(userPost => {
+            //     return userPost;
+            // })
+            return { ...state, all: { [action.post._id]: action.post, ...state.all }};
         case RECEIVE_USER_LOGOUT:
             return { ...state, user: [], new: undefined };
         default:

@@ -29,7 +29,7 @@ function PostCompose({ closeModal }) {
     });
 
     const handleSubmit = e => {
-        // e.preventDefault();
+        e.preventDefault();
         const post = {
             text,
             images,
@@ -42,7 +42,7 @@ function PostCompose({ closeModal }) {
         setPrivacy('friends');
         fileRef.current.value = null;
         closeModal(false);
-        window.location.reload(false);
+        // window.location.reload(false);
     };
 
     const update = e => setText(e.currentTarget.value);

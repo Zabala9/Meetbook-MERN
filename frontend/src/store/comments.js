@@ -122,7 +122,7 @@ const commentReducer = (state ={ all: {}, user: [], new: undefined }, action) =>
             delete newState.all[action.commentId];
             return {...newState, user: [], new: undefined };
         case RECEIVE_NEW_COMMENT:
-            return {...state, all: {...state.all, [action.comment._id]: action.comment }};
+            return {...state, all: { [action.comment._id]: action.comment, ...state.all }};
         case RECEIVE_USER_LOGOUT:
             return { ...state, user: [], new: undefined };
         default:
