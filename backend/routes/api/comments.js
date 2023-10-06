@@ -67,7 +67,6 @@ router.patch('/:id', singleMulterUpload("image"), requireUser, validateCommentIn
         let newCommentImg;
         const { text, imageUrl, author, _id } = req.body;
         let comment = await Comment.findById(_id);
-        console.log(comment, 'find');
 
         if(!comment) return res.status(404).json({ message: 'Comment not found.' });
         if(!comment.author.equals(req.user._id)) {

@@ -94,7 +94,6 @@ export const updateComment = (data) => async dispatch => {
             body: JSON.stringify(data)
         });
         const comment = await res.json();
-        console.log(comment, 'comment returned')
         dispatch(receiveComment(comment));
     } catch(err) {
         const resBody = await err.json();

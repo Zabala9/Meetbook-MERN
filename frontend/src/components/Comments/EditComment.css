@@ -1,4 +1,69 @@
 .container-edit-comment{
     background-color: white;
     padding: 8px;
+    border-radius: 6px;
+    margin-top: -30px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-edit-comment{
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#label-edit-comment{
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#button-close-edit-comment{
+    margin-right: 3px;
+    background: none;
+    border: none;
+    border-radius: 30px;
+    height: 24px;
+    transition: 0.5s;
+}
+
+#button-close-edit-comment:hover{
+    background-color: rgb(202, 202, 202);
+    transition: 0.5s;
+}
+
+#divider-edit-comment{
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(133, 133, 133);
+    cursor: default;
+}
+
+.bottom-edit-comment{
+    margin-top: 12px;
+}
+
+#input-edit-comment{
+    width: 96%;
+    font-size: 15px;
+}
+
+#button-update-comment{
+    margin-top: 10px;
+    padding: 3px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#button-update-comment:hover{
+    background-color: #80b694;
+    transition: 0.5s;
 }

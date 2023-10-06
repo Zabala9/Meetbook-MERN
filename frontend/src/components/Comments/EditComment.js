@@ -8,7 +8,6 @@ function EditComment({ closeModal, comment }){
     const [text, setText] = useState(comment.text);
     const dispatch = useDispatch();
     const body = document.body;
-    console.log(comment);
 
     const close = e => {
         e.preventDefault();
@@ -42,6 +41,7 @@ function EditComment({ closeModal, comment }){
                 <input type='text'
                     value={text}
                     onChange={updateText}
+                    id='input-edit-comment'
                 />
             </div>
             <button id='button-update-comment'
