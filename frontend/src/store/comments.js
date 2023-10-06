@@ -2,6 +2,7 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_ALL_COMMENTS = "comments/RECEIVE_ALL_COMMENTS";
+const RECEIVE_COMMENT = "comments/RECEIVE_COMMENT";
 const RECEIVE_COMMENTS = "comments/RECEIVE_COMMENTS";
 const RECEIVE_NEW_COMMENT = "comments/RECEIVE_NEW_COMMENT";
 const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";
@@ -11,6 +12,11 @@ const REMOVE_COMMENT = "comments/REMOVE_COMMENT";
 const receiveAllComments = comments => ({
     type: RECEIVE_ALL_COMMENTS,
     comments
+});
+
+const receiveComment = comment => ({
+    type: RECEIVE_COMMENT,
+    comment
 });
 
 const receiveComments = comments => ({
@@ -61,13 +67,11 @@ export const fetchComments = (postId) => async dispatch => {
 };
 
 export const createComment = (commentInfo) => async dispatch => {
-    // console.log(commentInfo, 'comment Info front');
-    const { text, image, parentPost, authorId } = commentInfo;
+    const { text, images, parentPost } = commentInfo;
     const formData = new FormData();
     formData.append("text", text);
     formData.append("parentPost", parentPost);
-    formData.append("authorId", authorId);
-    if(image) formData.append("image", image);
+    if(images) formData.append("image", images);
 
     try {
         const res = await jwtFetch('/api/comments/', {
@@ -83,7 +87,20 @@ export const createComment = (commentInfo) => async dispatch => {
     }
 };
 
-// update
+export const updateComment = (data) => async dispatch => {
+    try{
+        const res = await jwtFetch(`/api/comments/${data._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+        const comment = await res.json();
+        console.log(comment, 'comment returned')
+        dispatch(receiveComment(comment));
+    } catch(err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
 
 export const deleteComment = (commentId) => async dispatch => {
     try{
@@ -115,6 +132,8 @@ const commentReducer = (state ={ all: {}, user: [], new: undefined }, action) =>
     switch(action.type){
         case RECEIVE_ALL_COMMENTS:
             return {...state, all: action.comments, new: undefined };
+        case RECEIVE_COMMENT:
+            return {...state, all: {...state.all, [action.comment._id]: action.comment }};
         case RECEIVE_COMMENTS:
             return { ...state, all: action.comments, new: undefined };
         case REMOVE_COMMENT:

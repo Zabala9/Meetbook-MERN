@@ -41,8 +41,7 @@ router.get('/:postId', async (req, res, next) => {
 });
 
 router.post('/', singleMulterUpload("image"), requireUser, validateCommentInput, async (req, res, next) => {
-    // console.log(req.body, 'back');
-    const { parentPost, text, image } = req.body;
+    const { parentPost, image, text } = req.body;
     let imageUrl;
     
     if(req.file) imageUrl = await singleFileUpload({ file: image, public: true });
@@ -59,6 +58,34 @@ router.post('/', singleMulterUpload("image"), requireUser, validateCommentInput,
         comment = await comment.populate("author", "_id name lastname profileImageUrl");
         return res.json(comment);
     } catch(err){
+        next(err);
+    }
+});
+
+router.patch('/:id', singleMulterUpload("image"), requireUser, validateCommentInput, async (req, res, next) => {
+    try {
+        let newCommentImg;
+        const { text, imageUrl, author, _id } = req.body;
+        let comment = await Comment.findById(_id);
+        console.log(comment, 'find');
+
+        if(!comment) return res.status(404).json({ message: 'Comment not found.' });
+        if(!comment.author.equals(req.user._id)) {
+            return res.status(403).json({ message: 'You are not authorized to edit this comment.' });
+        }
+        if(req.file) newCommentImg = await singleFileUpload({ file: req.file, public: true });
+
+        comment.text = text;
+        comment.author = author;
+        if(req.file){
+            comment.imageUrl = newCommentImg;
+        } else { comment.imageUrl = imageUrl }
+
+        comment = await comment.save();
+        comment = await comment.populate("author", "_id name lastname profileImageUrl");
+
+        return res.json(comment);
+    } catch (err) {
         next(err);
     }
 });

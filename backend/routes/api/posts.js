@@ -97,7 +97,7 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, validatePostIn
     post.privacy = privacy;
     post.imageUrls = imageUrls;
     post = await post.save();
-    
+    post = await post.populate("author", "_id name lastname profileImageUrl");
     return res.json(post);
   } catch (err) {
     next(err);

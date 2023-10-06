@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../store/comments';
+import EditComment from './EditComment';
 import Modal from '../Modal/Modal';
 import './CommentButton.css';
 
@@ -18,6 +19,7 @@ function CommentButton({ userId, comment }) {
     };
 
     const update = () => {
+        setShowMenu(false);
         setShowModalUpdate(true);
     };
 
@@ -32,8 +34,7 @@ function CommentButton({ userId, comment }) {
     if (user._id === userId) return (
         <>
             {showModalUpdate && (
-                <Modal />
-                //component=editComment, closeModal=setModal, comment=comment
+                <Modal component={<EditComment closeModal={setShowModalUpdate} comment={comment} />} />
             )}
             <div>
                 <div className='dropdown-comment' style={{ textAlign: 'right'}}>
@@ -43,7 +44,7 @@ function CommentButton({ userId, comment }) {
                 </div>
                 { showMenu && (
                     <div className='dropdown-content-comment'>
-                        <button id='edit-button-comment'>Edit</button> 
+                        <button id='edit-button-comment' onClick={update}>Edit</button> 
                         <button id='delete-button-comment' onClick={remove}>Delete</button>
                     </div>
                 )}

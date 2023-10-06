@@ -5,23 +5,22 @@ import './CommentCompose.css';
 
 function CommentCompose({ parentPost }){
     const [text, setText] = useState('');
-    const [image, setImage] = useState([]);
+    const [images, setImages] = useState([]);
     const fileRef = useRef(null);
     const [imageUrl, setImageUrl] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
 
     const handleSubmit = e => {
+        e.preventDefault();
         const comment = {
             text,
-            image,
-            parentPost,
-            authorId: user._id
+            images,
+            parentPost
         }
-        // console.log(comment, 'comment to send');
-        dispatch(createComment(comment));
+        dispatch(createComment(comment, images));
         setText('');
-        setImage([]);
+        setImages([]);
         setImageUrl([]);
         fileRef.current.value = null;
     };
@@ -30,14 +29,14 @@ function CommentCompose({ parentPost }){
 
     const updateFiles = async e => {
         const file = e.target.files;
-        setImage(file);
+        setImages(file);
         if(file.length !== 0) {
             let filesLoaded = 0;
             const url = [];
 
-            Array.from(file).forEach((file, index) => {
+            Array.from(file).forEach((fil, index) => {
                 const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
+                fileReader.readAsDataURL(fil);
                 fileReader.onload = () => {
                     url[index] = fileReader.result;
                     if(++filesLoaded === file.length) setImageUrl(url);
@@ -72,8 +71,8 @@ function CommentCompose({ parentPost }){
                         style={{display: 'none'}}
                     />
                 </div>
-                { image.length > 0 ? 
-                    <label id='label-photo-comment'>{image[0].name}</label>
+                { images.length > 0 ? 
+                    <label id='label-photo-comment'>{images[0].name}</label>
                     : undefined
                 }
             </div>
