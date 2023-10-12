@@ -10,12 +10,14 @@ const { isProduction } = require('./config/keys');
 require('./models/User');
 require('./models/Post');
 require('./models/Comment');
+require('./models/PostLike');
 require('./config/passport');
 const passport = require('passport');
 
 const usersRouter = require('./routes/api/users');
 const postsRouter = require('./routes/api/posts');
 const commentsRouter = require('./routes/api/comments');
+const postLikes = require('./routes/api/postLikes');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -46,6 +48,7 @@ app.use(
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/postLikes', postLikes);
 app.use('/api/csrf', csrfRouter);
 
 app.use((req, res, next) => {
