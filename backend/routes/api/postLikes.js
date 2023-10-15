@@ -41,7 +41,6 @@ router.get('/:postId', async(req, res, next) => {
 
 router.post('/', requireUser, async(req, res, next) => {
     const { postId } = req.body;
-    console.log(postId);
 
     try{
         const newPostLike = new PostLike({

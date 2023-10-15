@@ -10,6 +10,7 @@ function AllPosts(){
     const dispatch = useDispatch();
     const posts = useSelector(state => Object.values(state.posts.all));
     const comments = useSelector(state => Object.values(state.comments.all));
+    const postLikes = useSelector(state => Object.values(state.postLikes.all));
 
     useEffect(() => {
         dispatch(fetchPosts());
@@ -24,7 +25,7 @@ function AllPosts(){
         <div className='container-all-posts'>
             {/* <label id='label-all-posts'>All Posts</label> */}
             {posts.map(post => (
-                <PostBox key={post._id} post={post} comments={comments} />
+                <PostBox key={post._id} post={post} comments={comments} postLikes={postLikes} />
             ))}
         </div>
     )
