@@ -115,7 +115,7 @@ export const deleteComment = (commentId) => async dispatch => {
 
 const nullErrors = null;
 
-export const postErrorsReducer = (state = nullErrors, action) => {
+export const commentErrorsReducer = (state = nullErrors, action) => {
     switch(action.type){
         case RECEIVE_COMMENT_ERRORS:
             return action.errors;

@@ -4,21 +4,20 @@ const mongoose = require('mongoose');
 const { requireUser } = require('../../config/passport');
 const PostLike = mongoose.model("PostLike");
 
-// funtion to return total number of votes
-
-// async function totalLikes(postId) {
-//     try{
-//         let allPostLikes = await PostLike.find({ postId }).exec();
-//         let totalLikesCount = 0;
-
-//         for(let i = 0; i < allPostLikes.length; i++){
-//             totalLikesCount += allPostLikes[i].like;
-//         }
-//         return {likeTotal: totalLikesCount};
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
+router.get('/', async (req, res, next) => {
+    try{
+        const postLikes = await PostLike.find()
+                                        .populate("author", "id name lastname profileImageUrl")
+                                        .sort({ createdAt: -1 });
+        const postLikesObj = {};
+        postLikes.forEach((postLike) => {
+            postLikesObj[postLike._id] = postLike;
+        });
+        return res.json(postLikesObj);
+    } catch(err){
+        return res.json([]);
+    }
+});
 
 router.get('/:postId', async(req, res, next) => {
     const { postId } = req.params;
@@ -41,12 +40,12 @@ router.get('/:postId', async(req, res, next) => {
 });
 
 router.post('/', requireUser, async(req, res, next) => {
-    const { parentPostId } = req.body;
+    const { postId } = req.body;
 
     try{
         const newPostLike = new PostLike({
-            authorId: req.user._id,
-            postId: parentPostId,
+            author: req.user._id,
+            postId: postId,
         });
 
         let like = await newPostLike.save();

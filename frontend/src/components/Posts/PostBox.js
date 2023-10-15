@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PostButton from './PostButton';
 import CommentCompose from '../Comments/CommentCompose';
+import PostLikesCompose from '../PostLikes/PostLikesCompose';
 import './PostBox.css';
 
-function PostBox ({ post, comments }) {
+function PostBox ({ post, comments, postLikes }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
     const history = useHistory();
@@ -18,6 +19,11 @@ function PostBox ({ post, comments }) {
         if (comment.parentPost === post._id) return comment;
         return null;
     }).filter((comment) => comment !== null);
+
+    const likesPost = postLikes.map((likePost) => {
+        if (likePost.postId === post._id) return likePost;
+        return null;
+    }).filter((likePost) => likePost !== null);
     
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
@@ -84,8 +90,13 @@ function PostBox ({ post, comments }) {
                     <div id='container-images-postbox'>
                         {images}
                     </div>
-                    <div className='container-labels-postshow'>
-                        <label id='label-likes-postbox'>likes</label>
+                    {likesPost.length > 0 ?
+                        <label id='label-post-likes-counter'>{likesPost.length} likes</label> 
+                        : undefined
+                    }
+                    <button id='divider-two-post-box'></button>
+                    <div className='container-labels-postbox'>
+                        <PostLikesCompose postId={post._id} />
                         {commentsPost.length > 0 ?
                             <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
                             : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
