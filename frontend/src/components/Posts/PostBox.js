@@ -42,8 +42,6 @@ function PostBox ({ post, comments, postLikes }) {
         const date = new Date(finalTimeSlide);
         const todayDate = new Date();
 
-        // console.log(dateG);
-
         if (Math.round(Math.abs((date - todayDate) / oneDay)) === 0){
             setTime(Math.round(Math.abs(date - todayDate) / hours) + 'h');
         } else if(Math.round(Math.abs(date - todayDate) / hours) === 0){
@@ -137,13 +135,18 @@ function PostBox ({ post, comments, postLikes }) {
                         <div id='container-images-postbox'>
                             {images}
                         </div>
-                        <div className='container-labels-postshow'>
-                            <label id='label-likes-postbox'>Likes</label>
+                        {likesPost.length > 0 ?
+                            <label id='label-post-likes-counter'>{likesPost.length} likes</label> 
+                            : undefined
+                        }
+                        <button id='divider-two-post-box'></button>
+                        <div className='container-labels-postbox'>
+                            <PostLikesCompose postId={post._id} />
                             {commentsPost.length > 0 ?
-                                <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
-                                : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                                <button id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</button>
+                                : <button id='label-comments-postbox' onClick={goToPostShow}>comments</button>
                             }
-                            <label id='label-shares-postbox'>shares</label>
+                            <button id='label-shares-postbox'>shares</button>
                         </div>
                         <button id='divider-post-box'></button>
                         {/* <div className='container-button-showpost'>

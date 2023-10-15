@@ -17,6 +17,7 @@ function Profile() {
     const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const comments = useSelector(state => Object.values(state.comments.all));
+    const postLikes = useSelector(state => Object.values(state.postLikes.all));
     const currentUrl = window.location.pathname;
 
     useEffect(() => {
@@ -179,6 +180,7 @@ function Profile() {
                                 <PostBox key={post._id}
                                     post={post}
                                     comments={comments}
+                                    postLikes={postLikes}
                                 />
                             ))
                         }
