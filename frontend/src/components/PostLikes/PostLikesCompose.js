@@ -16,8 +16,8 @@ function PostLikesCompose({ postId }){
     return (
         <div className='container-post-likes-compose'>
             <button id='button-create-post-like' onClick={handleSubmit}>
-                Like
-                <i className="fa-solid fa-thumbs-up"></i>
+                <label id='label-likes-post-like'>Like</label>
+                <i className="fa-solid fa-thumbs-up" id='img-like-post-like'></i>
             </button>
         </div>
     )

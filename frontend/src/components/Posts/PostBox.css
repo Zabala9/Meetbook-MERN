@@ -83,7 +83,7 @@
 #label-comments-postbox, #label-shares-postbox{
     background: none;
     border: none;
-    padding: 3px;
+    padding: 5px;
     border-radius: 5px;
     font-size: 15px;
     transition: 0.5s;
