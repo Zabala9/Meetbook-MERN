@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PostButton from './PostButton';
 import CommentCompose from '../Comments/CommentCompose';
+import PostLikesCompose from '../PostLikes/PostLikesCompose';
 import './PostBox.css';
 
 function PostBox ({ post, comments }) {
@@ -84,8 +85,9 @@ function PostBox ({ post, comments }) {
                     <div id='container-images-postbox'>
                         {images}
                     </div>
-                    <div className='container-labels-postshow'>
-                        <label id='label-likes-postbox'>likes</label>
+                    <label>likes</label>
+                    <div className='container-labels-postbox'>
+                        <PostLikesCompose postId={post._id} />
                         {commentsPost.length > 0 ?
                             <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
                             : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>

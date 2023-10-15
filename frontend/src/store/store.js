@@ -4,11 +4,13 @@ import session from './session';
 import errors from './errors';
 import posts from './posts';
 import comments from './comments';
+import postLikes from './postLikes';
 
 const rootReducer = combineReducers({
   session,
   posts,
   comments,
+  postLikes,
   errors
 });
 
