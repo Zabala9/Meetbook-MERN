@@ -94,6 +94,7 @@ function PostBox ({ post, comments, postLikes }) {
                         <label id='label-post-likes-counter'>{likesPost.length} likes</label> 
                         : undefined
                     }
+                    <button id='divider-two-post-box'></button>
                     <div className='container-labels-postbox'>
                         <PostLikesCompose postId={post._id} />
                         {commentsPost.length > 0 ?
