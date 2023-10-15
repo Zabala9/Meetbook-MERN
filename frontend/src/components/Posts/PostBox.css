@@ -75,15 +75,24 @@
     word-wrap: break-word;
 }
 
-#label-comments-postbox:hover, #label-likes-postbox:hover,
-#label-shares-postbox:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 #label-post-likes-counter{
     color: rgb(69, 69, 69);
     margin-left: 25px;
+}
+
+#label-comments-postbox, #label-shares-postbox{
+    background: none;
+    border: none;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: 0.5s;
+}
+
+#label-comments-postbox:hover, #label-likes-postbox:hover,
+#label-shares-postbox:hover{
+    background-color: rgb(218, 218, 218);
+    transition: 0.5s;
 }
 
 .container-labels-postbox{

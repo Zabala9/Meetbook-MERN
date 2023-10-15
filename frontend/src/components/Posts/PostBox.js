@@ -98,10 +98,10 @@ function PostBox ({ post, comments, postLikes }) {
                     <div className='container-labels-postbox'>
                         <PostLikesCompose postId={post._id} />
                         {commentsPost.length > 0 ?
-                            <label id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</label>
-                            : <label id='label-comments-postbox' onClick={goToPostShow}>comments</label>
+                            <button id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</button>
+                            : <button id='label-comments-postbox' onClick={goToPostShow}>comments</button>
                         }
-                        <label id='label-shares-postbox'>shares</label> 
+                        <button id='label-shares-postbox'>shares</button>
                     </div>
                     <button id='divider-post-box'></button>
                     {/* <div className='container-button-showpost'>
