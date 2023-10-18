@@ -14,6 +14,14 @@
 }
 
 #label-likes-post-like{
+    color: #38714e;
+}
+
+#label-likes-post-like, #label-likes-post-like2{
     margin-right: 5px;
     cursor: pointer;
+}
+
+#img-like-post-like{
+    color: #38714e;
 }

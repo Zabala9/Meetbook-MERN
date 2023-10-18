@@ -56,4 +56,15 @@ router.post('/', requireUser, async(req, res, next) => {
     }
 });
 
+router.delete('/:id', requireUser, async(req, res, next) => {
+    try{
+        const postLike = await PostLike.deleteOne({ _id: req.params.id });
+        if(!postLike) return res.status(404).json({ message: 'Post like not found.'});
+
+        return res.status(204).json('Post like successfully deleted.');
+    } catch(err){
+        next(err);
+    }
+});
+
 module.exports = router;

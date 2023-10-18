@@ -67,7 +67,6 @@ export const fetchPostLikes = (postId) => async dispatch => {
 };
 
 export const createPostLike = (postLikeInfo) => async dispatch => {
-    const { postId } = postLikeInfo;
 
     try{
         const res = await jwtFetch('/api/postLikes/', {
@@ -82,7 +81,17 @@ export const createPostLike = (postLikeInfo) => async dispatch => {
     }
 };
 
-// delete action
+export const deletePostLike = (postLikeId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/postLikes/${postLikeId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removePostLike(postLikeId));
+    } catch(err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
 
 const nullErrors = null;
 
