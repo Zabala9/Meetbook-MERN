@@ -5,12 +5,14 @@ import { fetchPosts } from '../../store/posts';
 import PostButton from './PostButton';
 import AllComments from '../Comments/AllComments';
 import CommentCompose from '../Comments/CommentCompose';
+import PostLikesCompose from '../PostLikes/PostLikesCompose';
 import './PostShow.css';
 
 function PostShow(){
     const { postId } = useParams();
     const dispatch = useDispatch();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
+    const postLikes = useSelector(state => Object.values(state.postLikes.all));
     let postTime;
     let slideTime;
     let secondSlide;
@@ -23,6 +25,11 @@ function PostShow(){
         secondSlide = slideTime[1].split(".");
         finalTimeSlide  = slideTime[0] + ' ' + secondSlide[0];
     }
+
+    const likesPost = postLikes.map((likePost) => {
+        if (likePost.postId === post._id) return likePost;
+        return null;
+    }).filter((likePost) => likePost !== null);
 
     useEffect(() => {
         dispatch(fetchPosts());
@@ -38,8 +45,6 @@ function PostShow(){
             const date = new Date(finalTimeSlide);
             const todayDate = new Date();
 
-            // console.log(dateG);
-
             if (Math.round(Math.abs((date - todayDate) / oneDay)) === 0){
                 setTime(Math.round(Math.abs(date - todayDate) / hours) + 'h');
             } else if(Math.round(Math.abs(date - todayDate) / hours) === 0){
@@ -48,11 +53,13 @@ function PostShow(){
                 setTime(Math.round(Math.abs((date - todayDate) / 1000)) + 's');
             } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 0 && Math.round(Math.abs((date - todayDate) / oneDay)) < 30) {
                 setTime(Math.round(Math.abs((date - todayDate) / oneDay)) + 'd');
-            } else if(Math.round(Math.abs((date - todayDate) / oneDay)) > 30){
-                setTime(dateG);
+            } else if(Math.round(Math.abs((date - todayDate) / oneDay)) >= 30){
+                const fDate = dateG.toLocaleDateString('default', { month: 'long' }) + " " + dateG.toLocaleTimeString('default', { day: 'numeric' } );
+                const splited = fDate.split(',');
+                setTime(splited[0]);
             }
         }
-    });
+    }, []);
 
     if(!post) return undefined;
 
@@ -89,7 +96,15 @@ function PostShow(){
                 <div className='container-images-postshow'>
                     {images}
                 </div>
+                {likesPost.length > 0 ?
+                    <label id='label-counter-likes-post'>{likesPost.length} likes</label> :
+                    undefined
+                }
                 <button id='divider-post-show'></button>
+                <div className='container-buttons-like-share'>
+                    <PostLikesCompose postId={postId} />
+                    <label>Share</label>
+                </div>
                 <button id='divider-two-post-show'></button>
                 <div className='container-comment-compose'>
                     <CommentCompose parentPost={postId} />

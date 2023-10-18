@@ -61,6 +61,7 @@
     margin-left: 10px;
     width: 520px;
     word-wrap: break-word;
+    margin-bottom: 20px;
 }
 
 #post-image-postshow{
@@ -68,8 +69,17 @@
     height: 100%;
 }
 
+.container-images-postshow{
+    margin-bottom: 20px;
+}
+
 #label-comments-postshow{
     color: rgb(117, 117, 117);
+}
+
+#label-counter-likes-post{
+    color: rgb(86, 86, 86);
+    margin-left: 20px;
 }
 
 #divider-post-show{
@@ -79,6 +89,14 @@
     width: 100%;
     margin-bottom: 5px;
     cursor: default;
+}
+
+.container-buttons-like-share{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin-bottom: -5px;
 }
 
 #divider-two-post-show{
