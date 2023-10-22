@@ -11,6 +11,7 @@ require('./models/User');
 require('./models/Post');
 require('./models/Comment');
 require('./models/PostLike');
+require('./models/Notification');
 require('./config/passport');
 const passport = require('passport');
 
@@ -18,6 +19,7 @@ const usersRouter = require('./routes/api/users');
 const postsRouter = require('./routes/api/posts');
 const commentsRouter = require('./routes/api/comments');
 const postLikesRouter = require('./routes/api/postLikes');
+const notificationsRouter = require('./routes/api/notifications');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -49,6 +51,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/postLikes', postLikesRouter);
+app.use('/api/notifications', notificationsRouter);
 app.use('/api/csrf', csrfRouter);
 
 app.use((req, res, next) => {
