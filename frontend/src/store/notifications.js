@@ -51,3 +51,49 @@ export const fetchNotifications = (userId) => async dispatch => {
     }
 };
 
+export const createNotification = (notificationInfo) => async dispatch => {
+    try{
+        const res = await jwtFetch('/api/notifications/', {
+            method: "POST",
+            body: JSON.stringify(notificationInfo)
+        });
+        const notification = await res.json();
+        dispatch(receiveNewNotification(notification));
+    } catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
+
+const nullErrors = null;
+
+export const notificationErrorsReducer = (state = nullErrors, action) => {
+    switch(action.type){
+        case RECEIVE_NOTIFICATION_ERRORS:
+            return null;
+        case RECEIVE_NEW_NOTIFICATION:
+        case CLEAR_NOTIFICATION_ERRORS:
+            return nullErrors;
+        default:
+            return state;
+    }
+};
+
+const notificationsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
+    switch(action.type){
+        case RECEIVE_USER_NOTIFICATIONS:
+            return {...state, all: action.notifications, new: undefined };
+        case REMOVE_NOTIFICATION:
+            const newState = {...state};
+            delete newState.all[action.notificationId];
+            return {...newState, user: [], new: undefined };
+        case RECEIVE_NEW_NOTIFICATION:
+            return {...state, all: { [action.notification._id]: action.notification, ...state.all }};
+        case RECEIVE_USER_LOGOUT:
+            return {...state, user: [], new: undefined };
+        default:
+            return state;
+    }
+};
+
+export default notificationsReducer;

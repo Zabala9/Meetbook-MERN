@@ -5,12 +5,14 @@ import errors from './errors';
 import posts from './posts';
 import comments from './comments';
 import postLikes from './postLikes';
+import notifications from './notifications';
 
 const rootReducer = combineReducers({
   session,
   posts,
   comments,
   postLikes,
+  notifications,
   errors
 });
 
