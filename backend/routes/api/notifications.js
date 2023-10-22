@@ -21,3 +21,22 @@ router.get('/userId', async (req, res, next) => {
         return res,json([]);
     }
 });
+
+router.post('/', requireUser, async (req, res, next) => {
+    const { parentPost, recipient, description } = req.body;
+
+    try{
+        const newNotification = new Notification({
+            author: req.user._id,
+            parentPost: parentPost,
+            recipient: recipient,
+            description: description,
+        });
+
+        let notification = await newNotification.save();
+        notification = await notification.populate("author", "_id name lastname profileImageUrl");
+        return res.json(notification);
+    } catch (err){
+        next(err);
+    }
+});
