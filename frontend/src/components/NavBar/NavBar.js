@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import { fetchNotifications } from '../../store/notifications';
 import image from '../../assets/logo.jpg';
+import AllNotifications from '../Notifications/AllNotifications';
 import './NavBar.css';
 
 function NavBar () {
@@ -11,6 +13,7 @@ function NavBar () {
     const [showMenu, setShowMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
     const user = useSelector(state => state.session.user);
+    const notifications = useSelector(state => Object.values(state.notifications.all));
 
     const openMenu = () => {
         if(showMenu){
@@ -36,6 +39,10 @@ function NavBar () {
         let path = '/';
         history.push(path);
     };
+
+    useEffect(() => {
+        dispatch(fetchNotifications(user._id));
+    }, [showNotifications]);
 
     return (
         <div className='container-navbar'>
@@ -68,7 +75,7 @@ function NavBar () {
                 </div>
                 { showNotifications && (
                     <div className='container-dropdown-notifications'>
-                        <label>testttttttttttttttttttttt</label>
+                        <AllNotifications notifications={notifications} closeNotification={setShowNotifications} />
                         {/* ADD word-wrap: break-word; IN NOTIFICATION BOX*/}
                     </div>
                 )}

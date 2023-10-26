@@ -3,15 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const { requireUser } = require("../../config/passport");
 const Notification = mongoose.model("Notification");
-const Post = mongoose.model("Post");
 
-router.get('/userId', async (req, res, next) => {
-    const { userId } = req.params();
+router.get('/:userId', async (req, res, next) => {
+    const { userId } = req.params;
 
     try {
         const notifications = await Notification.find({ recipient: userId })
                                                 .populate("author", "_id name lastname profileImageUrl")
-                                                .populate("parentPost", "id")
+                                                .populate("parentPost", "_id")
                                                 .sort({ createdAt: -1 });
         const notificationsObj = {};
         notifications.forEach((notification) => {
@@ -19,7 +18,7 @@ router.get('/userId', async (req, res, next) => {
         });
         return res.json(notificationsObj);
     } catch (err) {
-        return res,json([]);
+        return res.json([]);
     }
 });
 

@@ -41,6 +41,7 @@ export const clearNotificationErrors = errors => ({
 });
 
 export const fetchNotifications = (userId) => async dispatch => {
+    
     try{
         const res = await jwtFetch(`/api/notifications/${userId}`);
         const notifications = await res.json();
