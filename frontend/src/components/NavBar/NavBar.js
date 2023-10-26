@@ -13,27 +13,22 @@ function NavBar () {
     const user = useSelector(state => state.session.user);
 
     const openMenu = () => {
-        if(showMenu) return;
-        setShowMenu(true);
+        if(showMenu){
+            setShowMenu(false);
+        } else {
+            setShowNotifications(false);
+            setShowMenu(true);
+        }
     };
 
     const openNotifications = () => {
         if(showNotifications){
             setShowNotifications(false);
-        } else { setShowNotifications(true); }
-    };
-
-    useEffect(() => {
-        if(!showMenu) return;
-
-        const closeMenu = () => {
+        } else {
             setShowMenu(false);
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener('click', closeMenu);
-    }, [showMenu]);
+            setShowNotifications(true);
+        }
+    };
 
     const logoutUser = e => {
         e.preventDefault();

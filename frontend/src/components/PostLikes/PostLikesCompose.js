@@ -28,7 +28,9 @@ function PostLikesCompose({ postId }){
         
         if(filteredLikedPost.length === 0){
             dispatch(createPostLike(postLikeInfo));
-            dispatch(createNotification(notificationInfo));
+            if(postInfo.author._id !== userInfo._id){
+                dispatch(createNotification(notificationInfo));
+            }
         } else {
             dispatch(deletePostLike(filteredLikedPost[0]._id));
         }
