@@ -9,11 +9,18 @@ function NavBar () {
     const history = useHistory();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
+    const [showNotifications, setShowNotifications] = useState(false);
     const user = useSelector(state => state.session.user);
 
     const openMenu = () => {
         if(showMenu) return;
         setShowMenu(true);
+    };
+
+    const openNotifications = () => {
+        if(showNotifications){
+            setShowNotifications(false);
+        } else { setShowNotifications(true); }
     };
 
     useEffect(() => {
@@ -58,7 +65,17 @@ function NavBar () {
                 </Link>
             </div>
 
-            <div id='right-side-nav'>
+            <div className='right-side-nav'>
+                <div className='dropdown-notifications-navbar' style={{ textAlign: 'right' }}>
+                    <button id='button-notifications-navbar' onClick={openNotifications}>
+                        <i className="fa-solid fa-bell" id='img-notifications-navbar'></i>
+                    </button>
+                </div>
+                { showNotifications && (
+                    <div className='container-dropdown-notifications'>
+                        <label>testttttttttttttttttttttt</label>
+                    </div>
+                )}
                 <div id='dropdown-navbar' style={{ textAlign: 'right' }}>
                     <button id='button-dropdown' onClick={openMenu}>
                         <img src={user.profileImageUrl} alt='' id='profile-img'/>

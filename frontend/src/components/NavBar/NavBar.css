@@ -45,7 +45,42 @@
 }
 
 /* RIGHT SIDE BELOW */
+.right-side-nav{
+    display: flex;
+    align-items: center;
+}
 
+#button-notifications-navbar{
+    border: 1px solid black;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+#img-notifications-navbar{
+    font-size: 25px;
+}
+
+/* DROPDOWN NOTIFICATIONS BELOW */
+/* #dropdown-notifications-navbar{
+    width: 500px;
+} */
+
+.container-dropdown-notifications{
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    margin-top: 75px;
+    margin-left: -170px;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* DROPDOWN MENU PROFILE BELOW */ 
 #dropdown-navbar{
     width: 70px;
     height: 60px;
@@ -55,7 +90,7 @@
 #button-dropdown{
     border: none;
     background: none;
-    margin-top: 8px;
+    margin-top: 4px;
     display: flex;
     align-items: center;
 }
