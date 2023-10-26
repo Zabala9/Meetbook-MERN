@@ -63,17 +63,17 @@
 }
 
 /* DROPDOWN NOTIFICATIONS BELOW */
-/* #dropdown-notifications-navbar{
-    width: 500px;
-} */
+.dropdown-notifications-navbar{
+    position: relative;
+}
 
 .container-dropdown-notifications{
     display: flex;
     justify-content: center;
     width: 200px;
-    margin-top: 130px;
-    margin-left: -170px;
     position: absolute;
+    top: 5.5%;
+    right: 5%;
     background-color: white;
     border: 1px solid black;
     padding: 5px;

@@ -68,7 +68,7 @@ function NavBar () {
             </div>
 
             <div className='right-side-nav'>
-                <div className='dropdown-notifications-navbar' style={{ textAlign: 'right' }}>
+                <div className='dropdown-notifications-navbar'>
                     <button id='button-notifications-navbar' onClick={openNotifications}>
                         <i className="fa-solid fa-bell" id='img-notifications-navbar'></i>
                     </button>

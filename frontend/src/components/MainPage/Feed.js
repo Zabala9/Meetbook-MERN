@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { fetchNotifications } from '../../store/notifications';
 import AllPosts from '../Posts/AllPosts';
 import PostCompose from '../Posts/PostCompose';
 import Modal from '../Modal/Modal';
@@ -9,6 +10,7 @@ import './Feed.css';
 function Feed () {
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const currentUrl = window.location.pathname;
 
@@ -28,6 +30,10 @@ function Feed () {
         const buttonGames = document.getElementById('img-games-button-nav');
         if (buttonGames) buttonGames.style.color = "#000000";
     }
+
+    useEffect(() => {
+        dispatch(fetchNotifications(user._id));
+    }, [])
 
     return (
         <>
