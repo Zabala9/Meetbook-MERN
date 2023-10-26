@@ -2,7 +2,6 @@ import NotificationBox from './NotificationBox';
 import './AllNotifications.css';
 
 function AllNotifications({ notifications, closeNotification }) {
-    console.log(notifications.length);
 
     return (
         <div className='container-all-notifications'>

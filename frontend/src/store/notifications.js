@@ -89,7 +89,7 @@ const notificationsReducer = (state = { all: {}, user: [], new: undefined }, act
             delete newState.all[action.notificationId];
             return {...newState, user: [], new: undefined };
         case RECEIVE_NEW_NOTIFICATION:
-            return {...state, all: { [action.notification._id]: action.notification, ...state.all }};
+            return {...state, new: action.notification };
         case RECEIVE_USER_LOGOUT:
             return {...state, user: [], new: undefined };
         default:
