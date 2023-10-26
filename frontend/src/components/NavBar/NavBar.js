@@ -74,6 +74,7 @@ function NavBar () {
                 { showNotifications && (
                     <div className='container-dropdown-notifications'>
                         <label>testttttttttttttttttttttt</label>
+                        {/* ADD word-wrap: break-word; IN NOTIFICATION BOX*/}
                     </div>
                 )}
                 <div id='dropdown-navbar' style={{ textAlign: 'right' }}>

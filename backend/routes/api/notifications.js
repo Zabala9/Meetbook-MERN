@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const { requireUser } = require("../../config/passport");
 const Notification = mongoose.model("Notification");
+const Post = mongoose.model("Post");
 
 router.get('/userId', async (req, res, next) => {
     const { userId } = req.params();
