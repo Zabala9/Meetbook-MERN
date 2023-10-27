@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../../store/comments';
+import { createNotification } from '../../store/notifications';
 import './CommentCompose.css';
 
 function CommentCompose({ parentPost }){
@@ -10,6 +11,10 @@ function CommentCompose({ parentPost }){
     const [imageUrl, setImageUrl] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const postInfo = useSelector(state => state.posts.all[parentPost]);
+    const description = " has commented your post.";
+
+    // console.log(postInfo);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -17,8 +22,17 @@ function CommentCompose({ parentPost }){
             text,
             images,
             parentPost
-        }
+        };
+        const notification = {
+            parentPost,
+            recipient: postInfo.author._id,
+            description
+        };
+
         dispatch(createComment(comment, images));
+        if(postInfo.author._id !== user._id){
+            dispatch(createNotification(notification));
+        }
         setText('');
         setImages([]);
         setImageUrl([]);
