@@ -80,6 +80,18 @@ export const updateNotification = (data) => async dispatch => {
     }
 };
 
+export const deleteNotification = (notificationId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/notifications/${notificationId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removeNotification(notificationId));
+    } catch (err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 const nullErrors = null;
 
 export const notificationErrorsReducer = (state = nullErrors, action) => {

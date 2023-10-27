@@ -58,4 +58,16 @@ router.patch('/:notificationId', requireUser, async (req, res, next) => {
     }
 });
 
+router.delete('/:notificationId', requireUser, async(req, res, next) => {
+    try{
+        const { notificationId } = req.params;
+        const notification = await Notification.deleteOne({ _id: notificationId });
+        if(!notification) return res.status(404).json({ message: 'Notification not found.' });
+
+        return res.status(204).json('Notification successfully deleted.');
+    } catch(err){
+        next(err);
+    }
+});
+
 module.exports = router;
