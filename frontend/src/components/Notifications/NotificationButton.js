@@ -13,13 +13,20 @@ function NotificationButton({ notificationId }){
         } else { setShowMenuNotification(true); }
     };
 
-    const markAsRead = () => {
+    const markAsRead = e => {
+        e.preventDefault();
+        
         const notification = {
             _id: notificationId,
             read: true,
         };
 
         dispatch(updateNotification(notification));
+    };
+
+    const deleteNoti = e => {
+        e.preventDefault();
+        dispatch(deleteNotification(notificationId));
     };
 
     return (
@@ -31,11 +38,11 @@ function NotificationButton({ notificationId }){
             </div>
             { showMenuNotification && (
                 <div className='dropdown-notification-menu'>
-                    <button id='button-mark-read-noti'>
+                    <button id='button-mark-read-noti' onClick={markAsRead}>
                         <i className="fa-solid fa-check" id='img-check-noti'></i>
                         <label id='label-mark-read-noti'>Mark as read</label>
                     </button>
-                    <button id='button-delete-noti'>
+                    <button id='button-delete-noti' onClick={deleteNoti}>
                         <i className="fa-regular fa-trash-can" id='img-delete-noti'></i>
                         <label id='label-delete-noti'>Delete notification</label>
                     </button>
