@@ -66,6 +66,20 @@ export const createNotification = (notificationInfo) => async dispatch => {
     }
 };
 
+export const updateNotification = (data) => async dispatch => {
+    try{
+        const res = await jwtFetch(`/api/notifications/${data._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+        const notification = await res.json();
+        dispatch(receiveNotification(notification));
+    } catch(err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 const nullErrors = null;
 
 export const notificationErrorsReducer = (state = nullErrors, action) => {
@@ -84,6 +98,8 @@ const notificationsReducer = (state = { all: {}, user: [], new: undefined }, act
     switch(action.type){
         case RECEIVE_USER_NOTIFICATIONS:
             return {...state, all: action.notifications, new: undefined };
+        case RECEIVE_NOTIFICATION:
+            return { ...state, all: {...state.all, [action.notification._id]: action.notification }};
         case REMOVE_NOTIFICATION:
             const newState = {...state};
             delete newState.all[action.notificationId];

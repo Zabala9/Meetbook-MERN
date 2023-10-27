@@ -3,8 +3,10 @@
     align-items: center;
     /* margin-top: 3px; */
     cursor: pointer;
+    margin-bottom: 3px;
     padding: 4px;
     border-radius: 6px;
+    /* background-color: #78a7a9; */
     transition: 0.5s;
 }
 

@@ -41,4 +41,21 @@ router.post('/', requireUser, async (req, res, next) => {
     }
 });
 
+router.patch('/:notificationId', requireUser, async (req, res, next) => {
+    try{
+        const { notificationId } = req.params;
+        const { read } = req.body;
+        let notification = await Notification.findById(notificationId);
+
+        if(!notification) return res.status(404).json({ message: 'Notification not found.' });
+        
+        notification.read = read;
+        notification = await notification.save();
+        notification = await notification.populate("author", "_id name lastname profileImageUrl");
+        return res.json(notification);
+    } catch (err){
+        next(err);
+    }
+});
+
 module.exports = router;
