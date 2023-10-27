@@ -8,7 +8,7 @@ function NotificationBox({ notification, closeNotification }){
     const dispatch = useDispatch();
     const { name, lastname, profileImageUrl, _id } = notification.author;
     const parentPost = notification.parentPost._id;
-
+    
     const goToPostShow = () => {
         const changeReadNoti = {
             _id: notification._id,
