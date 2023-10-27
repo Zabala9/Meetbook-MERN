@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts } from '../../store/posts';
+import { fetchAllPostLikes } from '../../store/postLikes';
 import PostButton from './PostButton';
 import AllComments from '../Comments/AllComments';
 import CommentCompose from '../Comments/CommentCompose';
@@ -26,13 +27,9 @@ function PostShow(){
         finalTimeSlide  = slideTime[0] + ' ' + secondSlide[0];
     }
 
-    const likesPost = postLikes.map((likePost) => {
-        if (likePost.postId === post._id) return likePost;
-        return null;
-    }).filter((likePost) => likePost !== null);
-
     useEffect(() => {
         dispatch(fetchPosts());
+        dispatch(fetchAllPostLikes());
     }, [dispatch]);
 
     useEffect(() => {
@@ -62,6 +59,11 @@ function PostShow(){
     }, []);
 
     if(!post) return undefined;
+
+    const likesPost = postLikes.map((likePost) => {
+        if (likePost.postId === post._id) return likePost;
+        return null;
+    }).filter((likePost) => likePost !== null);
 
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image-postshow' key={url} src={url} alt='' />
