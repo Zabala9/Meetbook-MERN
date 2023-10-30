@@ -9,7 +9,7 @@ router.get('/:userId', async(req, res, next) => {
         const { userId } = req.params;
         const savePosts = await SavePost.find({ author: userId })
                                         .populate("author", "_id name lastname profileImageUrl")
-                                        .populate("postInformation", "author")
+                                        .populate("postInformation", "author _id text imageUrls")
                                         .sort({ createdAt: -1 });
         const savePostsObj = {};
         savePosts.forEach((savePost) => {
@@ -21,6 +21,21 @@ router.get('/:userId', async(req, res, next) => {
     }
 });
 
-//
+router.post('/', requireUser, async (req, res, next) => {
+    try{
+        const { postInformation } = req.body;
+        const newSavePost = new SavePost({
+            author: req.user._id,
+            postInformation: postInformation,
+        });
+
+        let savePost = await newSavePost.save();
+        savePost = await savePost.populate("author", "_id name lastname profileImageUrl")
+                                 .populate("postInformation", "author _id text imageUrls");
+        return res.json(savePost);
+    } catch (err){
+        next(err);
+    }
+});
 
 module.exports = router;
