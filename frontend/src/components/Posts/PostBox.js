@@ -5,7 +5,7 @@ import CommentCompose from '../Comments/CommentCompose';
 import PostLikesCompose from '../PostLikes/PostLikesCompose';
 import './PostBox.css';
 
-function PostBox ({ post, comments, postLikes }) {
+function PostBox ({ post, comments, postLikes, savedPosts }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
     const history = useHistory();
@@ -14,6 +14,8 @@ function PostBox ({ post, comments, postLikes }) {
     const secondSlide = slideTime[1].split(".");
     const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
     const [time, setTime] = useState('');
+
+    // console.log(post._id, 'post');
 
     const commentsPost = comments.map((comment) => {
         if (comment.parentPost === post._id) return comment;
@@ -24,6 +26,8 @@ function PostBox ({ post, comments, postLikes }) {
         if (likePost.postId === post._id) return likePost;
         return null;
     }).filter((likePost) => likePost !== null);
+
+    const postSaved = savedPosts.some((postSave) => postSave.postInformation._id === post._id); 
     
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
@@ -80,7 +84,7 @@ function PostBox ({ post, comments, postLikes }) {
                                 </div>
                             </div>
                         </label>
-                        <PostButton userId={_id} post={post} />
+                        <PostButton userId={_id} post={post} saved={postSaved} />
                     </div>
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
@@ -127,7 +131,7 @@ function PostBox ({ post, comments, postLikes }) {
                                     </div>
                                 </div>
                             </label>
-                            <PostButton userId={_id} post={post} />
+                            <PostButton userId={_id} post={post} saved={postSaved} />
                         </div>
                         <div id='container-text-post-postbox'>
                             <p id='label-text-post' >{post.text}</p>

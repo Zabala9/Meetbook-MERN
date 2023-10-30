@@ -8,7 +8,7 @@ import EditPost from './EditPost';
 import EditPrivacy from './EditPrivacy';
 import './PostButton.css';
 
-function PostButton({ userId, post }){
+function PostButton({ userId, post, saved }){
     const [showMenu, setShowMenu] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [showModalPrivacy, setShowModalPrivacy] = useState(false);
@@ -16,9 +16,7 @@ function PostButton({ userId, post }){
     const user = useSelector(state => state.session.user);
     const currentLocation = window.location.pathname;
     const history = useHistory();
-    const body = document.body;
-
-    // console.log(post, 'button');
+    const body = document.body;   
 
     const openMenu = () => {
         if (showMenu) return;
@@ -87,7 +85,10 @@ function PostButton({ userId, post }){
                 </div>
                 { showMenu && (
                     <div className='dropdown-content-post'>
-                        <button id='save-button-post' onClick={savePost}>Save</button>
+                        { saved ?
+                            <button id='save-button-post' onClick={savePost}>Unsave</button> :
+                            <button id='save-button-post' onClick={savePost}>Save</button>
+                        }
                         <button id='divider-post'></button>
                         <button id='edit-button-post' onClick={update}>Edit post</button>
                         <button id='edit-privacy-button-post' onClick={updatePrivacy}>Edit privacy</button>

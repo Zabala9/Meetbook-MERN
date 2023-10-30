@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { fetchNotifications } from '../../store/notifications';
+import { fetchSavePost } from '../../store/savePosts';
 import AllPosts from '../Posts/AllPosts';
 import PostCompose from '../Posts/PostCompose';
 import Modal from '../Modal/Modal';
@@ -33,6 +34,7 @@ function Feed () {
 
     useEffect(() => {
         dispatch(fetchNotifications(user._id));
+        dispatch(fetchSavePost(user._id));
     }, [])
 
     return (

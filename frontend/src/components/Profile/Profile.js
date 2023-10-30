@@ -18,6 +18,7 @@ function Profile() {
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const comments = useSelector(state => Object.values(state.comments.all));
     const postLikes = useSelector(state => Object.values(state.postLikes.all));
+    const savedPosts = useSelector(state => Object.values(state.savePosts.all));
     const currentUrl = window.location.pathname;
 
     useEffect(() => {
@@ -181,6 +182,7 @@ function Profile() {
                                     post={post}
                                     comments={comments}
                                     postLikes={postLikes}
+                                    savedPosts={savedPosts}
                                 />
                             ))
                         }
