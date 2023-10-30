@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deletePost, updatePost } from '../../store/posts';
+import { createSavePost } from '../../store/savePosts';
 import Modal from '../Modal/Modal';
 import EditPost from './EditPost';
 import EditPrivacy from './EditPrivacy';
@@ -16,6 +17,8 @@ function PostButton({ userId, post }){
     const currentLocation = window.location.pathname;
     const history = useHistory();
     const body = document.body;
+
+    // console.log(post, 'button');
 
     const openMenu = () => {
         if (showMenu) return;
@@ -53,6 +56,15 @@ function PostButton({ userId, post }){
         setShowModalPrivacy(true);
     };
 
+    const savePost = e => {
+        e.preventDefault();
+        
+        const savePostInfo = {
+            postInformation: post._id
+        };
+        dispatch(createSavePost(savePostInfo));
+    };
+
     if(showModalUpdate || showModalPrivacy){
         body.style.overflow = 'hidden';
     } else if(!showModalUpdate || !showModalUpdate){
@@ -75,7 +87,7 @@ function PostButton({ userId, post }){
                 </div>
                 { showMenu && (
                     <div className='dropdown-content-post'>
-                        <button id='save-button-post'>Save</button>
+                        <button id='save-button-post' onClick={savePost}>Save</button>
                         <button id='divider-post'></button>
                         <button id='edit-button-post' onClick={update}>Edit post</button>
                         <button id='edit-privacy-button-post' onClick={updatePrivacy}>Edit privacy</button>

@@ -49,6 +49,8 @@ export const createSavePost = (savePostInfo) => async dispatch => {
             method: "POST",
             body: JSON.stringify(savePostInfo)
         });
+        const savePost = await res.json();
+        dispatch(receiveNewSavePost(savePost));
     } catch(err){
         const resBody = await err.json();
         if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));

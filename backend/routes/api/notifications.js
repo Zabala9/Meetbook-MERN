@@ -34,8 +34,7 @@ router.post('/', requireUser, async (req, res, next) => {
         });
 
         let notification = await newNotification.save();
-        notification = await notification.populate("author", "_id name lastname profileImageUrl")
-                                         .populate("parentPost", "_id");
+        notification = await notification.populate("author", "_id name lastname profileImageUrl");
         return res.json(notification);
     } catch (err){
         next(err);

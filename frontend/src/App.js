@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import Groups from './components/Groups/Groups';
 import Market from './components/Market/Market';
 import Games from './components/Games/Games';
+import SavePosts from './components/SavePosts/SavePosts';
 import PostShow from './components/Posts/PostShow';
 
 import { getCurrentUser } from './store/session';
@@ -32,7 +33,8 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/groups" component={Groups} />
         <ProtectedRoute exact path="/market" component={Market} />
-        <ProtectedRoute exact  path="/games" component={Games} />
+        <ProtectedRoute exact path="/games" component={Games} />
+        <ProtectedRoute exact path="/saved" component={SavePosts} />
         <ProtectedRoute exact path="/post/:postId" component={PostShow} />
       </Switch>
     </>
