@@ -4,6 +4,7 @@ import { postErrorsReducer } from './posts';
 import { commentErrorsReducer } from './comments';
 import { postLikeErrorsReducer } from './postLikes';
 import { notificationErrorsReducer } from './notifications';
+import { savePostErrorsReducer } from './savePosts';
 
 export default combineReducers({
     session: sessionErrorsReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     comment: commentErrorsReducer,
     postLikes: postLikeErrorsReducer,
     notification: notificationErrorsReducer,
+    savePost: savePostErrorsReducer,
 });
