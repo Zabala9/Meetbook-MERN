@@ -26,8 +26,6 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
         if (likePost.postId === post._id) return likePost;
         return null;
     }).filter((likePost) => likePost !== null);
-
-    const postSaved = savedPosts.some((postSave) => postSave.postInformation._id === post._id); 
     
     const images = post.imageUrls?.map((url, index) => {
         return <img id='post-image' key={url} src={url} alt='' />
@@ -84,7 +82,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                                 </div>
                             </div>
                         </label>
-                        <PostButton userId={_id} post={post} saved={postSaved} />
+                        <PostButton userId={_id} post={post} saved={savedPosts} />
                     </div>
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
@@ -131,7 +129,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                                     </div>
                                 </div>
                             </label>
-                            <PostButton userId={_id} post={post} saved={postSaved} />
+                            <PostButton userId={_id} post={post} saved={savedPosts} />
                         </div>
                         <div id='container-text-post-postbox'>
                             <p id='label-text-post' >{post.text}</p>

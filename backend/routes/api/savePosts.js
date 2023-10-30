@@ -39,4 +39,16 @@ router.post('/', requireUser, async (req, res, next) => {
     }
 });
 
+router.delete('/:savePostId', requireUser, async(req, res, next) => {
+    try{
+        const { savePostId } = req.params;
+        const savePost = await SavePost.deleteOne({ _id: savePostId });
+        if(!savePost) return res.status(404).json({ message: 'Save post not found.' });
+
+        return res.status(204).json('Save post successfully deleted.');
+    } catch(err){
+        next(err);
+    }
+});
+
 module.exports = router;

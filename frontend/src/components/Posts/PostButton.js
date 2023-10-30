@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deletePost, updatePost } from '../../store/posts';
-import { createSavePost } from '../../store/savePosts';
+import { createSavePost, deleteSavePost } from '../../store/savePosts';
 import Modal from '../Modal/Modal';
 import EditPost from './EditPost';
 import EditPrivacy from './EditPrivacy';
@@ -16,7 +16,9 @@ function PostButton({ userId, post, saved }){
     const user = useSelector(state => state.session.user);
     const currentLocation = window.location.pathname;
     const history = useHistory();
-    const body = document.body;   
+    const body = document.body;  
+    
+    const postSaved = saved.find((postSave) => postSave.postInformation._id === post._id);
 
     const openMenu = () => {
         if (showMenu) return;
@@ -60,7 +62,12 @@ function PostButton({ userId, post, saved }){
         const savePostInfo = {
             postInformation: post._id
         };
-        dispatch(createSavePost(savePostInfo));
+        if(postSaved){
+            // console.log(postSaved);
+            dispatch(deleteSavePost(postSaved._id));
+        } else {
+            dispatch(createSavePost(savePostInfo));
+        }
     };
 
     if(showModalUpdate || showModalPrivacy){
@@ -85,7 +92,7 @@ function PostButton({ userId, post, saved }){
                 </div>
                 { showMenu && (
                     <div className='dropdown-content-post'>
-                        { saved ?
+                        { postSaved ?
                             <button id='save-button-post' onClick={savePost}>Unsave</button> :
                             <button id='save-button-post' onClick={savePost}>Save</button>
                         }

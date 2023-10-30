@@ -57,6 +57,18 @@ export const createSavePost = (savePostInfo) => async dispatch => {
     }
 };
 
+export const deleteSavePost = (savePostId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/notifications/${savePostId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removeSavePost(savePostId));
+    } catch(err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 const nullErrors = null;
 
 export const savePostErrorsReducer = (state = nullErrors, action) => {
@@ -77,7 +89,7 @@ const savePostsReducer = (state = { all: {}, new: undefined }, action) => {
             return {...state, all: action.savePosts, new: undefined };
         case REMOVE_SAVE_POST:
             const newState = {...state};
-            delete newState.all[action.postSaveId];
+            delete newState.all[action.savePostId];
             return {...newState, user: {}, new: undefined };
         case RECEIVE_NEW_SAVE_POST:
             return {...state, all: { [action.savePost._id]: action.savePost, ...state.all }};

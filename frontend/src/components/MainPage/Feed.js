@@ -35,7 +35,7 @@ function Feed () {
     useEffect(() => {
         dispatch(fetchNotifications(user._id));
         dispatch(fetchSavePost(user._id));
-    }, [])
+    }, [dispatch])
 
     return (
         <>
