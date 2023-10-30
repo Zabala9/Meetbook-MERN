@@ -6,6 +6,7 @@ import posts from './posts';
 import comments from './comments';
 import postLikes from './postLikes';
 import notifications from './notifications';
+import savePosts from './savePosts';
 
 const rootReducer = combineReducers({
   session,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   comments,
   postLikes,
   notifications,
+  savePosts,
   errors
 });
 

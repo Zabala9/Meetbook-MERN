@@ -54,3 +54,36 @@ export const createSavePost = (savePostInfo) => async dispatch => {
         if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
     }
 };
+
+const nullErrors = null;
+
+export const savePostErrorsReducer = (state = nullErrors, action) => {
+    switch(action.type){
+        case RECEIVE_SAVE_POST_ERRORS:
+            return null;
+        case RECEIVE_NEW_SAVE_POST:
+        case CLEAR_SAVE_POST_ERRORS:
+            return nullErrors;
+        default:
+            return state;
+    }
+};
+
+const savePostsReducer = (state = { all: {}, new: undefined }, action) => {
+    switch(action.type){
+        case RECEIVE_USER_SAVE_POSTS:
+            return {...state, all: action.savePosts, new: undefined };
+        case REMOVE_SAVE_POST:
+            const newState = {...state};
+            delete newState.all[action.postSaveId];
+            return {...newState, user: {}, new: undefined };
+        case RECEIVE_NEW_SAVE_POST:
+            return {...state, all: { [action.savePost._id]: action.savePost, ...state.all }};
+        case RECEIVE_USER_LOGOUT:
+            return {...state, user: {}, new: undefined };
+        default:
+            return state;
+    }
+};
+
+export default savePostsReducer;
