@@ -9,7 +9,15 @@ router.get('/:userId', async(req, res, next) => {
         const { userId } = req.params;
         const savePosts = await SavePost.find({ author: userId })
                                         .populate("author", "_id name lastname profileImageUrl")
-                                        .populate("postInformation", "author _id text imageUrls")
+                                        .populate({
+                                            path: 'postInformation',
+                                            select: 'author _id text imageUrls',
+                                            populate: {
+                                                path: 'author',
+                                                model: 'User',
+                                                select: '_id name lastname profileImageUrl'
+                                            }
+                                        })
                                         .sort({ createdAt: -1 });
         const savePostsObj = {};
         savePosts.forEach((savePost) => {

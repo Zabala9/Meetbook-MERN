@@ -1,0 +1,52 @@
+.container-post-saved1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-post-saved2{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#label-all-saved-posts{
+    margin-bottom: 20px;
+}
+
+#img-saved-post:hover{
+    cursor: pointer;
+}
+
+.rigth-side-post-box{
+    word-wrap: break-word;
+}
+
+.container-text-save-post-box{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#post-text-save-post-box:hover, #label-save-from-inside:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#label-post-save-post-box, #label-saved-from{
+    font-size: 13px;
+    font-weight: normal;
+}
+
+#label-save-from-inside{
+    margin-left: 3px;
+    font-weight: bold;
+}
+
+#share-button-save-post-box{
+    margin-right: 7px;
+}
+
+#button-unsave-post, #share-button-save-post-box{
+    font-size: 18px;
+}

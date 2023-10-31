@@ -63,7 +63,6 @@ function PostButton({ userId, post, saved }){
             postInformation: post._id
         };
         if(postSaved){
-            // console.log(postSaved);
             dispatch(deleteSavePost(postSaved._id));
         } else {
             dispatch(createSavePost(savePostInfo));
