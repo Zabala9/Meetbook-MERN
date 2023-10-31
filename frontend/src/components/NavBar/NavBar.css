@@ -4,6 +4,9 @@
     justify-content: space-between;
     padding: 7px;
     border-radius: 8px;
+    position: fixed;
+    width: 98%;
+    top: 0px;
 }
 
 #left-side-nav{

@@ -1,0 +1,35 @@
+.right-feed{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: fit-content;
+    border: none;
+    border-radius: 8px;
+    position: fixed;
+    left: 75vw;
+    top: 10vh;
+}
+
+.container-pages, .container-friends-request,
+.container-events, .container-contacts{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: none;
+}
+
+#label-your-pages, #label-friend-request,
+#label-events, #label-contacts{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: rgb(63, 63, 63);
+}
+
+#divider-pages-feed-right, #divider-request-feed-right,
+#divider-events-feed-right, #divider-contacts-feed-right {
+    background: none;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid rgb(171, 171, 171);
+}
