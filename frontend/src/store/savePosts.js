@@ -59,7 +59,7 @@ export const createSavePost = (savePostInfo) => async dispatch => {
 
 export const deleteSavePost = (savePostId) => async dispatch => {
     try{
-        await jwtFetch(`/api/notifications/${savePostId}`, {
+        await jwtFetch(`/api/savePosts/${savePostId}`, {
             method: 'DELETE',
         });
         dispatch(removeSavePost(savePostId));

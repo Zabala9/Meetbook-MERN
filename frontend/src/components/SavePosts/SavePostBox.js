@@ -1,11 +1,17 @@
+import { useDispatch } from 'react-redux';
+import { deleteSavePost } from '../../store/savePosts';
 import './SavePostBox.css';
 
 function SavePostBox({ post }){
+    const dispatch = useDispatch();
     const postInformation = post.postInformation;
     const authorInformation = post.author;
     const authorPostInformation = post.postInformation.author;
-    // console.log(post, 'saved box');
-    // console.log(authorPostInformation, 'post info');
+
+    const deleteSavedPost = e => {
+        e.preventDefault();
+        dispatch(deleteSavePost(post._id));
+    };
 
     return(
         <div className='container-save-post-box'>
@@ -24,7 +30,7 @@ function SavePostBox({ post }){
                     </label>
                 </div>
                 <button id='share-button-save-post-box'>share here</button>
-                <button id='button-unsave-post'>Unsave</button>
+                <button id='button-unsave-post' onClick={deleteSavedPost}>Unsave</button>
             </div>
         </div>
     )
