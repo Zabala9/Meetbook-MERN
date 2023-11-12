@@ -12,6 +12,7 @@ function NavBar () {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [searchText, setSearchText] = useState("");
     const user = useSelector(state => state.session.user);
     const notifications = useSelector(state => Object.values(state.notifications.all));
 
@@ -46,10 +47,16 @@ function NavBar () {
 
     return (
         <div className='container-navbar'>
-            <div id='left-side-nav'>
+            <div className='left-side-nav'>
                 <Link id='link-main' to='/'>
                     <img src={image} alt='' id='img-main'/>
                 </Link>
+                <div>
+                    <i className="fa-solid fa-magnifying-glass" id='img-search-navbar'></i>
+                    <input type='text'
+                        id='input-search-navbar'
+                    />
+                </div>
             </div>
 
             <div className='middle-side-nav'>

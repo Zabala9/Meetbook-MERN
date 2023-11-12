@@ -39,6 +39,30 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
+// Search route
+router.get('/search', async(req, res, next) => {
+  const { name, lastname } = req.body;
+  try {
+    let users;
+    if (!lastname){
+      users = await User.find({
+        $or: [
+          { name: { $regex: name, $options: 'i' }},
+          { lastname: { $regex: name, $options: 'i' }}
+        ]
+      });
+    } else {
+      users = await User.find({ 
+        name: { $regex: name, $options: 'i' },
+        lastname: { $regex: lastname, $options: 'i' }
+      });
+    }
+    return res.json(users);
+  } catch (err){
+    next(err);
+  }
+});
+
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the email
   const user = await User.findOne({
