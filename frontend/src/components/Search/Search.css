@@ -14,17 +14,28 @@
 
 .container-each-search-rsl{
     width: 100%;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
     align-items: center;
     display: flex;
 }
 
+.container-each-search-rsl:hover, #name-user-search-rsl:hover{
+    background-color: #abc0b3;
+    cursor: pointer;
+}
+
 .left-side-search-rsl{
     margin-left: 30px;
+    display: flex;
+    align-items: center;
 }
 
 #img-user-search-rsl{
     width: 40px;
     height: 40px;
+    border-radius: 50px;
 }
 
 .right-side-search-rsl{
@@ -33,5 +44,29 @@
 
 #name-user-search-rsl{
     font-size: 20px;
+    font-weight: bold;
+}
+
+#button-all-search{
+    width: 100%;
+    font-size: 20px;
+    border: none;
+    background: none;
+    margin-top: 7px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#button-all-search:hover, #label-search-for:hover,
+#label-search-for > label:hover{
+    cursor: pointer;
+    background-color: #abc0b3;
+}
+
+#label-search-for{
+    margin-left: 10px;
+}
+
+#label-search-for > label{
     font-weight: bold;
 }

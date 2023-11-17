@@ -101,7 +101,7 @@ function NavBar () {
                     />
                 </div>
                 {showSearch && (
-                    <Search usersSearch={usersSearch} />
+                    <Search usersSearch={usersSearch} closeSearch={setShowSearch} searchText={searchText} />
                 )}
             </div>
 
