@@ -34,9 +34,16 @@
 #input-search-navbar{
     height: 25px;
     width: 250px;
-    font-size: 15px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-indent: 3px;
     font-family: 'Noto Sans JP', sans-serif;
 }
+
+/* .dropdown-search-navbar{
+    position: relative;
+} */
 
 .middle-side-nav{
     display: flex;
@@ -91,16 +98,18 @@
 }
 
 /* DROPDOWN NOTIFICATIONS BELOW */
-.dropdown-notifications-navbar{
-    position: relative;
-}
+/* .dropdown-notifications-navbar{ */
+    /* position: relative; */
+/* } */
 
 .container-dropdown-notifications{
     display: flex;
     justify-content: center;
     width: 300px;
     position: absolute;
-    top: 5.5%;
+    /* top: 5.5%; */
+    /* right: 5%; */
+    top: 80%;
     right: 5%;
     background-color: white;
     border: 1px solid black;

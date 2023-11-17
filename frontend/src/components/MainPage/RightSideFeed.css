@@ -6,9 +6,10 @@
     height: fit-content;
     border: none;
     border-radius: 8px;
-    position: fixed;
-    left: 75vw;
-    top: 10vh;
+    margin-top: 98px;
+    /* position: fixed; */
+    /* left: 75vw; */
+    /* top: 10vh; */
 }
 
 .container-pages, .container-friends-request,

@@ -25,6 +25,7 @@ function NavBar () {
             setShowMenu(false);
         } else {
             setShowNotifications(false);
+            setShowSearch(false);
             setShowMenu(true);
         }
     };
@@ -34,6 +35,7 @@ function NavBar () {
             setShowNotifications(false);
         } else {
             setShowMenu(false);
+            setShowSearch(false);
             setShowNotifications(true);
         }
     };
@@ -56,6 +58,8 @@ function NavBar () {
                 lastname: splitedSearch[1]
             };
             dispatch(fetchSearch(searchData));
+            setShowNotifications(false);
+            setShowMenu(false);
             setShowSearch(true);
         } else if (splitedSearch.length === 1 && splitedSearch[0] !== "") {
             let searchData = {
@@ -63,6 +67,8 @@ function NavBar () {
                 lastname: ''
             };
             dispatch(fetchSearch(searchData));
+            setShowNotifications(false);
+            setShowMenu(false);
             setShowSearch(true);
         } else if(splitedSearch.length === 1 && splitedSearch[0] === ""){
             let searchData = {
@@ -70,6 +76,8 @@ function NavBar () {
                 lastname: "999abbbs"
             };
             dispatch(fetchSearch(searchData));
+            setShowNotifications(false);
+            setShowMenu(false);
             setShowSearch(false);
         }
     }, [searchText]);
@@ -84,7 +92,7 @@ function NavBar () {
                 <Link id='link-main' to='/'>
                     <img src={image} alt='' id='img-main'/>
                 </Link>
-                <div>
+                <div className='dropdown-search-navbar' style={{ textAlign: 'right' }}>
                     <i className="fa-solid fa-magnifying-glass" id='img-search-navbar'></i>
                     <input type='text'
                         id='input-search-navbar'
@@ -113,7 +121,7 @@ function NavBar () {
             </div>
 
             <div className='right-side-nav'>
-                <div className='dropdown-notifications-navbar'>
+                <div className='dropdown-notifications-navbar' style={{ textAlign: 'right'}}>
                     <button id='button-notifications-navbar' onClick={openNotifications}>
                         <i className="fa-solid fa-bell" id='img-notifications-navbar'></i>
                     </button>
@@ -121,7 +129,6 @@ function NavBar () {
                 { showNotifications && (
                     <div className='container-dropdown-notifications'>
                         <AllNotifications notifications={notifications} closeNotification={setShowNotifications} />
-                        {/* ADD word-wrap: break-word; IN NOTIFICATION BOX*/}
                     </div>
                 )}
                 <div id='dropdown-navbar' style={{ textAlign: 'right' }}>

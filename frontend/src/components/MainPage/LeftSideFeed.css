@@ -8,9 +8,10 @@
     border: none;
     padding: 10px;
     border-radius: 8px;
-    position: fixed;
-    left: 15vw;
-    top: 10vh;
+    margin-top: 98px;
+    /* position: fixed; */
+    /* left: 15vw;
+    top: 10vh; */
 }
 
 #button-profile, #button-groups, #button-market, 

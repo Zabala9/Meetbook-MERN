@@ -1,0 +1,37 @@
+.container-dropdown-search{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 246px;
+    padding: 5px;
+    justify-content: center;
+    position: absolute;
+    top: 72%;
+    left: 6%;
+}
+
+.container-each-search-rsl{
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.left-side-search-rsl{
+    margin-left: 30px;
+}
+
+#img-user-search-rsl{
+    width: 40px;
+    height: 40px;
+}
+
+.right-side-search-rsl{
+    margin-left: 20px;
+}
+
+#name-user-search-rsl{
+    font-size: 20px;
+    font-weight: bold;
+}
