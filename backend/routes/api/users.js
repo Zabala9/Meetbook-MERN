@@ -41,7 +41,7 @@ router.get('/current', restoreUser, (req, res) => {
 
 // Search route
 router.get('/search', async(req, res, next) => {
-  const { name, lastname } = req.body;
+  const { name, lastname } = req.query;
   try {
     let users;
     if (!lastname){

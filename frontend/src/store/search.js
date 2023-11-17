@@ -22,12 +22,10 @@ export const clearSearchErrors = errors => ({
 
 export const fetchSearch = (data) => async dispatch => {
     try {
-        // const { name, lastname } = data;
+        // console.log(data, 'data search');
+        const { name, lastname } = data;
 
-        const res = await jwtFetch('/api/users/search/', {
-            method: "GET",
-            body: data
-        });
+        const res = await jwtFetch(`/api/users/search?name=${name}&lastname=${lastname}`);
         const users = await res.json();
         dispatch(receiveSearch(users));
     } catch (err) {
@@ -35,3 +33,16 @@ export const fetchSearch = (data) => async dispatch => {
         if (resBody.statusCode === 400) dispatch(receiveErrors(resBody.errors));
     }
 };
+
+const searchReducer = (state = { all: {} }, action) => {
+    switch(action.type){
+        case RECEIVE_SEARCH:
+            return {...state, all: action.users };
+        case RECEIVE_USER_LOGOUT:
+            return { ...state };
+        default:
+            return state;
+    }
+};
+
+export default searchReducer;

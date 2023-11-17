@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { fetchNotifications } from '../../store/notifications';
+import { fetchSearch } from '../../store/search';
 import image from '../../assets/logo.jpg';
 import AllNotifications from '../Notifications/AllNotifications';
 import './NavBar.css';
@@ -41,6 +42,34 @@ function NavBar () {
         history.push(path);
     };
 
+    const updateSearch = e => setSearchText(e.currentTarget.value);
+
+    useEffect(() => {
+        const splitedSearch = searchText.split(' ');
+
+        if(splitedSearch.length > 1){
+            let searchData = {
+                name: splitedSearch[0],
+                lastname: splitedSearch[1]
+            };
+            dispatch(fetchSearch(searchData));
+        } else if (splitedSearch.length === 1 && splitedSearch[0] !== "") {
+            let searchData = {
+                name: splitedSearch[0],
+                lastname: ''
+            };
+            dispatch(fetchSearch(searchData));
+        } else if(splitedSearch.length === 1 && splitedSearch[0] === ""){
+            let searchData = {
+                name: "999",
+                lastname: "999"
+            };
+            dispatch(fetchSearch(searchData));
+        }
+
+        console.log(splitedSearch, 'splited');
+    }, [searchText]);
+
     useEffect(() => {
         dispatch(fetchNotifications(user._id));
     }, [showNotifications]);
@@ -55,6 +84,8 @@ function NavBar () {
                     <i className="fa-solid fa-magnifying-glass" id='img-search-navbar'></i>
                     <input type='text'
                         id='input-search-navbar'
+                        placeholder='Search Meetbook'
+                        onChange={updateSearch}
                     />
                 </div>
             </div>

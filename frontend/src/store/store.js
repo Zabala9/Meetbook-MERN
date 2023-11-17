@@ -7,6 +7,7 @@ import comments from './comments';
 import postLikes from './postLikes';
 import notifications from './notifications';
 import savePosts from './savePosts';
+import search from './search';
 
 const rootReducer = combineReducers({
   session,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   postLikes,
   notifications,
   savePosts,
+  search,
   errors
 });
 
