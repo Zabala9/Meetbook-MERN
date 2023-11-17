@@ -6,6 +6,7 @@ import { fetchNotifications } from '../../store/notifications';
 import { fetchSearch } from '../../store/search';
 import image from '../../assets/logo.jpg';
 import AllNotifications from '../Notifications/AllNotifications';
+import Search from '../Search/Search';
 import './NavBar.css';
 
 function NavBar () {
@@ -13,9 +14,11 @@ function NavBar () {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
     const [searchText, setSearchText] = useState("");
     const user = useSelector(state => state.session.user);
     const notifications = useSelector(state => Object.values(state.notifications.all));
+    const usersSearch = useSelector(state => Object.values(state.search.all));
 
     const openMenu = () => {
         if(showMenu){
@@ -53,21 +56,22 @@ function NavBar () {
                 lastname: splitedSearch[1]
             };
             dispatch(fetchSearch(searchData));
+            setShowSearch(true);
         } else if (splitedSearch.length === 1 && splitedSearch[0] !== "") {
             let searchData = {
                 name: splitedSearch[0],
                 lastname: ''
             };
             dispatch(fetchSearch(searchData));
+            setShowSearch(true);
         } else if(splitedSearch.length === 1 && splitedSearch[0] === ""){
             let searchData = {
-                name: "999",
-                lastname: "999"
+                name: "999abbbs",
+                lastname: "999abbbs"
             };
             dispatch(fetchSearch(searchData));
+            setShowSearch(false);
         }
-
-        console.log(splitedSearch, 'splited');
     }, [searchText]);
 
     useEffect(() => {
@@ -88,6 +92,9 @@ function NavBar () {
                         onChange={updateSearch}
                     />
                 </div>
+                {showSearch && (
+                    <Search usersSearch={usersSearch} />
+                )}
             </div>
 
             <div className='middle-side-nav'>
