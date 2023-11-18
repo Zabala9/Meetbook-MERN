@@ -68,8 +68,15 @@ router.get('/:userId', async (req, res, next) => {
   try{
     const { userId } = req.params;
 
-    const user = await User.findById(userId);
-                        //  .populate("author", "_id name lastname profileImageUrl");
+    const user = await User.findById(userId)
+                           .select('-hashedPassword -createdAt -updatedAt -__v');
+
+    if(!user){
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    console.log(user);
+  
     return res.json(user);
   } catch(err){
     next(err);

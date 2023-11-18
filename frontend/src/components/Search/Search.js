@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './Search.css';
 
 function Search({ usersSearch, closeSearch, searchText }){
     const history = useHistory();
+    const currentUserId = useSelector(state => state.session.user._id);
     const maxUsersToShow = 4;
 
     // Determine the number of users to display (its selecting a number between max and length)
@@ -11,9 +13,14 @@ function Search({ usersSearch, closeSearch, searchText }){
     const displayedUsers = usersSearch.slice(0, numUsersToDisplay);
 
     const goToProfileSearch = (_id) => {
-        let path = `/profile/${_id}`;
         closeSearch(false);
-        history.push(path);
+        if(_id === currentUserId){
+            let path = '/profile';
+            history.push(path);
+        } else{
+            let path = `/profile/${_id}`;
+            history.push(path);
+        }
     };
 
     return (

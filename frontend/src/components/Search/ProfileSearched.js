@@ -12,9 +12,9 @@ function ProfileSearched(){
     const userPosts = useSelector(state => Object.values(state.posts.user));
 
     useEffect(() => {
-        // dispatch(fetchSingleSearch(userId));
+        dispatch(fetchSingleSearch(userId));
         // dispatch(fetchUserPosts(userId));
-    }, [dispatch]);
+    }, []);
 
     return (
         <div className='container-profile-searched'>

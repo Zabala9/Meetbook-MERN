@@ -43,7 +43,7 @@ export const fetchSearch = (data) => async dispatch => {
 export const fetchSingleSearch = (userId) => async dispatch => {
     try{
         const res = await jwtFetch(`/api/users/${userId}`);
-        const user = res.json();
+        const user = await res.json();
         dispatch(receiveSingleSearch(user));
     } catch (err){
         const resBody = await err.json();
