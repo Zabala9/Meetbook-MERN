@@ -63,6 +63,19 @@ router.get('/search', async(req, res, next) => {
   }
 });
 
+// GET to user clicked on search
+router.get('/:userId', async (req, res, next) => {
+  try{
+    const { userId } = req.params;
+
+    const user = await User.findById(userId);
+                        //  .populate("author", "_id name lastname profileImageUrl");
+    return res.json(user);
+  } catch(err){
+    next(err);
+  }
+});
+
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the email
   const user = await User.findOne({
