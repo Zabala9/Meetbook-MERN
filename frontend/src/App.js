@@ -12,6 +12,7 @@ import Market from './components/Market/Market';
 import Games from './components/Games/Games';
 import SavePosts from './components/SavePosts/SavePosts';
 import PostShow from './components/Posts/PostShow';
+import ProfileSearched from './components/Search/ProfileSearched';
 
 import { getCurrentUser } from './store/session';
 
@@ -36,6 +37,7 @@ function App() {
         <ProtectedRoute exact path="/games" component={Games} />
         <ProtectedRoute exact path="/saved" component={SavePosts} />
         <ProtectedRoute exact path="/post/:postId" component={PostShow} />
+        <ProtectedRoute exact path="/profile/:userId" component={ProfileSearched} />
       </Switch>
     </>
   );
