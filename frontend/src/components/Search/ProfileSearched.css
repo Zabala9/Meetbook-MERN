@@ -1,4 +1,116 @@
 .container-profile-searched{
-    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     margin-top: 100px;
 }
+
+.container-top-profile-searched{
+    background-color: white;
+    width: 50%;
+    padding: 10px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-top-profile-searched{
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+#img-profile-searched{
+    border-radius: 100px;
+    width: 120px;
+    height: 120px;
+}
+
+#label-name-profile-searched{
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.right-top-profile-searched{
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+#button-add-friend{
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 50px;
+    transition: 0.5s;
+}
+
+#button-add-friend:hover{
+    cursor: pointer;
+    background-color: #8ec2a1;
+    transition: 0.5s;
+}
+
+#img-add-friend{
+    margin-right: 5px;
+}
+
+.container-bottom-profile-searched{
+    margin-top: 20px;
+    display: flex;
+}
+
+.left-bottom-profile-searched{
+    padding: 5px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+#container-bio-profile-searched{
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+#divider-bio-profile-searched{
+    background: none;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid rgb(171, 171, 171);
+    margin-bottom: 15px;
+}
+
+#label-city-profile-searched{
+    margin-bottom: 10px;
+}
+
+#bio-user-profile-searched{
+    display: flex;
+    justify-content: center;
+}
+
+#img-live-profile-searched, #img-status-profile-searched{
+    margin-right: 5px;
+    color: rgb(134, 134, 134);
+}
+
+#label-city-inside-profile-searched{
+    font-weight: bold;
+}
+
+.container-friends-profile-searched{
+    border-radius: 8px;
+    background-color: white;
+    padding: 5px;
+}
+
+#title-friends-profile-searched, #title-intro-profile-searched{
+    font-size: 20px;
+    font-weight: bold;
+}
+

@@ -15,7 +15,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
     const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
     const [time, setTime] = useState('');
 
-    // console.log(post._id, 'post');
+    console.log(post, 'post');
 
     const commentsPost = comments.map((comment) => {
         if (comment.parentPost === post._id) return comment;
@@ -60,7 +60,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
     }, [postTime]);
 
     return (
-        <>
+        <>  {/* añadir && para mostrar post con priv en only me solo si el creador es el mismo que esta conectado */}
             { location === '/feed' && post.privacy === 'only me' ? undefined :
                 location === '/feed' && (post.privacy === 'friends' || post.privacy === 'public') ? 
                 <div className='container-post'>
@@ -155,7 +155,57 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                             
                         </div> */}
                         <CommentCompose parentPost={post._id} />
-                    </div> : undefined
+                    </div>
+
+                    // añadir si son amigos para mostrar el post
+                : (post.privacy === 'public' || post.privacy === 'friends') ?
+                <div className='container-post'>
+                    <div className='container-post-info'>
+                        <label id='label-name-postbox'>
+                            <Link to='/'>
+                                <img id='profile-image' src={profileImageUrl} alt='' />
+                            </Link>
+                            <div className='container-name-privacy-postbox'>
+                                <Link id='name-user-postbox' to='/'>{name + ' ' + lastname}</Link>
+                                <div className='container-time-privacy'>
+                                    <label id='time-post-box'>{time}</label>
+                                    <label id='privacy-postbox'>
+                                        {post.privacy === 'public' ? <i className="fa-solid fa-earth-americas" id='img-public-privacy-postbox'></i> :
+                                            post.privacy === 'friends' ? <i className="fa-solid fa-user-group" id='img-friends-privacy-postbox'></i> : 
+                                            post.privacy === 'only me' ? <i className="fa-solid fa-lock" id='img-onlyme-privacy-postbox'></i> : undefined
+                                        }
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
+                        <PostButton userId={_id} post={post} saved={savedPosts} />
+                    </div>
+                    <div id='container-text-post-postbox'>
+                        <p id='label-text-post' >{post.text}</p>
+                    </div>
+                    <div id='container-images-postbox'>
+                        {images}
+                    </div>
+                    {likesPost.length > 0 ?
+                        <label id='label-post-likes-counter'>{likesPost.length} likes</label> 
+                        : undefined
+                    }
+                    <button id='divider-two-post-box'></button>
+                    <div className='container-labels-postbox'>
+                        <PostLikesCompose postId={post._id} />
+                        {commentsPost.length > 0 ?
+                            <button id='label-comments-postbox' onClick={goToPostShow}>{commentsPost.length} comments</button>
+                            : <button id='label-comments-postbox' onClick={goToPostShow}>comments</button>
+                        }
+                        <button id='label-shares-postbox'>shares</button>
+                    </div>
+                    <button id='divider-post-box'></button>
+                    {/* <div className='container-button-showpost'>
+
+                    </div> */}
+                    <CommentCompose parentPost={post._id} />
+                </div>
+                : undefined
             }
         </>
     );
