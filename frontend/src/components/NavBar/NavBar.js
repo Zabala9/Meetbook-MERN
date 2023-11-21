@@ -98,6 +98,7 @@ function NavBar () {
                         id='input-search-navbar'
                         placeholder='Search Meetbook'
                         onChange={updateSearch}
+                        autoComplete='off'
                     />
                 </div>
                 {showSearch && (
