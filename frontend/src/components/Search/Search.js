@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { createNotification } from '../../store/notifications';
 import './Search.css';
 
 function Search({ usersSearch, closeSearch, searchText }){
     const history = useHistory();
+    const dispatch = useDispatch();
     const currentUserId = useSelector(state => state.session.user._id);
     const maxUsersToShow = 4;
+    const description = " has saw your profile.";
 
     // Determine the number of users to display (its selecting a number between max and length)
     const numUsersToDisplay = Math.min(maxUsersToShow, usersSearch.length);

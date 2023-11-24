@@ -15,8 +15,6 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
     const finalTimeSlide = slideTime[0] + ' ' + secondSlide[0];
     const [time, setTime] = useState('');
 
-    console.log(post, 'post');
-
     const commentsPost = comments.map((comment) => {
         if (comment.parentPost === post._id) return comment;
         return null;
