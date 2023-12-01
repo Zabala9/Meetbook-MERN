@@ -8,22 +8,31 @@ import EditPost from './EditPost';
 import EditPrivacy from './EditPrivacy';
 import './PostButton.css';
 
-function PostButton({ userId, post, saved }){
+function PostButton({ userId, post }){
     const [showMenu, setShowMenu] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [showModalPrivacy, setShowModalPrivacy] = useState(false);
+    const [labelButton, setLabelButton] = useState('');
+    // const [postSaved, setPostSaved] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const savedPosts = useSelector(state => Object.values(state.savePosts.all));
     const currentLocation = window.location.pathname;
     const history = useHistory();
-    const body = document.body;  
-    
-    const postSaved = saved.find((postSave) => postSave.postInformation._id === post._id);
+    const body = document.body;
+
+    const postSaved = savedPosts.find((postSave) => postSave.postInformation._id === post._id);
 
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     };
+
+    useEffect(() => {
+        if(postSaved) {
+            setLabelButton('Unsave');
+        } else { setLabelButton('Save'); }
+    }, [postSaved]);
 
     useEffect(() => {
         if(!showMenu) return;
@@ -75,14 +84,35 @@ function PostButton({ userId, post, saved }){
         body.style.overflow = 'scroll';
     }
 
-    if (user._id === userId) return (
-        <>
-            {showModalUpdate && (
-                <Modal component={<EditPost closeModal={setShowModalUpdate} post={post} />} />
-            )}
-            {showModalPrivacy && (
-                <Modal component={<EditPrivacy closeModal={setShowModalPrivacy} post={post} />}  />
-            )}
+    if (user._id === userId) {
+        return (
+            <>
+                {showModalUpdate && (
+                    <Modal component={<EditPost closeModal={setShowModalUpdate} post={post} />} />
+                )}
+                {showModalPrivacy && (
+                    <Modal component={<EditPrivacy closeModal={setShowModalPrivacy} post={post} />}  />
+                )}
+                <div>
+                    <div className='dropdown-post' style={{ textAlign: 'right' }}>
+                        <button id='button-post' onClick={openMenu}>
+                            <i className="fa-solid fa-ellipsis" id='img-button-post'></i>
+                        </button>
+                    </div>
+                    { showMenu && (
+                        <div className='dropdown-content-post'>
+                            <button id='save-button-post' onClick={savePost}>{ labelButton }</button>
+                            <button id='divider-post'></button>
+                            <button id='edit-button-post' onClick={update}>Edit post</button>
+                            <button id='edit-privacy-button-post' onClick={updatePrivacy}>Edit privacy</button>
+                            <button id='delete-button-post' onClick={remove}>Delete post</button>
+                        </div>
+                    )}
+                </div>
+            </>
+        )
+    } else {
+        return (
             <div>
                 <div className='dropdown-post' style={{ textAlign: 'right' }}>
                     <button id='button-post' onClick={openMenu}>
@@ -90,20 +120,13 @@ function PostButton({ userId, post, saved }){
                     </button>
                 </div>
                 { showMenu && (
-                    <div className='dropdown-content-post'>
-                        { postSaved ?
-                            <button id='save-button-post' onClick={savePost}>Unsave</button> :
-                            <button id='save-button-post' onClick={savePost}>Save</button>
-                        }
-                        <button id='divider-post'></button>
-                        <button id='edit-button-post' onClick={update}>Edit post</button>
-                        <button id='edit-privacy-button-post' onClick={updatePrivacy}>Edit privacy</button>
-                        <button id='delete-button-post' onClick={remove}>Delete post</button>
+                    <div className='dropdown-content-post2'>
+                        <button id='save-button-post' onClick={savePost}>{ labelButton }</button>
                     </div>
                 )}
             </div>
-        </>
-    )
+        )
+    }
 };
 
 export default PostButton;

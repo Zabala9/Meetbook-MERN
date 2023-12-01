@@ -5,7 +5,7 @@ import CommentCompose from '../Comments/CommentCompose';
 import PostLikesCompose from '../PostLikes/PostLikesCompose';
 import './PostBox.css';
 
-function PostBox ({ post, comments, postLikes, savedPosts }) {
+function PostBox ({ post, comments, postLikes }) {
     const { name, lastname, profileImageUrl, _id } = post.author;
     const location = window.location.pathname;
     const history = useHistory();
@@ -80,7 +80,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                                 </div>
                             </div>
                         </label>
-                        <PostButton userId={_id} post={post} saved={savedPosts} />
+                        <PostButton userId={_id} post={post} />
                     </div>
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
@@ -127,7 +127,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                                     </div>
                                 </div>
                             </label>
-                            <PostButton userId={_id} post={post} saved={savedPosts} />
+                            <PostButton userId={_id} post={post} />
                         </div>
                         <div id='container-text-post-postbox'>
                             <p id='label-text-post' >{post.text}</p>
@@ -176,7 +176,7 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                                 </div>
                             </div>
                         </label>
-                        <PostButton userId={_id} post={post} saved={savedPosts} />
+                        <PostButton userId={_id} post={post} />
                     </div>
                     <div id='container-text-post-postbox'>
                         <p id='label-text-post' >{post.text}</p>
