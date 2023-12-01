@@ -13,7 +13,6 @@ function PostButton({ userId, post }){
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [showModalPrivacy, setShowModalPrivacy] = useState(false);
     const [labelButton, setLabelButton] = useState('');
-    // const [postSaved, setPostSaved] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const savedPosts = useSelector(state => Object.values(state.savePosts.all));
