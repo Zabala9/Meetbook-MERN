@@ -64,11 +64,11 @@ function PostBox ({ post, comments, postLikes, savedPosts }) {
                 <div className='container-post'>
                     <div className='container-post-info'>
                         <label id='label-name-postbox'>
-                            <Link to='/'>
+                            <Link to={`/profile/${_id}`}>
                                 <img id='profile-image' src={profileImageUrl} alt='' />
                             </Link>
                             <div className='container-name-privacy-postbox'>
-                                <Link id='name-user-postbox' to='/'>{name + ' ' + lastname}</Link>
+                                <Link id='name-user-postbox' to={`/profile/${_id}`}>{name + ' ' + lastname}</Link>
                                 <div className='container-time-privacy'>
                                     <label id='time-post-box'>{time}</label>
                                     <label id='privacy-postbox'>

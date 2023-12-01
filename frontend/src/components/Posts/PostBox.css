@@ -32,6 +32,10 @@
     flex-direction: column;
 }
 
+#name-user-postbox, #name-user-postbox:visited{
+    color: black;
+}
+
 #name-user-postbox:hover{
     cursor: pointer;
     text-decoration: underline;
