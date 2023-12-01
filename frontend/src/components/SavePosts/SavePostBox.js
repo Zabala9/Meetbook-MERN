@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deleteSavePost } from '../../store/savePosts';
 import './SavePostBox.css';
@@ -6,6 +6,7 @@ import './SavePostBox.css';
 function SavePostBox({ post }){
     const dispatch = useDispatch();
     const history = useHistory();
+    const userInfo = useSelector(state => state.session.user);
     const postInformation = post.postInformation;
     const authorInformation = post.author;
     const authorPostInformation = post.postInformation.author;
@@ -19,6 +20,17 @@ function SavePostBox({ post }){
         e.preventDefault();
         let path = `/post/${postInformation._id}`;
         history.push(path);
+    };
+
+    const goToUserProfile = e => {
+        e.preventDefault();
+        if (authorPostInformation._id === userInfo._id){
+            let path = '/profile';
+            history.push(path);
+        } else {
+            let path = `/profile/${authorPostInformation._id}`
+            history.push(path);
+        }
     };
 
     return(
@@ -37,7 +49,7 @@ function SavePostBox({ post }){
                     <label id='label-post-save-post-box'>Post</label>
                     <label id='label-saved-from'>Saved from
                         {authorPostInformation ? 
-                            <label id='label-save-from-inside'>{authorPostInformation.name + " " + authorPostInformation.lastname}'s post</label>
+                            <label id='label-save-from-inside' onClick={goToUserProfile}>{authorPostInformation.name + " " + authorPostInformation.lastname}'s post</label>
                             : undefined
                         }
                     </label>
