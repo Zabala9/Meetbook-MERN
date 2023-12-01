@@ -66,6 +66,7 @@
     padding: 5px;
     border-radius: 8px;
     margin-right: 20px;
+    width: 230px;
 }
 
 #container-bio-profile-searched{
@@ -75,14 +76,6 @@
     background-color: white;
     padding: 10px;
     margin-bottom: 50px;
-}
-
-#divider-bio-profile-searched{
-    background: none;
-    cursor: default;
-    border: none;
-    border-bottom: 1px solid rgb(171, 171, 171);
-    margin-bottom: 15px;
 }
 
 #label-city-profile-searched{

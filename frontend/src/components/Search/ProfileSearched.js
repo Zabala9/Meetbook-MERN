@@ -44,7 +44,6 @@ function ProfileSearched(){
                         { userInformation.bio !== '' ? <p id='bio-user-profile-searched'>{userInformation.bio}</p>
                             : undefined
                         }
-                        <button id='divider-bio-profile-searched'></button>
                         { userInformation.city !== '' ?
                             <label id='label-city-profile-searched'>
                                 <i className="fa-solid fa-house-chimney-window" id='img-live-profile-searched'></i>
