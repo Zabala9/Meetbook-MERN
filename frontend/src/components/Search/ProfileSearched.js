@@ -15,6 +15,7 @@ function ProfileSearched(){
     const comments = useSelector(state => Object.values(state.comments.all));
     const postLikes = useSelector(state => Object.values(state.postLikes.all));
     const savedPosts = useSelector(state => Object.values(state.savePosts.all));
+    // const friends = useSelecter(state => Object.values(state.friends.all));
 
     useEffect(() => {
         dispatch(fetchUserPosts(userId));
