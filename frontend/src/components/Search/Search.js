@@ -26,6 +26,12 @@ function Search({ usersSearch, closeSearch, searchText }){
         }
     };
 
+    const goToSearchComplete = () => {
+        closeSearch(false);
+        let path = `/search`;
+        history.push(path);
+    };
+
     return (
         <div className='container-dropdown-search'>
             {displayedUsers.map((userSearch) => (
@@ -38,7 +44,7 @@ function Search({ usersSearch, closeSearch, searchText }){
                     </div>
                 </div>
             ))}
-            <button id='button-all-search'>
+            <button id='button-all-search' onClick={goToSearchComplete}>
                 <i className="fa-solid fa-magnifying-glass" id='img-search-all-rsl'></i>
                 <label id='label-search-for'>Search for <label>{searchText}</label> </label>
             </button>
