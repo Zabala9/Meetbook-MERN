@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { updateNotification } from '../../store/notifications';
+import { updateNotification, createNotification } from '../../store/notifications';
 import NotificationButton from './NotificationButton';
 import './NotificationBox.css';
 
@@ -8,6 +8,7 @@ function NotificationBox({ notification, closeNotification }){
     const history = useHistory();
     const dispatch = useDispatch();
     const { name, lastname, profileImageUrl, _id } = notification.author;
+    const description = " has saw your profile.";
     let parentPost = '';
 
     if(notification.parentPost){
@@ -24,6 +25,11 @@ function NotificationBox({ notification, closeNotification }){
             let path = `/post/${parentPost}`;
             history.push(path);
         } else {
+            let notification = {
+                recipient: _id,
+                description
+            }
+            dispatch(createNotification(notification));
             let path = `/profile/${_id}`;
             history.push(path);
         }
