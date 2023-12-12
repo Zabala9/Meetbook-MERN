@@ -21,6 +21,11 @@ function Search({ usersSearch, closeSearch, searchText }){
             let path = '/profile';
             history.push(path);
         } else{
+            let notification = {
+                recipient: _id,
+                description,
+            }
+            dispatch(createNotification(notification));
             let path = `/profile/${_id}`;
             history.push(path);
         }

@@ -8,7 +8,11 @@ function NotificationBox({ notification, closeNotification }){
     const history = useHistory();
     const dispatch = useDispatch();
     const { name, lastname, profileImageUrl, _id } = notification.author;
-    const parentPost = notification.parentPost._id;
+    let parentPost = '';
+
+    if(notification.parentPost){
+        parentPost = notification.parentPost._id;
+    }
     
     const goToPostShow = () => {
         const changeReadNoti = {
@@ -16,8 +20,13 @@ function NotificationBox({ notification, closeNotification }){
             read: true,
         }
         dispatch(updateNotification(changeReadNoti));
-        let path = `/post/${parentPost}`;
-        history.push(path);
+        if(parentPost !== ""){
+            let path = `/post/${parentPost}`;
+            history.push(path);
+        } else {
+            let path = `/profile/${_id}`;
+            history.push(path);
+        }
         closeNotification(false);
     };
 
