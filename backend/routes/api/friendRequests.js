@@ -30,3 +30,27 @@ router.get('/:userId', async (req, res, next) => {
         return res.json([]);
     }
 });
+
+router.post('/', requireUser, async (req, res, next) => {
+    const { receiver, status } = req.body;
+
+    try{
+        const newFriendRequest = new FriendRequest({
+            requester: req.user._id,
+            receiver: receiver,
+            status: status
+        });
+
+        let friendRequest = await newFriendRequest.save();
+        friendRequest = await friendRequest.populate("requester", "_id name lastname profileImageUrl");
+        return res.json(friendRequest);
+    } catch (err){
+        next(err);
+    }
+});
+
+// patch
+
+// delete
+
+module.exports = router;
