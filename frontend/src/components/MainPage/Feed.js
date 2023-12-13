@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { fetchNotifications } from '../../store/notifications';
 import { fetchSavePost } from '../../store/savePosts';
+import { fetchFriendRequests, fetchFriendRequestsSent } from '../../store/friendRequests';
 import LeftSideFeed from './LeftSideFeed';
 import RightSideFeed from './RightSideFeed';
 import AllPosts from '../Posts/AllPosts';
@@ -37,6 +38,8 @@ function Feed () {
     useEffect(() => {
         dispatch(fetchNotifications(user._id));
         dispatch(fetchSavePost(user._id));
+        // dispatch(fetchFriendRequests(user._id));
+        dispatch(fetchFriendRequestsSent(user._id));
     }, [dispatch])
 
     return (

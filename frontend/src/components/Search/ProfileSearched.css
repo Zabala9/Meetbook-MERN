@@ -47,6 +47,10 @@
     transition: 0.5s;
 }
 
+#label-button-add-friend:hover{
+    cursor: pointer;
+}
+
 #button-add-friend:hover{
     cursor: pointer;
     background-color: #8ec2a1;

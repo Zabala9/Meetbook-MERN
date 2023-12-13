@@ -31,6 +31,23 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
+router.get('/sent/:userId', async (req, res, next) => {
+    try {
+        const friendRequestsSent = await FriendRequest.find({
+            requester: req.params.userId,
+            status: 'pending'
+        }).populate("receiver", "_id name lastname profileImageUrl");
+
+        const friendRequestsSentObj = {};
+        friendRequestsSent.forEach((friendRequest) => {
+            friendRequestsSentObj[friendRequest._id] = friendRequest;
+        });
+        return res.json(friendRequestsSentObj);
+    } catch (err) {
+        return res.json([]);
+    }
+});
+
 router.post('/', requireUser, async (req, res, next) => {
     const { receiver, status } = req.body;
 

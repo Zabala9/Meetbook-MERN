@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
 import { fetchAllComments } from '../../store/comments';
+import { createFriendRequest } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
 
@@ -16,6 +17,15 @@ function ProfileSearched(){
     const postLikes = useSelector(state => Object.values(state.postLikes.all));
     const savedPosts = useSelector(state => Object.values(state.savePosts.all));
     // const friends = useSelecter(state => Object.values(state.friends.all));
+
+    const addFriend = e => {
+        e.preventDefault();
+        const friendRequest = {
+            receiver: userId,
+            status: 'pending'
+        }
+        dispatch(createFriendRequest(friendRequest));
+    };
 
     useEffect(() => {
         dispatch(fetchUserPosts(userId));
@@ -31,10 +41,10 @@ function ProfileSearched(){
                     <label id='label-name-profile-searched'>{userInformation.name + " " + userInformation.lastname}</label>
                 </div>
                 <div className='right-top-profile-searched'>
-                    <button id='button-add-friend'>
+                    <button id='button-add-friend' onClick={addFriend}>
                         <i className="fa-solid fa-user-plus" id='img-add-friend'></i>
-                        Add as a friend
-                        {/* check if is a friend al ready and change the text */}
+                        <label id='label-button-add-friend'>Add as a friend</label>
+                        {/* check if is a friend al ready and change the text and functions*/}
                     </button>
                 </div>
             </div>
