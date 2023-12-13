@@ -24,10 +24,20 @@ function ProfileSearched(){
     // const friends = useSelecter(state => Object.values(state.friends.all));
     const description = " sent you a friend request.";
 
+    useEffect(() => {
+        const requestExists = friendRequests.some(request => request.receiver._id === userId);
+        if(friendRequest !== requestExists) {
+            setFriendRequest(requestExists);
+            localStorage.setItem('friendRequest', requestExists ? 'true' : 'false');
+        }
+    }, [friendRequests, userId, friendRequest]);
+
     const addFriend = e => {
         e.preventDefault();
         if (friendRequest){
             console.log('delete');
+            setFriendRequest(false);
+            localStorage.setItem('friendRequest', 'false');
         } else {
             const friendRequest = {
                 receiver: userId,
