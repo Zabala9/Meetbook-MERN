@@ -24,6 +24,7 @@ function PostLikesCompose({ postId }){
             parentPost: postId,
             recipient: postInfo.author._id,
             description,
+            notificationType: 'like',
         };
         
         if(filteredLikedPost.length === 0){

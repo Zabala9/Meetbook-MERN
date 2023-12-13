@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { updateNotification } from '../../store/notifications';
+import { updateNotification, createNotification } from '../../store/notifications';
 import NotificationButton from './NotificationButton';
 import './NotificationBox.css';
 
@@ -8,7 +8,14 @@ function NotificationBox({ notification, closeNotification }){
     const history = useHistory();
     const dispatch = useDispatch();
     const { name, lastname, profileImageUrl, _id } = notification.author;
-    const parentPost = notification.parentPost._id;
+    const description = " has saw your profile.";
+    let parentPost = '';
+
+    // console.log(notification, 'not');
+
+    if(notification.parentPost){
+        parentPost = notification.parentPost._id;
+    }
     
     const goToPostShow = () => {
         const changeReadNoti = {
@@ -16,14 +23,24 @@ function NotificationBox({ notification, closeNotification }){
             read: true,
         }
         dispatch(updateNotification(changeReadNoti));
-        let path = `/post/${parentPost}`;
-        history.push(path);
+        if(parentPost !== ""){
+            let path = `/post/${parentPost}`;
+            history.push(path);
+        } else {
+            let notification = {
+                recipient: _id,
+                description
+            }
+            dispatch(createNotification(notification));
+            let path = `/profile/${_id}`;
+            history.push(path);
+        }
         closeNotification(false);
     };
 
     return(
         <div className='container-notification-box'
-            style={{ backgroundColor: notification.read === false ? "#78a7a9" : "" }}
+            style={{ backgroundColor: notification.read === false ? "#a6cfb5" : "" }}
         >
             <div className='left-side-notification-box' onClick={goToPostShow}>
                 <img src={profileImageUrl} alt='' id='img-user-notification' />
@@ -31,6 +48,15 @@ function NotificationBox({ notification, closeNotification }){
             <div className='right-side-notification-box' onClick={goToPostShow}>
                 <label id='label-name-notification'>{name + " " + lastname}</label>
                 <label id='label-description-notification'>{notification.description}</label>
+
+                { notification.notificationType === 'request' ?
+                    <div className='container-buttons-request'>
+                        <button id='button-confirm-request'>Confirm</button>
+                        <button id='button-delete-request'>Delete</button>
+                    </div>
+                    :
+                    undefined
+                }
             </div>
             <div className='container-notification-button-1'>
                 <NotificationButton notificationId={notification._id} />

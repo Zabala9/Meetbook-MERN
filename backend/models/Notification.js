@@ -15,6 +15,11 @@ const notificationSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "User",
         },
+        notificationType: {
+            type: String,
+            enum: ['comment', 'like', 'visit', 'request'],
+            require: true
+        },
         description: {
             type: String,
             require: true,

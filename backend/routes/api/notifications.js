@@ -23,15 +23,27 @@ router.get('/:userId', async (req, res, next) => {
 });
 
 router.post('/', requireUser, async (req, res, next) => {
-    const { parentPost, recipient, description } = req.body;
+    const { parentPost, recipient, description, notificationType } = req.body;
 
     try{
-        const newNotification = new Notification({
-            author: req.user._id,
-            parentPost: parentPost,
-            recipient: recipient,
-            description: description,
-        });
+        let newNotification;
+
+        if (parentPost) {
+            newNotification = new Notification({
+                author: req.user._id,
+                parentPost: parentPost,
+                recipient: recipient,
+                description: description,
+                notificationType: notificationType
+            });
+        } else {
+            newNotification  = new Notification({
+                author: req.user._id,
+                recipient: recipient,
+                description: description,
+                notificationType: notificationType
+            });
+        }
 
         let notification = await newNotification.save();
         notification = await notification.populate("author", "_id name lastname profileImageUrl");
