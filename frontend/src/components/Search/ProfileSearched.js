@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
 import { fetchAllComments } from '../../store/comments';
+import { createNotification } from '../../store/notifications';
 import { createFriendRequest } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
@@ -11,20 +12,37 @@ import "./ProfileSearched.css";
 function ProfileSearched(){
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const [friendRequest, setFriendRequest] = useState(
+        localStorage.getItem('friendRequest') === 'true'
+    );
     const userInformation = useSelector(state => state.search.single);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const comments = useSelector(state => Object.values(state.comments.all));
     const postLikes = useSelector(state => Object.values(state.postLikes.all));
     const savedPosts = useSelector(state => Object.values(state.savePosts.all));
+    const friendRequests = useSelector(state => Object.values(state.friendRequests.user));
     // const friends = useSelecter(state => Object.values(state.friends.all));
+    const description = " sent you a friend request.";
 
     const addFriend = e => {
         e.preventDefault();
-        const friendRequest = {
-            receiver: userId,
-            status: 'pending'
+        if (friendRequest){
+            console.log('delete');
+        } else {
+            const friendRequest = {
+                receiver: userId,
+                status: 'pending'
+            };
+            const notification = {
+                recipient: userId,
+                description,
+                notificationType: 'request',
+            };
+            dispatch(createFriendRequest(friendRequest));
+            dispatch(createNotification(notification));
+            setFriendRequest(true);
+            localStorage.setItem('friendRequest', 'true');
         }
-        dispatch(createFriendRequest(friendRequest));
     };
 
     useEffect(() => {
@@ -42,8 +60,17 @@ function ProfileSearched(){
                 </div>
                 <div className='right-top-profile-searched'>
                     <button id='button-add-friend' onClick={addFriend}>
-                        <i className="fa-solid fa-user-plus" id='img-add-friend'></i>
-                        <label id='label-button-add-friend'>Add as a friend</label>
+                        {friendRequest ?
+                            <>
+                                <i className="fa-solid fa-user-minus" id='img-cancel-friend-request'></i>
+                                <label id='label-button-add-friend'>Cancel request</label>
+                            </>
+                            :
+                            <>
+                                <i className="fa-solid fa-user-plus" id='img-add-friend'></i>
+                                <label id='label-button-add-friend'>Add as a friend</label>
+                            </>
+                        }
                         {/* check if is a friend al ready and change the text and functions*/}
                     </button>
                 </div>

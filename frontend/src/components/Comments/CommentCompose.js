@@ -26,7 +26,8 @@ function CommentCompose({ parentPost }){
         const notification = {
             parentPost,
             recipient: postInfo.author._id,
-            description
+            description,
+            notificationType: 'comment',
         };
 
         dispatch(createComment(comment, images));

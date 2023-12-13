@@ -57,7 +57,7 @@
     transition: 0.5s;
 }
 
-#img-add-friend{
+#img-add-friend, #img-cancel-friend-request{
     margin-right: 5px;
 }
 

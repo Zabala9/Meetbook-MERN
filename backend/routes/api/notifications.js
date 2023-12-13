@@ -23,7 +23,7 @@ router.get('/:userId', async (req, res, next) => {
 });
 
 router.post('/', requireUser, async (req, res, next) => {
-    const { parentPost, recipient, description } = req.body;
+    const { parentPost, recipient, description, notificationType } = req.body;
 
     try{
         let newNotification;
@@ -34,12 +34,14 @@ router.post('/', requireUser, async (req, res, next) => {
                 parentPost: parentPost,
                 recipient: recipient,
                 description: description,
+                notificationType: notificationType
             });
         } else {
             newNotification  = new Notification({
                 author: req.user._id,
                 recipient: recipient,
                 description: description,
+                notificationType: notificationType
             });
         }
 

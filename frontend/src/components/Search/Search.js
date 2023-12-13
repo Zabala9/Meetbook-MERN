@@ -24,6 +24,7 @@ function Search({ usersSearch, closeSearch, searchText }){
             let notification = {
                 recipient: _id,
                 description,
+                notificationType: 'visit',
             }
             dispatch(createNotification(notification));
             let path = `/profile/${_id}`;
