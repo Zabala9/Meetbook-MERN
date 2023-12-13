@@ -1,7 +1,7 @@
 .container-notification-box{
     display: flex;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin-bottom: 3px;
     padding: 4px;
     border-radius: 6px;
@@ -9,7 +9,8 @@
 }
 
 .container-notification-box:hover{
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    background-color: #99b9a5;
     transition: 0.5s;
 }
 
@@ -17,7 +18,7 @@
     margin-left: 10px;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 #img-user-notification{
@@ -25,21 +26,40 @@
     height: 50px;
     border: none;
     border-radius: 50px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .right-side-notification-box{
     margin-left: 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 #label-name-notification{
     font-weight: bold;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 #label-description-notification{
-    cursor: pointer;
+    /* cursor: pointer; */
+}
+
+.container-buttons-request{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#button-confirm-request, #button-delete-request{
+    font-size: 17px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px 10px;
+}
+
+#button-confirm-request{
+    background-color: #467456;
+    color: rgb(237, 237, 237);
 }
 
 /* .container-notification-button-1{

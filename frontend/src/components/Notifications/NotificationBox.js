@@ -11,6 +11,8 @@ function NotificationBox({ notification, closeNotification }){
     const description = " has saw your profile.";
     let parentPost = '';
 
+    // console.log(notification, 'not');
+
     if(notification.parentPost){
         parentPost = notification.parentPost._id;
     }
@@ -38,7 +40,7 @@ function NotificationBox({ notification, closeNotification }){
 
     return(
         <div className='container-notification-box'
-            style={{ backgroundColor: notification.read === false ? "#78a7a9" : "" }}
+            style={{ backgroundColor: notification.read === false ? "#a6cfb5" : "" }}
         >
             <div className='left-side-notification-box' onClick={goToPostShow}>
                 <img src={profileImageUrl} alt='' id='img-user-notification' />
@@ -46,6 +48,15 @@ function NotificationBox({ notification, closeNotification }){
             <div className='right-side-notification-box' onClick={goToPostShow}>
                 <label id='label-name-notification'>{name + " " + lastname}</label>
                 <label id='label-description-notification'>{notification.description}</label>
+
+                { notification.notificationType === 'request' ?
+                    <div className='container-buttons-request'>
+                        <button id='button-confirm-request'>Confirm</button>
+                        <button id='button-delete-request'>Delete</button>
+                    </div>
+                    :
+                    undefined
+                }
             </div>
             <div className='container-notification-button-1'>
                 <NotificationButton notificationId={notification._id} />
