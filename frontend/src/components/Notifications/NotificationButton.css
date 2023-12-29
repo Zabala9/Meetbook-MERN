@@ -26,6 +26,7 @@
     width: 160px;
     margin-top: 3px;
     margin-left: -140px;
+    z-index: 1000;
 }
 
 #button-mark-read-noti{
