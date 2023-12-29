@@ -45,7 +45,6 @@ function ProfileSearched(){
         if (friendRequest){
             e.preventDefault();
             const friendRequestInfo = findFriendRequest();
-            // console.log(friendRequestInfo, 'request info');
             dispatch(deleteFriendRequestSent(friendRequestInfo._id));
             setFriendRequest(false);
             localStorage.setItem('friendRequest', 'false');
