@@ -146,7 +146,7 @@ const friendRequestsReducer = (state = { all: {}, user: {}, new: undefined }, ac
             delete newState.all[action.friendRequestId];
             return {...newState, user: {...newState.user}, new: undefined};
         case RECEIVE_NEW_FRIEND_REQUEST:
-            return {...state, user: { [action.friendRequest._id]: action.friendRequest, ...state.user }, new: action.friendRequest };
+            return {...state, user: { [action.friendRequest._id]: action.friendRequest, ...state.user } };
         case RECEIVE_USER_LOGOUT:
             return {...state, new: undefined };
         default:

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
+import { fetchAllPostLikes } from '../../store/postLikes';
 import { fetchAllComments } from '../../store/comments';
 import { createNotification } from '../../store/notifications';
-import { createFriendRequest, deleteFriendRequest, deleteFriendRequestSent } from '../../store/friendRequests';
+import { createFriendRequest, deleteFriendRequestSent } from '../../store/friendRequests';
+import { fetchFriendRequests, fetchFriendRequestsSent } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
 
@@ -13,7 +15,7 @@ function ProfileSearched(){
     const { userId } = useParams();
     const dispatch = useDispatch();
     const [friendRequest, setFriendRequest] = useState(
-        localStorage.getItem('friendRequest')
+        localStorage.getItem('friendRequest') === 'true'
     );
     const userLoginInformation = useSelector(state => state.session.user);
     const userInformation = useSelector(state => state.search.single);
@@ -24,6 +26,8 @@ function ProfileSearched(){
     const friendRequests = useSelector(state => Object.values(state.friendRequests.user));
     // const friends = useSelecter(state => Object.values(state.friends.all));
     const description = " sent you a friend request.";
+
+    console.log(friendRequests, 'requests');
 
     useEffect(() => {
         const requestExists = friendRequests.some(request => (request.receiver._id === userId && request.requester === userLoginInformation._id));
@@ -38,8 +42,8 @@ function ProfileSearched(){
     };
 
     const addFriend = e => {
-        e.preventDefault();
         if (friendRequest){
+            e.preventDefault();
             const friendRequestInfo = findFriendRequest();
             // console.log(friendRequestInfo, 'request info');
             dispatch(deleteFriendRequestSent(friendRequestInfo._id));
@@ -59,6 +63,7 @@ function ProfileSearched(){
             dispatch(createNotification(notification));
             setFriendRequest(true);
             localStorage.setItem('friendRequest', 'true');
+            window.location.reload();
         }
     };
 
@@ -66,6 +71,9 @@ function ProfileSearched(){
         dispatch(fetchUserPosts(userId));
         dispatch(fetchSingleSearch(userId));
         dispatch(fetchAllComments());
+        dispatch(fetchFriendRequests(userLoginInformation._id));
+        dispatch(fetchFriendRequestsSent(userLoginInformation._id));
+        dispatch(fetchAllPostLikes());
     }, [dispatch]);
 
     return (
