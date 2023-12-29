@@ -17,7 +17,7 @@ router.get('/:userId', async (req, res, next) => {
     }
 
     try{
-        const friendRequests = await FriendRequest.find({ requester: user._id })
+        const friendRequests = await FriendRequest.find({ receiver: user._id })
                                                   .sort({ createdAt: -1 })
                                                   .populate("requester", "_id name lastname profileImageUrl")
                                                   .populate("receiver", "_id name lastname profileImageUrl");
@@ -68,6 +68,16 @@ router.post('/', requireUser, async (req, res, next) => {
 
 // patch
 
-// delete
+router.delete('/:friendRequestId', requireUser, async (req, res, next) => {
+    try{
+        const { friendRequestId } = req.params;
+        const friendRequest = await FriendRequest.deleteOne({ _id: friendRequestId });
+        if (!friendRequest) return res.status(404).json({ message: 'Friend request not found.' });
+
+        return res.status(204).json('Friend request successfully deleted.');
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;

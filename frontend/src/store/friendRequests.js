@@ -90,7 +90,17 @@ export const createFriendRequest = (friendRequestInfo) => async dispatch => {
 
 // update
 
-// delete
+export const deleteFriendRequest = (friendRequestId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/friendRequests/${friendRequestId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removeFriendRequest(friendRequestId));
+    } catch (err){
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
 
 const nullErrors = null;
 
@@ -107,6 +117,7 @@ export const friendRequestErrorReducer = (state = nullErrors, action) => {
 };
 
 const friendRequestsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+    let newState;
     switch(action.type){
         case RECEIVE_USER_FRIEND_REQUESTS:
             return {...state, all: action.friendRequests, new: undefined };
@@ -115,7 +126,7 @@ const friendRequestsReducer = (state = { all: {}, user: {}, new: undefined }, ac
         case RECEIVE_FRIEND_REQUEST: // update
             return { ...state, all: {...state.all, [action.friendRequest._id] : action.friendRequest }};
         case REMOVE_FRIEND_REQUEST_SENT:
-            let newState = {...state};
+            newState = {...state};
             delete newState.user[action.friendRequestId];
             return {...newState, user: {...newState.user}, new: undefined};
         case REMOVE_FRIEND_REQUEST:
