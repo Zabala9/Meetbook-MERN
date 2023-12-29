@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateNotification, deleteNotification } from '../../store/notifications';
 import './NotificationButton.css';
@@ -8,10 +8,31 @@ function NotificationButton({ notificationId }){
     const [showMenuNotification, setShowMenuNotification] = useState(false);
 
     const openMenuNoti = () => {
-        if (showMenuNotification){
-            setShowMenuNotification(false);
-        } else { setShowMenuNotification(true); }
+        setShowMenuNotification(!showMenuNotification);
     };
+
+    const handleCloseDropdown = (event) => {
+        if (!event.target.closest('.container-notification-button')) {
+            setShowMenuNotification(false);
+        }
+    };
+
+    const handleScroll = () => {
+        setShowMenuNotification(false);
+    };
+
+    useEffect(() => {
+        if(showMenuNotification){
+            document.addEventListener('click', handleCloseDropdown);
+            document.addEventListener('scroll', handleScroll, true);
+        }
+
+        return () => {
+            document.removeEventListener('click', handleCloseDropdown);
+            document.removeEventListener('scroll', handleScroll, true);
+        };
+
+    }, [showMenuNotification]);
 
     const markAsRead = e => {
         e.preventDefault();
