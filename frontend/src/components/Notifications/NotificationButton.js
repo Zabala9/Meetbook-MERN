@@ -56,19 +56,19 @@ function NotificationButton({ notificationId }){
                 <button id='button-notification' onClick={openMenuNoti}>
                     <i className="fa-solid fa-ellipsis" id='img-notification-button'></i>
                 </button>
+                { showMenuNotification && (
+                    <div className='dropdown-notification-menu'>
+                        <button id='button-mark-read-noti' onClick={markAsRead}>
+                            <i className="fa-solid fa-check" id='img-check-noti'></i>
+                            <label id='label-mark-read-noti'>Mark as read</label>
+                        </button>
+                        <button id='button-delete-noti' onClick={deleteNoti}>
+                            <i className="fa-regular fa-trash-can" id='img-delete-noti'></i>
+                            <label id='label-delete-noti'>Delete notification</label>
+                        </button>
+                    </div>
+                )}
             </div>
-            { showMenuNotification && (
-                <div className='dropdown-notification-menu'>
-                    <button id='button-mark-read-noti' onClick={markAsRead}>
-                        <i className="fa-solid fa-check" id='img-check-noti'></i>
-                        <label id='label-mark-read-noti'>Mark as read</label>
-                    </button>
-                    <button id='button-delete-noti' onClick={deleteNoti}>
-                        <i className="fa-regular fa-trash-can" id='img-delete-noti'></i>
-                        <label id='label-delete-noti'>Delete notification</label>
-                    </button>
-                </div>
-            )}
         </>
     )
 };
