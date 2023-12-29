@@ -26,7 +26,7 @@ function ProfileSearched(){
     const description = " sent you a friend request.";
 
     useEffect(() => {
-        const requestExists = friendRequests.some(request => request.receiver._id === userId);
+        const requestExists = friendRequests.some(request => (request.receiver._id === userId) && (request.requester === userLoginInformation._id));
         if(friendRequest !== requestExists) {
             setFriendRequest(requestExists);
             localStorage.setItem('friendRequest', requestExists ? 'true' : 'false');
@@ -34,7 +34,7 @@ function ProfileSearched(){
     }, [friendRequests, userId, friendRequest]);
 
     const findFriendRequest = () => {
-        return friendRequests.find(friendRequest => friendRequest.requester === userLoginInformation._id);
+        return friendRequests.find(friendRequest => friendRequest.requester === userLoginInformation._id && friendRequest.receiver._id === userId);
     };
 
     const addFriend = e => {
@@ -44,7 +44,7 @@ function ProfileSearched(){
             // console.log(friendRequestInfo, 'request info');
             dispatch(deleteFriendRequest(friendRequestInfo._id));
             setFriendRequest(false);
-            // localStorage.setItem('friendRequest', 'false');
+            localStorage.setItem('friendRequest', 'false');
         } else {
             const friendRequest = {
                 receiver: userId,
@@ -58,7 +58,7 @@ function ProfileSearched(){
             dispatch(createFriendRequest(friendRequest));
             dispatch(createNotification(notification));
             setFriendRequest(true);
-            // localStorage.setItem('friendRequest', 'true');
+            localStorage.setItem('friendRequest', 'true');
         }
     };
 
