@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
+import { fetchAllPostLikes } from '../../store/postLikes';
 import { fetchAllComments } from '../../store/comments';
 import { createNotification } from '../../store/notifications';
-import { createFriendRequest } from '../../store/friendRequests';
+import { createFriendRequest, deleteFriendRequestSent } from '../../store/friendRequests';
+import { fetchFriendRequests, fetchFriendRequestsSent } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
 
@@ -15,6 +17,7 @@ function ProfileSearched(){
     const [friendRequest, setFriendRequest] = useState(
         localStorage.getItem('friendRequest') === 'true'
     );
+    const userLoginInformation = useSelector(state => state.session.user);
     const userInformation = useSelector(state => state.search.single);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const comments = useSelector(state => Object.values(state.comments.all));
@@ -24,18 +27,25 @@ function ProfileSearched(){
     // const friends = useSelecter(state => Object.values(state.friends.all));
     const description = " sent you a friend request.";
 
+    console.log(friendRequests, 'requests');
+
     useEffect(() => {
-        const requestExists = friendRequests.some(request => request.receiver._id === userId);
+        const requestExists = friendRequests.some(request => (request.receiver._id === userId && request.requester === userLoginInformation._id));
         if(friendRequest !== requestExists) {
             setFriendRequest(requestExists);
             localStorage.setItem('friendRequest', requestExists ? 'true' : 'false');
         }
-    }, [friendRequests, userId, friendRequest]);
+    }, [friendRequests, userId, friendRequest, setFriendRequest]);
+
+    const findFriendRequest = () => {
+        return friendRequests.find(friendRequest => friendRequest.requester === userLoginInformation._id && friendRequest.receiver._id === userId);
+    };
 
     const addFriend = e => {
-        e.preventDefault();
         if (friendRequest){
-            console.log('delete');
+            e.preventDefault();
+            const friendRequestInfo = findFriendRequest();
+            dispatch(deleteFriendRequestSent(friendRequestInfo._id));
             setFriendRequest(false);
             localStorage.setItem('friendRequest', 'false');
         } else {
@@ -52,6 +62,7 @@ function ProfileSearched(){
             dispatch(createNotification(notification));
             setFriendRequest(true);
             localStorage.setItem('friendRequest', 'true');
+            window.location.reload();
         }
     };
 
@@ -59,6 +70,9 @@ function ProfileSearched(){
         dispatch(fetchUserPosts(userId));
         dispatch(fetchSingleSearch(userId));
         dispatch(fetchAllComments());
+        dispatch(fetchFriendRequests(userLoginInformation._id));
+        dispatch(fetchFriendRequestsSent(userLoginInformation._id));
+        dispatch(fetchAllPostLikes());
     }, [dispatch]);
 
     return (

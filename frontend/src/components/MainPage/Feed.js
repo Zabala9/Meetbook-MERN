@@ -38,7 +38,7 @@ function Feed () {
     useEffect(() => {
         dispatch(fetchNotifications(user._id));
         dispatch(fetchSavePost(user._id));
-        // dispatch(fetchFriendRequests(user._id));
+        dispatch(fetchFriendRequests(user._id));
         dispatch(fetchFriendRequestsSent(user._id));
     }, [dispatch])
 

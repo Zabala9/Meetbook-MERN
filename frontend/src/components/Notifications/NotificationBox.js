@@ -1,12 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { updateNotification, createNotification } from '../../store/notifications';
+import { updateNotification, createNotification, deleteNotification } from '../../store/notifications';
+import { deleteFriendRequest } from '../../store/friendRequests';
 import NotificationButton from './NotificationButton';
 import './NotificationBox.css';
 
 function NotificationBox({ notification, closeNotification }){
     const history = useHistory();
     const dispatch = useDispatch();
+    const friendRequests = useSelector(state => Object.values(state.friendRequests.all));
     const { name, lastname, profileImageUrl, _id } = notification.author;
     const description = " has saw your profile.";
     let parentPost = '';
@@ -38,6 +40,17 @@ function NotificationBox({ notification, closeNotification }){
         closeNotification(false);
     };
 
+    const findFriendRequest = () => {
+        const authorId = notification.author._id;
+        return friendRequests.find(friendRequest => friendRequest.requester._id === authorId);
+    };
+
+    const rejectFriendRequest = () => {
+        const friendRequest = findFriendRequest();
+        dispatch(deleteNotification(notification._id));
+        dispatch(deleteFriendRequest(friendRequest._id));
+    };
+
     return(
         <div className='container-notification-box'
             style={{ backgroundColor: notification.read === false ? "#a6cfb5" : "" }}
@@ -45,14 +58,14 @@ function NotificationBox({ notification, closeNotification }){
             <div className='left-side-notification-box' onClick={goToPostShow}>
                 <img src={profileImageUrl} alt='' id='img-user-notification' />
             </div>
-            <div className='right-side-notification-box' onClick={goToPostShow}>
-                <label id='label-name-notification'>{name + " " + lastname}</label>
-                <label id='label-description-notification'>{notification.description}</label>
+            <div className='right-side-notification-box'>
+                <label id='label-name-notification' onClick={goToPostShow}>{name + " " + lastname}</label>
+                <label id='label-description-notification' onClick={goToPostShow}>{notification.description}</label>
 
                 { notification.notificationType === 'request' ?
                     <div className='container-buttons-request'>
                         <button id='button-confirm-request'>Confirm</button>
-                        <button id='button-delete-request'>Delete</button>
+                        <button id='button-delete-request' onClick={rejectFriendRequest}>Delete</button>
                     </div>
                     :
                     undefined
