@@ -5,7 +5,7 @@ import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
 import { fetchAllComments } from '../../store/comments';
 import { createNotification } from '../../store/notifications';
-import { createFriendRequest } from '../../store/friendRequests';
+import { createFriendRequest, deleteFriendRequest } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
 
@@ -15,6 +15,7 @@ function ProfileSearched(){
     const [friendRequest, setFriendRequest] = useState(
         localStorage.getItem('friendRequest') === 'true'
     );
+    const userLoginInformation = useSelector(state => state.session.user);
     const userInformation = useSelector(state => state.search.single);
     const userPosts = useSelector(state => Object.values(state.posts.user));
     const comments = useSelector(state => Object.values(state.comments.all));
@@ -32,12 +33,18 @@ function ProfileSearched(){
         }
     }, [friendRequests, userId, friendRequest]);
 
+    const findFriendRequest = () => {
+        return friendRequests.find(friendRequest => friendRequest.requester === userLoginInformation._id);
+    };
+
     const addFriend = e => {
         e.preventDefault();
         if (friendRequest){
-            console.log('delete');
+            const friendRequestInfo = findFriendRequest();
+            // console.log(friendRequestInfo, 'request info');
+            dispatch(deleteFriendRequest(friendRequestInfo._id));
             setFriendRequest(false);
-            localStorage.setItem('friendRequest', 'false');
+            // localStorage.setItem('friendRequest', 'false');
         } else {
             const friendRequest = {
                 receiver: userId,
@@ -51,7 +58,7 @@ function ProfileSearched(){
             dispatch(createFriendRequest(friendRequest));
             dispatch(createNotification(notification));
             setFriendRequest(true);
-            localStorage.setItem('friendRequest', 'true');
+            // localStorage.setItem('friendRequest', 'true');
         }
     };
 

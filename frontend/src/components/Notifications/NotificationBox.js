@@ -49,7 +49,7 @@ function NotificationBox({ notification, closeNotification }){
         const friendRequest = findFriendRequest();
         dispatch(deleteNotification(notification._id));
         dispatch(deleteFriendRequest(friendRequest._id));
-    }
+    };
 
     return(
         <div className='container-notification-box'
