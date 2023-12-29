@@ -5,7 +5,7 @@ import { fetchSingleSearch } from '../../store/search';
 import { fetchUserPosts } from '../../store/posts';
 import { fetchAllComments } from '../../store/comments';
 import { createNotification } from '../../store/notifications';
-import { createFriendRequest, deleteFriendRequest } from '../../store/friendRequests';
+import { createFriendRequest, deleteFriendRequest, deleteFriendRequestSent } from '../../store/friendRequests';
 import PostBox from '../Posts/PostBox';
 import "./ProfileSearched.css";
 
@@ -13,7 +13,7 @@ function ProfileSearched(){
     const { userId } = useParams();
     const dispatch = useDispatch();
     const [friendRequest, setFriendRequest] = useState(
-        localStorage.getItem('friendRequest') === 'true'
+        localStorage.getItem('friendRequest')
     );
     const userLoginInformation = useSelector(state => state.session.user);
     const userInformation = useSelector(state => state.search.single);
@@ -26,12 +26,12 @@ function ProfileSearched(){
     const description = " sent you a friend request.";
 
     useEffect(() => {
-        const requestExists = friendRequests.some(request => (request.receiver._id === userId) && (request.requester === userLoginInformation._id));
+        const requestExists = friendRequests.some(request => (request.receiver._id === userId && request.requester === userLoginInformation._id));
         if(friendRequest !== requestExists) {
             setFriendRequest(requestExists);
             localStorage.setItem('friendRequest', requestExists ? 'true' : 'false');
         }
-    }, [friendRequests, userId, friendRequest]);
+    }, [friendRequests, userId, friendRequest, setFriendRequest]);
 
     const findFriendRequest = () => {
         return friendRequests.find(friendRequest => friendRequest.requester === userLoginInformation._id && friendRequest.receiver._id === userId);
@@ -42,7 +42,7 @@ function ProfileSearched(){
         if (friendRequest){
             const friendRequestInfo = findFriendRequest();
             // console.log(friendRequestInfo, 'request info');
-            dispatch(deleteFriendRequest(friendRequestInfo._id));
+            dispatch(deleteFriendRequestSent(friendRequestInfo._id));
             setFriendRequest(false);
             localStorage.setItem('friendRequest', 'false');
         } else {

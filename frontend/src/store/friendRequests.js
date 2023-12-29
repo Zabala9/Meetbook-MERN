@@ -102,6 +102,18 @@ export const deleteFriendRequest = (friendRequestId) => async dispatch => {
     }
 };
 
+export const deleteFriendRequestSent = (friendRequestId) => async dispatch => {
+    try {
+        await jwtFetch(`/api/friendRequests/${friendRequestId}`, {
+            method: 'DELETE',
+        });
+        dispatch(removeFriendRequestSent(friendRequestId));
+    } catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) return dispatch(receiveErrors(resBody.errors));
+    }
+};
+
 const nullErrors = null;
 
 export const friendRequestErrorReducer = (state = nullErrors, action) => {
