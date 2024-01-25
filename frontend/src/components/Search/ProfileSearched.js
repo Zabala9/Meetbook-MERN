@@ -27,7 +27,7 @@ function ProfileSearched(){
     // const friends = useSelecter(state => Object.values(state.friends.all));
     const description = " sent you a friend request.";
 
-    console.log(friendRequests, 'requests');
+    // console.log(friendRequests, 'requests');
 
     useEffect(() => {
         const requestExists = friendRequests.some(request => (request.receiver._id === userId && request.requester === userLoginInformation._id));
@@ -45,7 +45,7 @@ function ProfileSearched(){
         if (friendRequest){
             e.preventDefault();
             const friendRequestInfo = findFriendRequest();
-            dispatch(deleteFriendRequestSent(friendRequestInfo._id));
+            dispatch(deleteFriendRequestSent(friendRequestInfo._id, userId));
             setFriendRequest(false);
             localStorage.setItem('friendRequest', 'false');
         } else {
