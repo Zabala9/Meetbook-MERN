@@ -102,9 +102,9 @@ export const deleteFriendRequest = (friendRequestId) => async dispatch => {
     }
 };
 
-export const deleteFriendRequestSent = (friendRequestId) => async dispatch => {
+export const deleteFriendRequestSent = (friendRequestId, userNotificationId) => async dispatch => {
     try {
-        await jwtFetch(`/api/friendRequests/${friendRequestId}`, {
+        await jwtFetch(`/api/friendRequests/${friendRequestId}/${userNotificationId}`, {
             method: 'DELETE',
         });
         dispatch(removeFriendRequestSent(friendRequestId));

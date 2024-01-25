@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const FriendRequest = mongoose.model('FriendRequest');
+const Notification = mongoose.model('Notification');
 const { requireUser } = require('../../config/passport');
 
 router.get('/:userId', async (req, res, next) => {
@@ -68,11 +69,16 @@ router.post('/', requireUser, async (req, res, next) => {
 
 // patch
 
-router.delete('/:friendRequestId', requireUser, async (req, res, next) => {
+router.delete('/:friendRequestId/:userNotificationId', requireUser, async (req, res, next) => {
     try{
+        const { userNotificationId } = req.params;
+        // console.log(userNotificationId, "userId");
         const { friendRequestId } = req.params;
         const friendRequest = await FriendRequest.deleteOne({ _id: friendRequestId });
         if (!friendRequest) return res.status(404).json({ message: 'Friend request not found.' });
+
+        const notification = await Notification.findOne({ author: req.user._id, recipient: userNotificationId, notificationType: 'request' });
+        if (notification) { await Notification.deleteOne({ _id: notification._id }) };
 
         return res.status(204).json('Friend request successfully deleted.');
     } catch (err) {
